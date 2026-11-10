@@ -1,4 +1,5 @@
 import json,re,html,os,sys,base64,urllib.parse as up
+sys.path.insert(0,os.path.dirname(os.path.abspath(__file__))); import page
 exp=sys.argv[1]; out=sys.argv[2]
 d=json.load(open(exp)); t=[x['text'] for x in d if '"bytes_b64"' in x['text']][0]
 m=re.search(r'"bytes_b64"\s*:\s*"([^"]+)"',t); rev=re.search(r'"rev"\s*:\s*(\d+)',t)
@@ -54,11 +55,10 @@ def rep(m):
 h2=re.sub(r'href="([^"]+)"',rep,h)
 tbl=''.join('<tr><td><a href="%s">%s</a></td><td>%s</td></tr>'%(html.escape(q(l) if l else u),html.escape(u),('<a href="%s">%s</a>'%(html.escape(q(l)),html.escape(l))) if l else html.escape(r)) for u,l,r in rows)
 r=rev.group(1) if rev else '?'
-banner='<div style="border:1px solid #999;padding:12px;margin:12px 0;font-family:sans-serif;background:#f6f4ef"><b>Offline archive copy.</b> Built from the Claude Doc <i>Geert Greydanus — Timeline from the Family Papers</i> (rev %s). Links to archived files open the local copy in <code>drive/</code>, <code>sources/</code> or <code>web/</code>; the original URL is kept in each link\'s <code>data-original</code> attribute. Other links still go online. <a href="#archive-sources">Source index</a>.</div>'%r
 extra='<li><a href="sources/YadVashem_JeroensVersion.pdf">sources/YadVashem_JeroensVersion.pdf</a>: Jurjen Hoekstra\'s 2020 Yad Vashem proposal</li><li><a href="sources/nara_helper_files/">sources/nara_helper_files/</a>: US Army helper files (NARA RG 498, series 5709392). The four largest were re-rendered at 110 dpi to stay under GitHub\'s file-size limit; originals are at catalog.archives.gov.</li>'
-app='<h2 id="archive-sources">Archive source index</h2><p>Every link in the timeline, with the local copy or the reason there is none.</p><table border="1" cellpadding="4" style="border-collapse:collapse;font-size:13px"><tr><th>Original link</th><th>Local copy</th></tr>'+tbl+'</table><h3>Other files in this archive</h3><ul>'+extra+'</ul>'
-h2=re.sub(r'(<body[^>]*>)',lambda mm:mm.group(1)+banner,h2,count=1) if '<body' in h2 else banner+h2
-h2=h2.replace('</body>',app+'</body>') if '</body>' in h2 else h2+app
+app='<h2 id="archive-sources">Archive source index</h2><p>Every link in the timeline, with the local copy or the reason there is none.</p><table><tr><th>Original link</th><th>Local copy</th></tr>'+tbl+'</table><h3>Other files in this archive</h3><ul>'+extra+'</ul>'
+m=re.search(r'<body[^>]*>(.*)</body>',h2,re.S)
+h2=page.render((m.group(1) if m else h2)+app,r)
 open(out,'w').write(h2)
 print('rev',r,len(rows),'links;',sum(1 for x in rows if x[1]),'local')
 print('\n'.join(sorted(set(x[1] for x in rows if x[1]))))
