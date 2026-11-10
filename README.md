@@ -18,11 +18,11 @@ Open **`index.html`** in a browser. Links that point to an archived file open th
 | `sources/` | Published and archival sources: *Trouw* articles (1995, 2014), Gerstein article, Steven Fenves transcript (USHMM), LO-LKP *Het Grote Gebod* and *Necrologie* extracts, *De Vrije Katheder* 11 May 1945, Niederorschel museum booklet, the 2020 Yad Vashem proposal |
 | `sources/nara_helper_files/` | US Army helper files, 1945–46 (National Archives RG 498, series 5709392, *Case Files of Dutch Citizens Proposed for Awards for Assisting American Airmen*): Satter (Hendrik, Johannes), Schaap, van Braak, Helmink, Hofs, Knottnerus, D. Lammers, Gussinklo, Leemreize, Slotboom, C.A. van der Hooft, plus two files that matched "Greidanus" (Lowey Ball, van Wijngaarden) |
 | `web/` | Saved copies of web pages: Oorlogsbronnen, Oorlogsgravenstichting, Joods Monument, NIOD catalogue, Nationaal Monument Kamp Vught, USHMM, Yad Vashem, Studiegroep Luchtoorlog evader records, and others |
-| `tools/` | `page.py` lays out `index.html` and inserts the sections in `tools/sections/`; `map/` builds the journey map from `map/stops.json`; `build_pdf.sh` prints the PDF. `build_index.py` and `drive_map.json` built the first `index.html` from a Claude Doc export and are kept for reference only |
+| `tools/` | `page.py` lays out `index.html` and inserts the sections in `tools/sections/`; `map/` builds the journey map from `map/stops.json`; `build_pdf.sh` prints the PDF |
 
 ## Notes
 
 - The four largest NARA helper files (Slotboom, van Braak, Leemreize, van Wijngaarden) were re-rendered at 110 dpi to keep every file under GitHub's 100 MB limit. Full-resolution scans are at `https://catalog.archives.gov/id/<NAID>`.
 - Not archived: Arolsen Archives card images, Drive folders, and pages on domains that could not be reached when the archive was built (nl.wikipedia, jolink.org, eindhoven4044.nl, holocaust.cz, officielebekendmakingen.nl, stiftung-gedenkstaetten.de). These links still point online.
 - Web snapshots are single HTML files saved from the browser; some pages load images or scripts from the original site and may look incomplete offline.
-- `index.html` is the living version of the timeline. It began as an export of a Claude Doc, but has been edited here since; the doc is no longer kept in step.
+- `index.html` is the living version of the timeline and the source of truth; the PDF is printed from it.

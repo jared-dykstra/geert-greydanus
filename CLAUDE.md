@@ -5,7 +5,7 @@ The research timeline of Geert Greydanus (1899–1965), published with GitHub Pa
 ## Source of truth
 
 - **The HTML is the source of truth.** That means `index.html`, plus what `tools/page.py` inserts into it: the sections in `tools/sections/` and the map built from `tools/map/stops.json`. Edit these.
-- **Do not rebuild `index.html` from a Claude Doc export.** Do not run `tools/build_index.py` on one. It replaces the body of `index.html` and loses every edit made here.
+- **The old Claude Doc is retired.** Do not copy content from it or from an export of it; this repository supersedes it.
 
 ## Keep the PDF in step
 

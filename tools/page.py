@@ -1,10 +1,11 @@
-"""Wrap the timeline's HTML (a Claude Doc export, links already rewritten) in a readable page.
+"""Lay out index.html: the page shell, styles, contents list, and the sections kept in tools/sections/.
 
-Used by build_index.py, and runnable on its own to restyle an existing index.html:
+index.html is the source of truth. Edit its content directly, then run:
 
     python3 tools/page.py index.html index.html
 
-Re-running it is safe: it takes only the content between the CONTENT markers when they are present.
+The script keeps everything between the CONTENT and SOURCE INDEX markers, re-inserts the sections, and
+rebuilds the rest of the page around them. Running it twice gives the same file.
 """
 import html, os, re, sys
 
@@ -12,23 +13,8 @@ PDF = 'geert-greydanus-timeline.pdf'
 START, END = '<!-- CONTENT START -->', '<!-- CONTENT END -->'
 SI_START, SI_END = '<!-- SOURCE INDEX START -->', '<!-- SOURCE INDEX END -->'
 
-# The war years at a glance, as drawn in the doc's chart (which the HTML export leaves out; the PDF has it).
-# Positions are months after 1 April 1943. Bars are (start, end); markers have end None.
-GLANCE_SPAN = 54
-GLANCE_YEARS = [(9, '1944'), (21, '1945'), (33, '1946'), (45, '1947')]
-GLANCE = [
-    ('In hiding, Achterhoek', 0, 12, 'Apr 1943 to Apr 1944', 'april-1943-april-1944-in-hiding-oom-geert-in-the-achterhoek'),
-    ('Family held in Vught', 8.05, 8.6, '2–18 Dec 1943', None),
-    ('Arrested at Satter farm', 12.65, None, '20 Apr 1944', 'april-august-1944-arrest-the-vught-bunker-transport'),
-    ('Vught camp and bunker', 12.65, 16, 'Apr 1944 to Aug 1944', 'april-august-1944-arrest-the-vught-bunker-transport'),
-    ('Buchenwald, Niederorschel', 16, 24, 'Aug 1944 to Apr 1945', 'august-1944-may-1945-buchenwald-niederorschel-and-liberation'),
-    ('Back in Rotterdam police', 25, 53, 'May 1945 to Sep 1947', 'may-1945-september-1947-back-in-rotterdam'),
-    ('Sails for Canada', 53.25, None, '8 Sep 1947', '19471967-canada'),
-]
-
-
-# Sections written for this page that are not (yet) in the Claude Doc. Each is inserted before the
-# h2 named here, between markers, so a rebuild from a fresh export keeps it and a re-run replaces it.
+# Sections kept as separate files. Each is inserted before the h2 named here, between markers, so a
+# re-run replaces it with the current file.
 EXTRA_SECTIONS = [('journey.html', '18991943-friesland-rotterdam-and-the-police'),
                   ('gerstein.html', 'the-airman-helping-network-around-varsseveld-janmay-1944'),
                   ('markus.html', 'april-august-1944-arrest-the-vught-bunker-transport')]
@@ -41,55 +27,24 @@ def add_sections(body):
         body = re.sub(re.escape(start) + '.*?' + re.escape(end) + r'\n?', '', body, flags=re.S)
         frag = open(os.path.join(SECTIONS_DIR, name), encoding='utf-8').read().strip()
         anchor = '<h2 id="%s">' % before
-        if anchor in body:
-            body = body.replace(anchor, '%s\n%s\n%s\n%s' % (start, frag, end, anchor), 1)
+        if anchor not in body:
+            sys.exit('page.py: no <h2 id="%s"> to put %s before' % (before, name))
+        body = body.replace(anchor, '%s\n%s\n%s\n%s' % (start, frag, end, anchor), 1)
     return body
 
 
-def content_of(doc):
-    """The timeline's own HTML, without anything an earlier run of this script or build_index.py added."""
-    if START in doc:
-        doc = doc.split(START, 1)[1].split(END, 1)[0]
-    doc = re.sub(r'^\s*<div style="border:1px solid #999.*?</div>', '', doc, count=1, flags=re.S)
-    return doc.strip()
-
-
-def glance():
-    pct = lambda m: '%.2f%%' % (100.0 * m / GLANCE_SPAN)
-    ticks = ''.join('<span class="g-tick" style="left:%s">%s</span>' % (pct(m), y) for m, y in GLANCE_YEARS)
-    rows = []
-    for label, start, end, dates, anchor in GLANCE:
-        if end is None:
-            mark = '<span class="g-mark%s" style="left:%s"></span>' % (' g-key' if 'Arrest' in label else '', pct(start))
-            note_at = start + 1
-        else:
-            mark = '<span class="g-bar" style="left:%s;width:%s"></span>' % (pct(start), pct(max(end - start, 0.5)))
-            note_at = end + 1
-        right = note_at > GLANCE_SPAN - 12
-        note = '<span class="g-note%s" style="%s:%s">%s</span>' % (
-            ' g-left' if right else '', 'right' if right else 'left',
-            pct(GLANCE_SPAN - start + 1.5) if right else pct(note_at - 0.4), dates)
-        name = '<a href="#%s">%s</a>' % (anchor, label) if anchor else label
-        rows.append('<div class="g-row%s"><div class="g-name">%s</div><div class="g-track">%s%s</div></div>'
-                    % (' g-strong' if 'Arrest' in label else '', name, mark, note))
-    arrest = '<span class="g-line" style="left:calc(190px + (100%% - 194px) * %.4f)"></span>' % (12.65 / GLANCE_SPAN)
-    return ('<figure class="glance"><figcaption><strong>A year in hiding, a year in the camps, two years back in the police</strong>'
-            '<span>Geert Greydanus, April 1943 to September 1947, to scale</span></figcaption>'
-            '<div class="g-chart">%s<div class="g-row g-axis"><div class="g-name"></div><div class="g-track">%s</div></div>%s</div>'
-            '</figure>' % (arrest, ticks, ''.join(rows)))
-
-
 def classify_tables(body):
+    """Style a table that has no class yet: a timeline if it has Date and Event columns, else facts."""
     def one(m):
-        head = re.sub(r'<[^>]+>', '|', m.string[m.start():m.start() + 400])
+        t = m.group(0)
+        head = re.sub(r'<[^>]+>', '|', t[:400])
         cls = 'timeline' if '|Date|' in head and '|Event|' in head else 'facts'
-        return '<div class="table-wrap"><table class="%s">' % cls
-    body = re.sub(r'<table(?![^>]*class=)[^>]*>(?=<thead>|<tr>)', one, body)
-    return re.sub(r'</table>', '</table></div>', body)
+        return '<div class="table-wrap">%s</div>' % re.sub(r'^<table[^>]*>', '<table class="%s">' % cls, t)
+    return re.sub(r'<table(?![^>]*class=).*?</table>', one, body, flags=re.S)
 
 
 def label_cells(body):
-    """Give each cell its column name, so a table can stack into cards on a phone."""
+    """Give each bare cell its column name, so a table can stack into cards on a phone."""
     def table(m):
         t = m.group(0)
         heads = [re.sub(r'<[^>]+>', '', h) for h in re.findall(r'<th[^>]*>(.*?)</th>', t)]
@@ -109,34 +64,14 @@ def toc(body):
             '<ol>%s</ol></details></nav>' % lis)
 
 
-def render(doc, rev='?'):
-    if SI_START in doc:  # an earlier run of this script: keep its source index as it is
-        rendered_index = doc.split(SI_START, 1)[1].split(SI_END, 1)[0]
-        return _page(content_of(doc), rendered_index, rev)
-    body, source_index = content_of(doc), ''
-    m = re.search(r'<h2 id="archive-sources">', body)
-    if m:
-        body, source_index = body[:m.start()], body[m.start():]
-    # The doc's byline (a date and an internal user id) says nothing a reader needs.
-    body = re.sub(r'<p><time[^>]*>.*?</time>.*?</p>', '', body, count=1, flags=re.S)
-    body = re.sub(r'<h1[^>]*>.*?</h1>', '', body, count=1, flags=re.S)
-    body = re.sub(r'<figure data-embed="[^"]*">.*?</figure>', glance(), body, count=1, flags=re.S)
-    body = label_cells(classify_tables(body))
-    if source_index:
-        source_index = re.sub(r'<h2 id="archive-sources">.*?</h2>', '', source_index, count=1, flags=re.S)
-        source_index = re.sub(r'<table[^>]*>', '<div class="table-wrap"><table class="facts index">', source_index, count=1)
-        source_index = source_index.replace('</table>', '</table></div>', 1)
-        source_index = ('<section id="archive-sources" class="archive"><h2>Source index</h2>'
-                        '<details><summary>Show every link in the timeline, with its saved copy</summary>%s</details></section>'
-                        % source_index)
-    return _page(body, source_index, rev)
-
-
-def _page(body, source_index, rev):
-    body = add_sections(body.strip())
+def render(doc):
+    if START not in doc or SI_START not in doc:
+        sys.exit('page.py: the input has no CONTENT or SOURCE INDEX markers')
+    body = doc.split(START, 1)[1].split(END, 1)[0].strip()
+    source_index = doc.split(SI_START, 1)[1].split(SI_END, 1)[0]
+    body = label_cells(classify_tables(add_sections(body)))
     toc_html = toc(body + '<h2 id="archive-sources">Source index</h2>')
-    rev_note = ' (revision %s)' % html.escape(str(rev)) if rev and rev != '?' else ''
-    return TEMPLATE.format(toc=toc_html, body=body, source_index=source_index, pdf=PDF, rev=rev_note,
+    return TEMPLATE.format(toc=toc_html, body=body, source_index=source_index, pdf=PDF,
                            start=START, end=END, si_start=SI_START, si_end=SI_END, css=CSS)
 
 
@@ -305,5 +240,4 @@ TEMPLATE = """<!doctype html>
 if __name__ == '__main__':
     src, out = sys.argv[1], sys.argv[2]
     doc = open(src, encoding='utf-8').read()
-    rev = re.search(r'\(rev (\d+)\)', doc) or re.search(r'\(revision (\d+)\)', doc)
-    open(out, 'w', encoding='utf-8').write(render(doc, rev.group(1) if rev else '?'))
+    open(out, 'w', encoding='utf-8').write(render(doc))
