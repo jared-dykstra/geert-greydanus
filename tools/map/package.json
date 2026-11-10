@@ -1,0 +1,12 @@
+{
+  "name": "geert-journey-map",
+  "private": true,
+  "description": "Builds tools/sections/journey.html, the map of Geert's journey, from Natural Earth borders.",
+  "type": "module",
+  "scripts": { "build": "node build_map.mjs" },
+  "dependencies": {
+    "d3-geo": "3.1.1",
+    "topojson-client": "3.1.0",
+    "world-atlas": "2.0.2"
+  }
+}
