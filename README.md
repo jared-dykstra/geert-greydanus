@@ -1,5 +1,7 @@
 # Geert Greydanus (1899–1965): timeline and source archive
 
+**[View the timeline online → jared-dykstra.github.io/geert-greydanus](https://jared-dykstra.github.io/geert-greydanus/)**
+
 An offline, self-contained copy of the research timeline *Geert Greydanus — Timeline from the Family Papers*, with copies of the sources it cites.
 
 Open **`index.html`** in a browser. Links that point to an archived file open the local copy; the original URL is kept in each link's `data-original` attribute. A source index at the bottom of the page lists every link with its local copy, or the reason there is none.
