@@ -29,7 +29,8 @@ GLANCE = [
 
 # Sections written for this page that are not (yet) in the Claude Doc. Each is inserted before the
 # h2 named here, between markers, so a rebuild from a fresh export keeps it and a re-run replaces it.
-EXTRA_SECTIONS = [('gerstein.html', 'the-airman-helping-network-around-varsseveld-janmay-1944')]
+EXTRA_SECTIONS = [('journey.html', '18991943-friesland-rotterdam-and-the-police'),
+                  ('gerstein.html', 'the-airman-helping-network-around-varsseveld-janmay-1944')]
 SECTIONS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'sections')
 
 
