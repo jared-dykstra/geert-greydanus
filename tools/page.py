@@ -18,6 +18,7 @@ SI_START, SI_END = '<!-- SOURCE INDEX START -->', '<!-- SOURCE INDEX END -->'
 EXTRA_SECTIONS = [('journey.html', '18991943-friesland-rotterdam-and-the-police'),
                   ('gerstein.html', 'the-airman-helping-network-around-varsseveld-janmay-1944'),
                   ('markus.html', 'april-august-1944-arrest-the-vught-bunker-transport'),
+                  ('fellowprisoners.html', 'august-1944-may-1945-buchenwald-niederorschel-and-liberation'),
                   ('deathmarch.html', 'may-1945-september-1947-back-in-rotterdam')]
 SECTIONS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'sections')
 
