@@ -54,12 +54,6 @@ def content_of(doc):
     return doc.strip()
 
 
-def nice_date(iso):
-    y, mo, d = iso.split('-')
-    months = 'January February March April May June July August September October November December'.split()
-    return '%d %s %s' % (int(d), months[int(mo) - 1], y)
-
-
 def glance():
     pct = lambda m: '%.2f%%' % (100.0 * m / GLANCE_SPAN)
     ticks = ''.join('<span class="g-tick" style="left:%s">%s</span>' % (pct(m), y) for m, y in GLANCE_YEARS)
@@ -123,10 +117,8 @@ def render(doc, rev='?'):
     m = re.search(r'<h2 id="archive-sources">', body)
     if m:
         body, source_index = body[:m.start()], body[m.start():]
-    # The doc's byline names an internal user id; the date alone is useful.
-    body = re.sub(r'<p><time[^>]*datetime="([^"]+)"[^>]*>.*?</time>.*?</p>',
-                  lambda m: '<p class="updated">Last updated <time datetime="%s">%s</time></p>' % (m.group(1), nice_date(m.group(1))),
-                  body, count=1, flags=re.S)
+    # The doc's byline (a date and an internal user id) says nothing a reader needs.
+    body = re.sub(r'<p><time[^>]*>.*?</time>.*?</p>', '', body, count=1, flags=re.S)
     body = re.sub(r'<h1[^>]*>.*?</h1>', '', body, count=1, flags=re.S)
     body = re.sub(r'<figure data-embed="[^"]*">.*?</figure>', glance(), body, count=1, flags=re.S)
     body = label_cells(classify_tables(body))
@@ -257,7 +249,7 @@ em{font-style:italic}
  table.timeline td:last-child,table.facts td:last-child{width:auto;margin-top:4px}
  tbody tr:hover{background:none}
 }
-@media print{.toc,.top,.actions{display:none}.layout{display:block}body{background:#fff;font-size:12pt}h2{break-after:avoid}tr{break-inside:avoid}}
+@media print{.toc,.top,.actions,#archive-sources{display:none}.layout{display:block}body{background:#fff;font-size:12pt}h2{break-after:avoid}tr{break-inside:avoid}}
 """
 
 SCRIPT = """<script>
@@ -299,7 +291,7 @@ TEMPLATE = """<!doctype html>
 {end}
 {si_start}{source_index}{si_end}
 <section class="about"><h2>About this page</h2>
-<p>This is a copy of the research document <em>Geert Greydanus — Timeline from the Family Papers</em>{rev}. Wherever a source was saved, its link opens the saved copy in this archive (family papers, published articles, archive records and web pages), so the page still works if the original site changes. Links to sources that could not be saved still go to the original site.</p>
+<p>This page is the timeline <em>Geert Greydanus — Timeline from the Family Papers</em>, written from the family papers and the sources saved with it. Wherever a source was saved, its link opens the saved copy in this archive (family papers, published articles, archive records and web pages), so the page still works if the original site changes. Links to sources that could not be saved still go to the original site.</p>
 <p>The <a href="{pdf}">PDF</a> is the same document, for printing or keeping.</p>
 </section>
 </main>

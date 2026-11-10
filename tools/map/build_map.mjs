@@ -70,7 +70,7 @@ const list = steps.map((s, i) =>
 const stepData = JSON.stringify(steps.map(s => ({ p: s.place, xy: s.xy })));
 
 const html = `<h2 id="geerts-journey-on-a-map">Geert’s journey on a map</h2>
-<p>From the day he went into hiding to the day he left for Canada. Press play, or pick any step to jump to it.</p>
+<p>From the day he went into hiding to the day he left for Canada.<span class="jm-howto"> Press play, or pick any step to jump to it.</span></p>
 <figure class="journey" aria-label="Map of Geert's journey">
 <div class="jm-map">
 <svg viewBox="0 0 ${W} ${H}" role="img" aria-labelledby="jm-title"><title id="jm-title">${esc(data.title)}</title>
@@ -131,7 +131,7 @@ const html = `<h2 id="geerts-journey-on-a-map">Geert’s journey on a map</h2>
 @media (prefers-color-scheme:dark){:root{--jm-sea:#1c2428;--jm-land:#2b2723;--jm-nl:#35302a;--jm-border:#4a433b}}
 @media (max-width:900px){.journey{display:block}.jm-map{position:static}.jm-steps{max-height:none;margin-top:16px}}
 @media (prefers-reduced-motion:reduce){.jm-marker,.jm-canada{transition:none}}
-@media print{.jm-controls{display:none}.jm-steps p{display:block}.jm-leg{opacity:1}}
+@media print{.jm-controls,.jm-caption,.jm-howto,.jm-marker{display:none}.jm-map{position:static}.jm-steps{max-height:none}.jm-steps p{display:block}.jm-leg{opacity:1;stroke-dashoffset:0!important}.jm-canada{opacity:1}.journey{display:block}}
 </style>
 <script>
 (function(){
