@@ -7,10 +7,10 @@
 <meta name="description" content="Rotterdam police detective, resistance helper and camp survivor: Geert Greydanus's life from the family papers, with copies of every source.">
 <style>
 :root{--paper:#faf7f0;--card:#fffdf8;--ink:#2a2622;--muted:#6b635a;--rule:#e4ddcf;--accent:#8a3324;--accent-soft:#f3e6df;
---hiding:#b5873a;--vught:#8a3324;--camp:#4a3f3a;--home:#5b7a6a;--serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+--serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
 --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
 @media (prefers-color-scheme:dark){:root{--paper:#1b1917;--card:#24211e;--ink:#ebe5da;--muted:#a69d91;--rule:#3a3530;--accent:#e08a6d;
---accent-soft:#3a2a24;--hiding:#c99a4b;--vught:#b8523f;--camp:#7a6c64;--home:#6f9584}}
+--accent-soft:#3a2a24}}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:16px}
 body{margin:0;background:var(--paper);color:var(--ink);font:18px/1.6 var(--serif);-webkit-text-size-adjust:100%}
@@ -59,15 +59,21 @@ table.facts.index td{font:13px/1.4 var(--sans);word-break:break-all;width:auto}
 tbody tr:hover{background:var(--accent-soft)}
 code{font-size:.85em;background:var(--accent-soft);padding:1px 5px;border-radius:3px}
 em{font-style:italic}
-.glance{margin:32px 0;padding:20px;background:var(--card);border:1px solid var(--rule);border-radius:8px}
-.glance figcaption{font:600 15px var(--sans);margin-bottom:12px}
-.glance-bar{display:flex;gap:3px;min-height:72px}
-.glance-seg{display:flex;flex-direction:column;justify-content:flex-end;padding:8px 10px;color:#fff;text-decoration:none;border-radius:4px;min-width:0;font-family:var(--sans)}
-.glance-seg:hover{filter:brightness(1.1)}
-.glance-label{font-weight:700;font-size:14px;line-height:1.2}
-.glance-dates{font-size:12px;opacity:.9}
-.glance-hiding{background:var(--hiding)}.glance-vught{background:var(--vught)}.glance-camp{background:var(--camp)}.glance-home{background:var(--home)}
-.glance-note{font:13px/1.4 var(--sans);color:var(--muted);margin:10px 0 0}
+.glance{margin:32px 0;padding:20px 24px;background:var(--card);border:1px solid var(--rule);border-radius:8px;font-family:var(--sans)}
+.glance figcaption{margin-bottom:16px}.glance figcaption strong{display:block;font-size:16px}.glance figcaption span{font-size:13px;color:var(--muted)}
+.g-chart{position:relative}
+.g-row{display:grid;grid-template-columns:190px 1fr;align-items:center;min-height:32px;font-size:14px}
+.g-name a{color:var(--ink);text-decoration:none}.g-name a:hover{color:var(--accent);text-decoration:underline}
+.g-strong .g-name,.g-strong .g-note{font-weight:700}
+.g-track{position:relative;height:32px;margin-right:4px}
+.g-track::before{content:"";position:absolute;left:0;right:0;top:50%;border-top:1px solid var(--rule)}
+.g-axis{min-height:24px;border-bottom:1px solid var(--rule);margin-bottom:4px}.g-axis .g-track::before{display:none}
+.g-tick{position:absolute;bottom:4px;transform:translateX(-50%);font-size:12px;color:var(--muted)}
+.g-line{position:absolute;top:24px;bottom:0;border-left:1.5px dashed var(--accent);opacity:.6;z-index:0}
+.g-bar{position:absolute;top:9px;height:14px;border-radius:7px;background:var(--accent-soft);border:1px solid var(--accent);z-index:1}
+.g-mark{position:absolute;top:10px;width:12px;height:12px;margin-left:-6px;transform:rotate(45deg);background:var(--muted);z-index:1}
+.g-mark.g-key{background:var(--accent)}
+.g-note{position:absolute;top:6px;white-space:nowrap;font-size:13px;line-height:20px;color:var(--muted);z-index:2;background:var(--card);padding:0 4px}
 .archive details{margin-top:12px}
 .archive summary{cursor:pointer;font:600 15px var(--sans);color:var(--accent)}
 .about{margin-top:64px;padding:20px 24px;background:var(--card);border:1px solid var(--rule);border-radius:8px;font:15px/1.6 var(--sans);color:var(--muted);max-width:none}
@@ -87,8 +93,11 @@ em{font-style:italic}
  .years{font-weight:400;color:var(--muted);white-space:nowrap}
 .lede{font-size:18px}
  h2{font-size:25px;margin-top:48px}
- .glance-bar{flex-direction:column;min-height:0}
- .glance-seg{flex:none!important;padding:10px 12px;flex-direction:row;justify-content:space-between;gap:8px}
+ .glance{padding:16px}
+ .g-row{grid-template-columns:1fr;min-height:0;margin-bottom:6px}
+ .g-axis{display:none}.g-line{display:none}
+ .g-name{font-size:13px}
+ .g-track{height:24px}.g-bar{top:5px}.g-mark{top:6px}.g-note{top:3px;font-size:12px}
  table,thead,tbody,tr,td{display:block;width:auto!important}
  thead{display:none}
  tbody tr{padding:14px 0;border-bottom:1px solid var(--rule)}
@@ -123,7 +132,7 @@ em{font-style:italic}
 <p><strong>Family at a glance</strong></p>
 <div class="table-wrap"><table class="facts"><thead><tr><th>Person</th><th>Relationship</th><th>Dates in the papers</th></tr></thead><tbody><tr><td data-label="Person">Geert Greydanus</td><td data-label="Relationship">Subject</td><td data-label="Dates in the papers">Born Kubaard (Hennaarderadeel), Friesland, 1 Dec 1899; died Clinton, Ont., 14 Sep 1965</td></tr><tr><td data-label="Person">Jacobje &quot;Johanna&quot; Pebesma</td><td data-label="Relationship">Wife</td><td data-label="Dates in the papers">Born Garijp, 22 Apr 1902; married Geert in Heerlen on 9 May 1923</td></tr><tr><td data-label="Person">Jacob Greydanus and Saakje Hibma</td><td data-label="Relationship">Parents</td><td data-label="Dates in the papers">Geert was the second of 9 children</td></tr><tr><td data-label="Person">Wietske</td><td data-label="Relationship">Daughter</td><td data-label="Dates in the papers">Born Rotterdam, 4 Mar 1924 (Vught card: &quot;Grietje Wietske&quot;); married Dirk Walinga 27 Nov 1948</td></tr><tr><td data-label="Person">Jacob (Jaap)</td><td data-label="Relationship">Son</td><td data-label="Dates in the papers">Born 17 Jan 1927; killed in Pasuruan, Dutch East Indies, 21 Aug 1947</td></tr><tr><td data-label="Person">Jan (John)</td><td data-label="Relationship">Son</td><td data-label="Dates in the papers">Born 4 Jun 1928</td></tr><tr><td data-label="Person">Gerard Bouke (Jerry)</td><td data-label="Relationship">Son</td><td data-label="Dates in the papers">Born 15 Feb 1932</td></tr><tr><td data-label="Person">Cornelis Wiebe (Con)</td><td data-label="Relationship">Son</td><td data-label="Dates in the papers">Born 6 Nov 1936</td></tr><tr><td data-label="Person">Bernhard (Ben)</td><td data-label="Relationship">Son</td><td data-label="Dates in the papers">Born 6 Oct 1944, while Geert was in Buchenwald</td></tr></tbody></table></div>
 <p>Family dates: <a href="drive/0B_hNNbamR_Greydanus%20Beschikkingen.PDF" data-original="https://drive.google.com/file/d/0B_hNNbamR2cxUUFoZlQwRGxnYkk/view">pension decision 1967</a>, <a href="drive/0B_hNNbamR_Greydanus%20Verzetsrapport%20%26%20stukken.PDF" data-original="https://drive.google.com/file/d/0B_hNNbamR2cxQVpkWnZyQzZvNzQ/view">police letter 1952</a>, <a href="drive/0B_hNNbamR_Scanned%20from%20a%20Xerox%20multifunction%20device001.pdf" data-original="https://drive.google.com/file/d/0B_hNNbamR2cxT01CX2tjLUtMa1VvN2lrcWR0MFdvbTA1Z1hB/view">Hoekstra 2013, pp. 2–3, 18</a>, <a href="drive/0B_hNNbamR_Joel%20-%20Grandma.pdf" data-original="https://drive.google.com/file/d/0B_hNNbamR2cxSno2cWpUNTBpdWFNTzdJWVhOdTFoaDhCbW5V/view">Joel Dykstra essay</a>, <a href="drive/1-dRF15etg_Edited%20-Jan%2020-25%20Interview%20with%20Ben%20Greydanus.docx" data-original="https://drive.google.com/file/d/1-dRF15etg1P6jXrRhK3o5l3qMve7nUES/view">Ben interview</a>. Every row below links to the file it came from.</p>
-<figure class="glance"><figcaption>Geert’s war years at a glance, April 1943 – September 1947</figcaption><div class="glance-bar"><a class="glance-seg glance-hiding" href="#april-1943-april-1944-in-hiding-oom-geert-in-the-achterhoek" style="flex:12"><span class="glance-label">In hiding</span><span class="glance-dates">Apr 1943 – Apr 1944</span></a><a class="glance-seg glance-vught" href="#april-august-1944-arrest-the-vught-bunker-transport" style="flex:4"><span class="glance-label">Arrest, Vught</span><span class="glance-dates">Apr – Aug 1944</span></a><a class="glance-seg glance-camp" href="#august-1944-may-1945-buchenwald-niederorschel-and-liberation" style="flex:9"><span class="glance-label">Buchenwald, Niederorschel</span><span class="glance-dates">Aug 1944 – May 1945</span></a><a class="glance-seg glance-home" href="#may-1945-september-1947-back-in-rotterdam" style="flex:28"><span class="glance-label">Back in Rotterdam</span><span class="glance-dates">May 1945 – Sep 1947</span></a></div><p class="glance-note">Widths are to scale: the arrest on 20 April 1944 ends a year in hiding; the camps take most of the next year.</p></figure>
+<figure class="glance"><figcaption><strong>A year in hiding, a year in the camps, two years back in the police</strong><span>Geert Greydanus, April 1943 to September 1947, to scale</span></figcaption><div class="g-chart"><span class="g-line" style="left:calc(190px + (100% - 194px) * 0.2343)"></span><div class="g-row g-axis"><div class="g-name"></div><div class="g-track"><span class="g-tick" style="left:16.67%">1944</span><span class="g-tick" style="left:38.89%">1945</span><span class="g-tick" style="left:61.11%">1946</span><span class="g-tick" style="left:83.33%">1947</span></div></div><div class="g-row"><div class="g-name"><a href="#april-1943-april-1944-in-hiding-oom-geert-in-the-achterhoek">In hiding, Achterhoek</a></div><div class="g-track"><span class="g-bar" style="left:0.00%;width:22.22%"></span><span class="g-note" style="left:23.33%">Apr 1943 to Apr 1944</span></div></div><div class="g-row"><div class="g-name">Family held in Vught</div><div class="g-track"><span class="g-bar" style="left:14.91%;width:1.02%"></span><span class="g-note" style="left:17.04%">2–18 Dec 1943</span></div></div><div class="g-row g-strong"><div class="g-name"><a href="#april-august-1944-arrest-the-vught-bunker-transport">Arrested at Satter farm</a></div><div class="g-track"><span class="g-mark g-key" style="left:23.43%"></span><span class="g-note" style="left:24.54%">20 Apr 1944</span></div></div><div class="g-row"><div class="g-name"><a href="#april-august-1944-arrest-the-vught-bunker-transport">Vught camp and bunker</a></div><div class="g-track"><span class="g-bar" style="left:23.43%;width:6.20%"></span><span class="g-note" style="left:30.74%">Apr 1944 to Aug 1944</span></div></div><div class="g-row"><div class="g-name"><a href="#august-1944-may-1945-buchenwald-niederorschel-and-liberation">Buchenwald, Niederorschel</a></div><div class="g-track"><span class="g-bar" style="left:29.63%;width:14.81%"></span><span class="g-note" style="left:45.56%">Aug 1944 to Apr 1945</span></div></div><div class="g-row"><div class="g-name"><a href="#may-1945-september-1947-back-in-rotterdam">Back in Rotterdam police</a></div><div class="g-track"><span class="g-bar" style="left:46.30%;width:51.85%"></span><span class="g-note g-left" style="right:56.48%">May 1945 to Sep 1947</span></div></div><div class="g-row"><div class="g-name"><a href="#19471967-canada">Sails for Canada</a></div><div class="g-track"><span class="g-mark" style="left:98.61%"></span><span class="g-note g-left" style="right:4.17%">8 Sep 1947</span></div></div></div></figure>
 <p>The arrest on 20 April 1944 divides a year in hiding from almost a year in the camps. Dates come from the police, camp and pension records. The family&#39;s Vught dates (2–18 Dec 1943) come from the Arolsen hostage cards.</p>
 <h2 id="18991943-friesland-rotterdam-and-the-police">1899–1943: Friesland, Rotterdam and the police</h2>
 <p>Geert grew up on Frisian farms, served in the military police, and by 1940 was a senior detective with Rotterdam&#39;s Centrale Recherche. Rows run oldest first, so the timeline reads in order.</p>

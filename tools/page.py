@@ -12,12 +12,18 @@ PDF = 'geert-greydanus-timeline.pdf'
 START, END = '<!-- CONTENT START -->', '<!-- CONTENT END -->'
 SI_START, SI_END = '<!-- SOURCE INDEX START -->', '<!-- SOURCE INDEX END -->'
 
-# The war years at a glance, from the section headings. The doc draws this as a chart that does not export.
+# The war years at a glance, as drawn in the doc's chart (which the HTML export leaves out; the PDF has it).
+# Positions are months after 1 April 1943. Bars are (start, end); markers have end None.
+GLANCE_SPAN = 54
+GLANCE_YEARS = [(9, '1944'), (21, '1945'), (33, '1946'), (45, '1947')]
 GLANCE = [
-    ('In hiding', 'Apr 1943 – Apr 1944', 12, 'hiding', 'april-1943-april-1944-in-hiding-oom-geert-in-the-achterhoek'),
-    ('Arrest, Vught', 'Apr – Aug 1944', 4, 'vught', 'april-august-1944-arrest-the-vught-bunker-transport'),
-    ('Buchenwald, Niederorschel', 'Aug 1944 – May 1945', 9, 'camp', 'august-1944-may-1945-buchenwald-niederorschel-and-liberation'),
-    ('Back in Rotterdam', 'May 1945 – Sep 1947', 28, 'home', 'may-1945-september-1947-back-in-rotterdam'),
+    ('In hiding, Achterhoek', 0, 12, 'Apr 1943 to Apr 1944', 'april-1943-april-1944-in-hiding-oom-geert-in-the-achterhoek'),
+    ('Family held in Vught', 8.05, 8.6, '2–18 Dec 1943', None),
+    ('Arrested at Satter farm', 12.65, None, '20 Apr 1944', 'april-august-1944-arrest-the-vught-bunker-transport'),
+    ('Vught camp and bunker', 12.65, 16, 'Apr 1944 to Aug 1944', 'april-august-1944-arrest-the-vught-bunker-transport'),
+    ('Buchenwald, Niederorschel', 16, 24, 'Aug 1944 to Apr 1945', 'august-1944-may-1945-buchenwald-niederorschel-and-liberation'),
+    ('Back in Rotterdam police', 25, 53, 'May 1945 to Sep 1947', 'may-1945-september-1947-back-in-rotterdam'),
+    ('Sails for Canada', 53.25, None, '8 Sep 1947', '19471967-canada'),
 ]
 
 
@@ -36,14 +42,28 @@ def nice_date(iso):
 
 
 def glance():
-    total = sum(g[2] for g in GLANCE)
-    bars = ''.join(
-        '<a class="glance-seg glance-%s" href="#%s" style="flex:%d"><span class="glance-label">%s</span>'
-        '<span class="glance-dates">%s</span></a>' % (cls, anchor, months, label, dates)
-        for label, dates, months, cls, anchor in GLANCE)
-    return ('<figure class="glance"><figcaption>Geert’s war years at a glance, April 1943 – September 1947'
-            '</figcaption><div class="glance-bar">%s</div><p class="glance-note">Widths are to scale: '
-            'the arrest on 20 April 1944 ends a year in hiding; the camps take most of the next year.</p></figure>' % bars)
+    pct = lambda m: '%.2f%%' % (100.0 * m / GLANCE_SPAN)
+    ticks = ''.join('<span class="g-tick" style="left:%s">%s</span>' % (pct(m), y) for m, y in GLANCE_YEARS)
+    rows = []
+    for label, start, end, dates, anchor in GLANCE:
+        if end is None:
+            mark = '<span class="g-mark%s" style="left:%s"></span>' % (' g-key' if 'Arrest' in label else '', pct(start))
+            note_at = start + 1
+        else:
+            mark = '<span class="g-bar" style="left:%s;width:%s"></span>' % (pct(start), pct(max(end - start, 0.5)))
+            note_at = end + 1
+        right = note_at > GLANCE_SPAN - 12
+        note = '<span class="g-note%s" style="%s:%s">%s</span>' % (
+            ' g-left' if right else '', 'right' if right else 'left',
+            pct(GLANCE_SPAN - start + 1.5) if right else pct(note_at - 0.4), dates)
+        name = '<a href="#%s">%s</a>' % (anchor, label) if anchor else label
+        rows.append('<div class="g-row%s"><div class="g-name">%s</div><div class="g-track">%s%s</div></div>'
+                    % (' g-strong' if 'Arrest' in label else '', name, mark, note))
+    arrest = '<span class="g-line" style="left:calc(190px + (100%% - 194px) * %.4f)"></span>' % (12.65 / GLANCE_SPAN)
+    return ('<figure class="glance"><figcaption><strong>A year in hiding, a year in the camps, two years back in the police</strong>'
+            '<span>Geert Greydanus, April 1943 to September 1947, to scale</span></figcaption>'
+            '<div class="g-chart">%s<div class="g-row g-axis"><div class="g-name"></div><div class="g-track">%s</div></div>%s</div>'
+            '</figure>' % (arrest, ticks, ''.join(rows)))
 
 
 def classify_tables(body):
@@ -111,10 +131,10 @@ def _page(body, source_index, rev):
 
 CSS = r"""
 :root{--paper:#faf7f0;--card:#fffdf8;--ink:#2a2622;--muted:#6b635a;--rule:#e4ddcf;--accent:#8a3324;--accent-soft:#f3e6df;
---hiding:#b5873a;--vught:#8a3324;--camp:#4a3f3a;--home:#5b7a6a;--serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+--serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
 --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
 @media (prefers-color-scheme:dark){:root{--paper:#1b1917;--card:#24211e;--ink:#ebe5da;--muted:#a69d91;--rule:#3a3530;--accent:#e08a6d;
---accent-soft:#3a2a24;--hiding:#c99a4b;--vught:#b8523f;--camp:#7a6c64;--home:#6f9584}}
+--accent-soft:#3a2a24}}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:16px}
 body{margin:0;background:var(--paper);color:var(--ink);font:18px/1.6 var(--serif);-webkit-text-size-adjust:100%}
@@ -163,15 +183,21 @@ table.facts.index td{font:13px/1.4 var(--sans);word-break:break-all;width:auto}
 tbody tr:hover{background:var(--accent-soft)}
 code{font-size:.85em;background:var(--accent-soft);padding:1px 5px;border-radius:3px}
 em{font-style:italic}
-.glance{margin:32px 0;padding:20px;background:var(--card);border:1px solid var(--rule);border-radius:8px}
-.glance figcaption{font:600 15px var(--sans);margin-bottom:12px}
-.glance-bar{display:flex;gap:3px;min-height:72px}
-.glance-seg{display:flex;flex-direction:column;justify-content:flex-end;padding:8px 10px;color:#fff;text-decoration:none;border-radius:4px;min-width:0;font-family:var(--sans)}
-.glance-seg:hover{filter:brightness(1.1)}
-.glance-label{font-weight:700;font-size:14px;line-height:1.2}
-.glance-dates{font-size:12px;opacity:.9}
-.glance-hiding{background:var(--hiding)}.glance-vught{background:var(--vught)}.glance-camp{background:var(--camp)}.glance-home{background:var(--home)}
-.glance-note{font:13px/1.4 var(--sans);color:var(--muted);margin:10px 0 0}
+.glance{margin:32px 0;padding:20px 24px;background:var(--card);border:1px solid var(--rule);border-radius:8px;font-family:var(--sans)}
+.glance figcaption{margin-bottom:16px}.glance figcaption strong{display:block;font-size:16px}.glance figcaption span{font-size:13px;color:var(--muted)}
+.g-chart{position:relative}
+.g-row{display:grid;grid-template-columns:190px 1fr;align-items:center;min-height:32px;font-size:14px}
+.g-name a{color:var(--ink);text-decoration:none}.g-name a:hover{color:var(--accent);text-decoration:underline}
+.g-strong .g-name,.g-strong .g-note{font-weight:700}
+.g-track{position:relative;height:32px;margin-right:4px}
+.g-track::before{content:"";position:absolute;left:0;right:0;top:50%;border-top:1px solid var(--rule)}
+.g-axis{min-height:24px;border-bottom:1px solid var(--rule);margin-bottom:4px}.g-axis .g-track::before{display:none}
+.g-tick{position:absolute;bottom:4px;transform:translateX(-50%);font-size:12px;color:var(--muted)}
+.g-line{position:absolute;top:24px;bottom:0;border-left:1.5px dashed var(--accent);opacity:.6;z-index:0}
+.g-bar{position:absolute;top:9px;height:14px;border-radius:7px;background:var(--accent-soft);border:1px solid var(--accent);z-index:1}
+.g-mark{position:absolute;top:10px;width:12px;height:12px;margin-left:-6px;transform:rotate(45deg);background:var(--muted);z-index:1}
+.g-mark.g-key{background:var(--accent)}
+.g-note{position:absolute;top:6px;white-space:nowrap;font-size:13px;line-height:20px;color:var(--muted);z-index:2;background:var(--card);padding:0 4px}
 .archive details{margin-top:12px}
 .archive summary{cursor:pointer;font:600 15px var(--sans);color:var(--accent)}
 .about{margin-top:64px;padding:20px 24px;background:var(--card);border:1px solid var(--rule);border-radius:8px;font:15px/1.6 var(--sans);color:var(--muted);max-width:none}
@@ -191,8 +217,11 @@ em{font-style:italic}
  .years{font-weight:400;color:var(--muted);white-space:nowrap}
 .lede{font-size:18px}
  h2{font-size:25px;margin-top:48px}
- .glance-bar{flex-direction:column;min-height:0}
- .glance-seg{flex:none!important;padding:10px 12px;flex-direction:row;justify-content:space-between;gap:8px}
+ .glance{padding:16px}
+ .g-row{grid-template-columns:1fr;min-height:0;margin-bottom:6px}
+ .g-axis{display:none}.g-line{display:none}
+ .g-name{font-size:13px}
+ .g-track{height:24px}.g-bar{top:5px}.g-mark{top:6px}.g-note{top:3px;font-size:12px}
  table,thead,tbody,tr,td{display:block;width:auto!important}
  thead{display:none}
  tbody tr{padding:14px 0;border-bottom:1px solid var(--rule)}
