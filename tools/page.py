@@ -6,7 +6,7 @@ Used by build_index.py, and runnable on its own to restyle an existing index.htm
 
 Re-running it is safe: it takes only the content between the CONTENT markers when they are present.
 """
-import html, re, sys
+import html, os, re, sys
 
 PDF = 'geert-greydanus-timeline.pdf'
 START, END = '<!-- CONTENT START -->', '<!-- CONTENT END -->'
@@ -25,6 +25,23 @@ GLANCE = [
     ('Back in Rotterdam police', 25, 53, 'May 1945 to Sep 1947', 'may-1945-september-1947-back-in-rotterdam'),
     ('Sails for Canada', 53.25, None, '8 Sep 1947', '19471967-canada'),
 ]
+
+
+# Sections written for this page that are not (yet) in the Claude Doc. Each is inserted before the
+# h2 named here, between markers, so a rebuild from a fresh export keeps it and a re-run replaces it.
+EXTRA_SECTIONS = [('gerstein.html', 'the-airman-helping-network-around-varsseveld-janmay-1944')]
+SECTIONS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'sections')
+
+
+def add_sections(body):
+    for name, before in EXTRA_SECTIONS:
+        start, end = '<!-- SECTION %s START -->' % name, '<!-- SECTION %s END -->' % name
+        body = re.sub(re.escape(start) + '.*?' + re.escape(end) + r'\n?', '', body, flags=re.S)
+        frag = open(os.path.join(SECTIONS_DIR, name), encoding='utf-8').read().strip()
+        anchor = '<h2 id="%s">' % before
+        if anchor in body:
+            body = body.replace(anchor, '%s\n%s\n%s\n%s' % (start, frag, end, anchor), 1)
+    return body
 
 
 def content_of(doc):
@@ -122,7 +139,7 @@ def render(doc, rev='?'):
 
 
 def _page(body, source_index, rev):
-    body = body.strip()
+    body = add_sections(body.strip())
     toc_html = toc(body + '<h2 id="archive-sources">Source index</h2>')
     rev_note = ' (revision %s)' % html.escape(str(rev)) if rev and rev != '?' else ''
     return TEMPLATE.format(toc=toc_html, body=body, source_index=source_index, pdf=PDF, rev=rev_note,
@@ -198,6 +215,12 @@ em{font-style:italic}
 .g-mark{position:absolute;top:10px;width:12px;height:12px;margin-left:-6px;transform:rotate(45deg);background:var(--muted);z-index:1}
 .g-mark.g-key{background:var(--accent)}
 .g-note{position:absolute;top:6px;white-space:nowrap;font-size:13px;line-height:20px;color:var(--muted);z-index:2;background:var(--card);padding:0 4px}
+.chain{list-style:none;padding:0;margin:20px 0;counter-reset:step;max-width:42em}
+.chain li{position:relative;padding:0 0 18px 44px;margin:0;counter-increment:step}
+.chain li::before{content:counter(step);position:absolute;left:0;top:2px;width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--paper);font:700 14px/28px var(--sans);text-align:center}
+.chain li::after{content:"";position:absolute;left:13.5px;top:34px;bottom:4px;border-left:1px solid var(--rule)}
+.chain li:last-child::after{display:none}
+.sources-note{font:14px/1.5 var(--sans);color:var(--muted)}
 .archive details{margin-top:12px}
 .archive summary{cursor:pointer;font:600 15px var(--sans);color:var(--accent)}
 .about{margin-top:64px;padding:20px 24px;background:var(--card);border:1px solid var(--rule);border-radius:8px;font:15px/1.6 var(--sans);color:var(--muted);max-width:none}

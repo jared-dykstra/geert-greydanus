@@ -1,7 +1,7 @@
-# Publishes the repository to GitHub Pages on every push to main.
-# GitHub's built-in Pages deploy gives up after 10 minutes, which is not enough to
-# copy this ~500 MB archive; this one allows 30. Needs Settings → Pages → Source:
-# "GitHub Actions".
+# Publishes the repository to GitHub Pages on every push to main, or by hand from
+# the Actions tab (Publish site → Run workflow). Needs Settings → Pages → Source:
+# "GitHub Actions". actions/deploy-pages waits at most 10 minutes for GitHub to
+# finish a deploy; a longer timeout is ignored.
 name: Publish site
 
 on:
@@ -21,7 +21,7 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 20
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -33,5 +33,3 @@ jobs:
           path: .
       - id: deployment
         uses: actions/deploy-pages@v4
-        with:
-          timeout: 1800000
