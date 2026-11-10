@@ -17,7 +17,8 @@ SI_START, SI_END = '<!-- SOURCE INDEX START -->', '<!-- SOURCE INDEX END -->'
 # re-run replaces it with the current file.
 EXTRA_SECTIONS = [('journey.html', '18991943-friesland-rotterdam-and-the-police'),
                   ('gerstein.html', 'the-airman-helping-network-around-varsseveld-janmay-1944'),
-                  ('markus.html', 'april-august-1944-arrest-the-vught-bunker-transport')]
+                  ('markus.html', 'april-august-1944-arrest-the-vught-bunker-transport'),
+                  ('deathmarch.html', 'may-1945-september-1947-back-in-rotterdam')]
 SECTIONS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'sections')
 
 
@@ -105,6 +106,11 @@ h1{font-size:clamp(34px,5vw,52px);line-height:1.1;margin:0 0 12px;font-weight:60
 .toc li a{display:block;padding:6px 0 6px 14px;margin-left:-2px;border-left:2px solid transparent;color:var(--muted);text-decoration:none}
 .toc li a:hover{color:var(--ink)}
 .toc li a.active{color:var(--accent);border-left-color:var(--accent);font-weight:600}
+.feature{margin:20px 0 28px;padding:20px 24px;border:1px solid var(--rule);border-left:4px solid var(--accent);border-radius:8px;background:var(--accent-soft)}
+.feature p{margin:0 0 8px}.feature p:last-child{margin:0}
+.feature-kicker{font:700 12px var(--sans);text-transform:uppercase;letter-spacing:.08em;color:var(--accent)}
+.feature-title{font-size:22px;line-height:1.3;font-weight:600}
+.feature-links{font:14px/1.5 var(--sans)}
 main{padding:24px 0 80px;min-width:0}
 main>p,main>ul,main>ol,main section>p{max-width:42em}
 .updated{font:14px var(--sans);color:var(--muted)}
