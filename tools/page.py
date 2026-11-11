@@ -5,9 +5,12 @@ index.html is the source of truth. Edit its content directly, then run:
     python3 tools/page.py index.html index.html
 
 The script keeps everything between the CONTENT and SOURCE INDEX markers, re-inserts the sections, and
-rebuilds the rest of the page around them. Running it twice gives the same file.
+rebuilds the rest of the page around them. Apart from the "Last updated" stamp under the title, which
+is set to the current UTC time on every run, running it twice gives the same file. tools/build_pdf.sh
+runs this script first, so every page or PDF build carries a fresh stamp.
 """
 import html, os, re, sys
+from datetime import datetime, timezone
 
 PDF = 'geert-greydanus-timeline.pdf'
 START, END = '<!-- CONTENT START -->', '<!-- CONTENT END -->'
@@ -73,7 +76,10 @@ def render(doc):
     source_index = doc.split(SI_START, 1)[1].split(SI_END, 1)[0]
     body = label_cells(classify_tables(add_sections(body)))
     toc_html = toc(body + '<h2 id="archive-sources">Source index</h2>')
-    return TEMPLATE.format(toc=toc_html, body=body, source_index=source_index, pdf=PDF,
+    now = datetime.now(timezone.utc)
+    updated = ('<p class="updated">Last updated <time datetime="%s">%s</time></p>'
+               % (now.strftime('%Y-%m-%dT%H:%MZ'), now.strftime('%-d %B %Y, %H:%M UTC')))
+    return TEMPLATE.format(toc=toc_html, body=body, source_index=source_index, pdf=PDF, updated=updated,
                            start=START, end=END, si_start=SI_START, si_end=SI_END, css=CSS)
 
 
@@ -93,7 +99,8 @@ a:hover{text-decoration-thickness:2px}
 .kicker{font:600 13px/1.4 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
 h1{font-size:clamp(34px,5vw,52px);line-height:1.1;margin:0 0 12px;font-weight:600;letter-spacing:-.01em}
 .years{font-weight:400;color:var(--muted);white-space:nowrap}
-.lede{font-size:20px;max-width:46em;margin:0 0 24px;color:var(--ink)}
+.lede{font-size:20px;max-width:46em;margin:0 0 12px;color:var(--ink)}
+.updated{font:500 14px/1.4 var(--sans);color:var(--muted);margin:0 0 24px}
 .actions{display:flex;flex-wrap:wrap;gap:12px;font-family:var(--sans)}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:6px;font:600 15px/1 var(--sans);text-decoration:none;border:1px solid var(--accent)}
 .btn-primary{background:var(--accent);color:var(--paper)}
@@ -220,6 +227,7 @@ TEMPLATE = """<!doctype html>
 <p class="kicker">A timeline from the family papers</p>
 <h1>Geert Greydanus <span class="years">1899–1965</span></h1>
 <p class="lede">A Rotterdam police detective who went into hiding in April 1943 rather than arrest Jews, helped Allied airmen in the Achterhoek as &ldquo;Oom Geert&rdquo;, survived Vught, Buchenwald and Niederorschel, and later farmed near Clinton, Ontario.</p>
+{updated}
 <div class="actions">
 <a class="btn btn-primary" href="{pdf}" download>""" + DOWNLOAD_ICON + """Download as PDF</a>
 <a class="btn btn-secondary" href="#archive-sources">Source index</a>
