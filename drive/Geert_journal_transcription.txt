@@ -1,0 +1,252 @@
+Geert Greydanus family journal (Drive folder 'Geert journal', https://drive.google.com/drive/folders/1GrFG5R5atqIwgxILZ4pc7RPnJOf_Y_hE). Transcriptions and English translations, one section per scan. [?] marks unreadable words.
+
+=================== 1and2 ===================
+1and2.jpg (Drive 1GvTSXOaL-UYBiAMvJLIhPnAb0PQQZRsR) -- two journal pages.
+Top: envelope, 7½c stamp, postmark ['s-Herto]genbosch Station (date unreadable).
+ORIGINAL: "Aan Fam. Dijkstra / Vossepad 78 [?18] / Rotterdam (Z)"
+ENGLISH: "To the Dijkstra family, Vossepad 78 [?], Rotterdam (South)"
+Bottom left: newspaper death notice (printed), with handwritten date:
+ORIGINAL: "Eenige en algemeene kennisgeving. Hierbij geef ik kennis van het overlijden van mijn lieve Man WILLEM AGE DE VRIES, in den leeftijd van 33 jaar. Wed. J. P. DE VRIES-Breedveld. Geertsemastraat 1a. Rotterdam, 18-1-'43" (date handwritten)
+ENGLISH: "Sole and general notice. I hereby announce the death of my dear husband Willem Age de Vries, aged 33. Widow J. P. de Vries-Breedveld, Geertsemastraat 1a, Rotterdam, 18 Jan 1943."
+Bottom right: reverse of Vught letter form, sender block:
+ORIGINAL: "Anschrift: Schutzhäftling [handwritten:] Gijzel[aar] W. Greydanus geb. 4/3 '24 / Nr. 0667 Block 24 / F. [=Frauenlager] K.L. Herzogenbusch"
+ENGLISH: "Address: protective-custody prisoner [hostage] W. Greydanus born 4 Mar 1924, No. 0667, Block 24, women's camp, KL Herzogenbusch"
+
+=================== 1a ===================
+1a.jpg (Drive 1GvZv3uHV06ZY_pemJsydhNvLaj8Q6DDU) -- not in repo drive/; downloaded to scratch dl/
+Printed Vught (KL Herzogenbusch) letter form with "Auszug aus der Lagerordnung". Handwritten date at top: "6 Dec '43". To the right, an envelope edge with a 7½c stamp postmarked ['s-Herto]genbosch Station (date unreadable).
+
+ORIGINAL (Dutch, pencil):
+Lieve allemaal. Een klein berichtje van ons. Wij maken het goed. Wilt u dit even doorgeven aan de andere fam. in R'dam, buren en op kantoor. Wij mogen eenmaal in de 2 weken een brief ontvangen en per persoon per week 1 pakje. Wij hebben graag boter, suiker, jam, kaas. Niet iets wat nog gekookt moet worden. Wilt u s.v.p. proberen een warme trui voor Joop [Jaap] en Jan te krijgen. Ze hebben nog wel een [?], het is nu zo koud. Vraagt u maar aan tante Siem om hun nummer, ik weet het niet. Kunt u proberen hen ook iedere keer een pakje te sturen en een briefje. Er mag maar 1 kledingstuk per pakket verstuurd worden. Kunt u ons ook helpen aan een kam en mes. Als u terugschrijft, schrijft u dan aan mijn nr. 0667. Moeder, Gerard en Corrie hebben nr. 0666 dus het moet verdeeld worden. Allen hartelijke groeten. Wietske
+
+ENGLISH:
+Dear all. A short message from us. We are doing well. Please pass this on to the other family in Rotterdam, the neighbours and the office. We may receive a letter once every 2 weeks and 1 parcel per person per week. We would like butter, sugar, jam, cheese. Nothing that still has to be cooked. Please try to get a warm sweater for Jaap and Jan. They do still have a [?], it is so cold now. Ask Aunt Siem for their number, I don't know it. Could you also try to send them a parcel and a note each time. Only 1 piece of clothing may be sent per parcel. Could you also help us to a comb and a knife. If you write back, write to my no. 0667. Mother, Gerard and Corrie have no. 0666, so it has to be shared. Warm regards to all. Wietske
+
+=================== 1a translated ===================
+1a translated.jpg (Drive 1Ash92OdxqPfhXXYod23uNcMCcPQK_j4q) -- typed Dutch transcription + machine English translation of 1a (Wietske's Vught letter). Not dated in the translation.
+Matches 1a (see 1a.txt). Translation error: "Wij maken het goed" rendered "We'll make it right"; correct: "We are doing well". "mijn ummer" = "mijn nummer".
+
+=================== 1b ===================
+1b.jpg (Drive 1Gw9t4eGQ2qHzLLlU_Fr8xW2pDnTdVYyb). NOTE: 2a.jpg (1H1_1WsQ5W) is the same photograph (byte-identical except ~360 metadata bytes).
+Printed Vught letter form. Handwritten header: "Vught 12-12-'43". Pencil, faint; one line blacked out (censored or self-struck).
+ORIGINAL (Dutch):
+Beste [Jo?]m[?],
+Eindelijk een berichtje van ons. Wij hadden gehoopt [?] en mochten de 2e Zondag al schrijven. Het eten is hier aardig goed. Brood krijgen we meer als thuis. Ik zou graag een pakje van jullie krijgen [?]; als jullie bij ons in huis komen dan wilde ik in de eerste plaats een goede trui hebben en een tafelmes [?], want we krijgen maar een stuk [?] en [?] ... en thuis is volgens mij [?] wel een das [?]. Wietske en de anderen behalve Jaap zitten in het vrouwenlager en wij zitten in het mannenlager. [line blacked out] per week. Dat is meer als thuis. We zijn hier nu al 10 dagen. De eerste week hoefden we niet te werken maar nu wel. Er is verder geen nieuws. Met de hartelijke groeten van Jan.
+P.S. Jaap schrijft naar Tante Siem.
+ENGLISH:
+Dear [?], At last a message from us. We had hoped [?] and were allowed to write on the 2nd Sunday. The food here is fairly good. We get more bread than at home. I'd like a parcel from you; if you go to our house, then first of all I'd like a good sweater and a table knife [?], because we only get a piece of [?] ... Wietske and the others except Jaap are in the women's camp and we are in the men's camp. [blacked out] per week. That's more than at home. We have been here 10 days now. The first week we didn't have to work, but now we do. No other news. Warm regards from Jan. P.S. Jaap is writing to Aunt Siem.
+
+=================== 2a ===================
+2a.jpg (Drive 1H1_1WsQ5WBaLzhdgHbNRDKek_tVIGkhL) -- duplicate photograph of 1b.jpg (Jan's letter, Vught 12-12-'43). See 1b.txt. Not cited on the site (1b is).
+
+=================== 3a ===================
+3a.jpg (Drive 1HINzLk41sVNUsNngENJ3cyqTfhpmU41D) -- handwritten (ink) letter; right edge shows part of 4a's letter.
+ORIGINAL (Dutch):
+15 Dec. 1943. Geachte Heer, Hierbij nog de nrs. van Jac. Greydanus 16 jaar 8426 en van Jan Greydanus 15 jaar 8428. Mevrouw Greyd. heeft dus no. 0666 en Wietske 0667, terwijl de beide jongste kinderen geen no. hebben. Hopende U zoo van dienst te zijn geweest. Hoogachtend, [signature, J. Goe[?]] secr.
+ENGLISH:
+15 Dec 1943. Dear Sir, Herewith also the numbers of Jac. Greydanus, 16 years, 8426, and of Jan Greydanus, 15 years, 8428. Mrs Greyd. therefore has no. 0666 and Wietske 0667, while the two youngest children have no number. Hoping to have been of service to you. Respectfully, [signature] secr.
+
+=================== 4a ===================
+4a.jpg (Drive 1HJogvIVjc8-7vQ-I1WxHWPECqAGk2mIe) -- handwritten (ink) letter.
+ORIGINAL (Dutch):
+Vught 7 Dec. Den Geachte Heer, Helaas weet ik het nr. v. Mevrouw Greydanus nog niet. Zodra ik het weet zal ik U berichten. Iedere gevangene mag per week 1 pakket v. 3-4 k.g. ontvangen. Indien de familie Greydanus niet door familie of kennissen gesteund wordt, wilt U mij dit dan s.v.p. eens berichten? Cornelis heb ik gezien: we brachten hem een St. Nic. cadeau; hij was erg aardig [?] opgewekt. De gevangenen mogen 2 x per maand één brief ontvangen en schrijven. Indien U het nr. niet weet kunt U de geboortedatum vermelden. Ook dan komt alles terecht. Met hoogachting, Secr. [surname illegible, "Monté"?]
+ENGLISH:
+Vught, 7 Dec. Dear Sir, Unfortunately I do not yet know Mrs Greydanus's number. As soon as I know it I will tell you. Each prisoner may receive 1 parcel of 3-4 kg per week. If the Greydanus family is not supported by family or friends, would you please let me know? I have seen Cornelis: we brought him a St Nicholas present; he was very [?] cheerful. Prisoners may receive and write one letter twice a month. If you don't know the number you can give the date of birth; then everything will arrive too. Respectfully, Secr. [?]
+
+=================== 4b ===================
+4b.jpg (Drive 1MdUGsyVnmFWfNI25wDwKv1-c9sGstIsG) -- red printed envelope ("HIER OPENEN", "AFZ.", printer "Probst & Zoon - druk C. Chevalier"), same envelope type as visible beside 3a.
+ORIGINAL: "De Weled. Geb. Heer P. Dijkstra / Vossepad 18 [?10] / Rotterdam"
+ENGLISH: "Mr P. Dijkstra, Vossepad 18 [?], Rotterdam"
+No date, no sender.
+
+=================== 5 ===================
+5.jpg (Drive 1HN1k88ytG7V3RbE_MFt1JPycGMZrsnmd) -- local copy is drive/5.jpg (no id prefix; byte size 6371136 matches Drive). Typed circular.
+ORIGINAL (Dutch, key passages):
+NOTA No. 406/1943. Betreffende: Weder in dienst treden van "ondergedoken" politie-ambtenaren.
+De wnd. Directeur-Generaal van Politie ontving van den SS-Obergruppenführer und General der Polizei Rauter een schrijven, waarvan de vertaling als volgt luidt:
+"Ik had indertijd bepaald, dat in de gevallen, waarin Nederlandsche ambtenaren van politie in uniform en met pistool den politiedienst verlaten, de arrestatie der gezinsleden moet plaatsvinden ... In dien tusschentijd zijn circa 150 gijzelaars - gezinsleden van deze weggeloopen ambtenaren van politie - naar een kamp in Nederland overgebracht.
+Ik heb dit kamp gisteren bezocht en de gezinsleden met het oog op de aanstaande Kerstdagen in vrijheid gesteld. ... Ik heb aan deze familieleden in het kamp gisteren medegedeeld, dat ik bovendien bereid ben om de weggeloopen politie-ambtenaren weer in den dienst der Nederlandsche Politie te nemen, onder voorwaarde, dat dezen zich binnen de eerstvolgende 14 dagen bij hun bevoegde politie-instanties aanmelden en zich voortaan loyaal gedragen. ... dat ik voortaan tegen alle gevallen van desertie in de Nederlandsche Politie ... ten strengste zal optreden. ..." w.g. Rauter, SS-Obergruppenführer und General der Polizei.
+Ondergedoken ambtenaren, die, gezien bovenstaande mededeeling, weder in dienst wenschen te treden, moeten zich, alvorens hun werkzaamheden te hervatten, voor 3 Januari 1944 melden bij de Afdeeling Personeel aan het Centraal Bureau.
+ROTTERDAM, 29 December 1943. De Politiepresident, J. J. BOELSTRA.
+ENGLISH (key passages):
+Note No. 406/1943. Re: return to service of police officers "in hiding". The acting Director-General of Police received a letter from Rauter: "I had ordered that where Dutch police officers leave the service in uniform and with pistol, their family members are to be arrested ... Meanwhile about 150 hostages - family members of these runaway officers - have been taken to a camp in the Netherlands. I visited this camp yesterday and released the family members in view of the coming Christmas days. ... I told these family members in the camp yesterday that I am also prepared to take the runaway officers back into the Dutch police, provided they report to their competent police authorities within the next 14 days and behave loyally from now on. ... in future I will act with the utmost severity against all cases of desertion ..." Officers in hiding who wish to return must report to the Personnel Department at the Central Bureau before 3 January 1944. Rotterdam, 29 December 1943, Police President J. J. Boelstra.
+
+=================== 5 translated ===================
+5 translated.jpg (Drive 1KcfPxTpCLqiedO_o2G38l3vsjxwIiSaf) -- Google Lens screenshot, machine English of 5.jpg (Nota 406/1943). Garbled in places; drops "circa 150 gijzelaars". Content as in 5.txt.
+
+=================== 6 ===================
+6.jpg (Drive 1HPSLoH-iMk4vWrQtW9nL1Ar5GH5kLem1) -- typed letter on letterhead "POLITIEPRESIDENT ROTTERDAM" (old "POLITIE ROTTERDAM" struck through).
+ORIGINAL: CENTRAAL-BUREAU AFD. Personeel LA A No. 155/40b/1943-vdG. BIJLAGEN: --. Den Heer G. Greydanus, West-Varkenoordscheweg 359b, Rotterdam. ROTTERDAM, 22 October 1943. Ik heb de eer U te berichten, dat de wnd. Directeur-Generaal van Politie U bij zijn beschikking van 20 October 1943, No. P IIIc 820/1943, ontslag als onbezoldigd rijksveldwachter heeft verleend. DE POLITIEPRESIDENT, [signed] J. J. BOELSTRA.
+ENGLISH: Rotterdam, 22 Oct 1943. To Mr G. Greydanus, West-Varkenoordseweg 359b, Rotterdam. I have the honour to inform you that the acting Director-General of Police, by decision of 20 Oct 1943, No. P IIIc 820/1943, has granted you dismissal as unpaid rijksveldwachter. The Police President, J. J. Boelstra.
+
+=================== 7a ===================
+7a.jpg (Drive 1HQhNoNXV77HodzkVgQ5fYZZGLcqR3rrb) -- pencil draft, German, on the back of a typed Dutch business form; undated, unsigned. Continues on 7b, 7c. Right page: blue wrapper "Greydanus" (see 8).
+ORIGINAL (German):
+Herrn Reichskommissar Dr. Seyss Inquart.
+Seit etwa 9 Wochen befindet sich mein Vater G. G[reydanus] im Konzentrationslager Vught, ohne dass wir etwas von ihm gehört haben. Vorige Woche haben wir telefonisch in Vught informiert und man teilte uns mit dass er tatsächlich in Vught war. Wir fragten seine Nummer um ein Paket senden zu können, aber man sagte dass er in einer Abteilung war wo man keine Nummer hat. Wir konnten aber ruhig ein Paketchen senden, das[s] ...
+ENGLISH:
+To Reichskommissar Dr Seyss-Inquart. For about 9 weeks my father G. G. has been in Vught concentration camp, without our hearing anything from him. Last week we enquired by telephone in Vught and were told that he was indeed in Vught. We asked his number so as to send a parcel, but were told he was in a section where one has no number. We could, however, safely send a small parcel, that ...
+
+=================== 7b ===================
+7b.jpg (Drive 1HVx7oUZMWhzfDLcSfO3NsNf1q4mPA5Ku) -- continuation of the Seyss-Inquart draft (7a). Not in repo drive/; downloaded to scratch dl/. Not cited by id on the site (7a and "7 translated en" are).
+ORIGINAL (German): ... [?]. Zu unserem grossen Erstaunen ist das Paketchen jedoch gestern zurückgekommen ohne weitere Mitteilung, weshalb ich Sie bitte mir, wenn möglich, einige Auskünfte über meinen Vater zu erteilen. Ist er noch in Vught und wie lange muss er noch dort bleiben? Darf er keine Berichte nach Hause senden? Wohin [struck] Wie müssen wir unsere Pakete adressieren damit wir ...
+ENGLISH: ... To our great astonishment, however, the parcel came back yesterday without further notice, which is why I ask you, if possible, to give me some information about my father. Is he still in Vught and how long must he stay there? May he not send news home? How must we address our parcels so that we ...
+
+=================== 7c ===================
+7c.jpg (Drive 1HYiYzPQVPGkKVhzir-styfO5RqxKcn3j) -- end of the Seyss-Inquart draft. Not in repo drive/; downloaded to scratch dl/. Not cited on the site.
+ORIGINAL (German): ... sicher sind dass mein Vater sie bekommt? Mit einer Antwort würden Sie uns sehr zum Dank verpflichten da Sie begreifen werden, dass wir sehr beunruhigt sind [struck word] wenn wir gar nichts hören. [tick mark; no signature, no date]
+ENGLISH: ... sure that my father receives them? We would be very grateful for an answer, as you will understand that we are very worried when we hear nothing at all.
+
+=================== 7 translated de ===================
+7 translated de.jpeg (Drive 16f7IfZw4aDFInfXv-kETYMt6APe60AlH) -- typed German transcription of the 7a-7c draft (screenshot of a translation app, "DUITS -> ENGELS"). Not in repo drive/; downloaded to scratch dl/. Not cited on the site.
+Text matches 7a-7c (see those files): "Herrn Reichskommissar Dr Seyss Inquart. Seit etwa 9 Wochen befindet mein Vater G.G....... sich ins Konzentrationslager Vught ... Grosse Erstaunen ist das das Paketchen gestern zuruckgekommen ist, ohne weitere Mitteilung ... dass wir sehr beunruhigt sind wenn wir gar nichts horen."
+
+=================== 7 translated en ===================
+7 translated en.jpeg (Drive 1yYXfO-SGyptSImPwDG9JhHGjpxKSHZtf) -- typed English translation of the Seyss-Inquart draft (7a-7c). Faithful except "went to the Vught prison" for "befindet sich im KZ Vught" (is in Vught concentration camp).
+
+=================== 8 ===================
+8.jpg (Drive 1Haksc0I8qqqjC5aJ6EiBf_ny54zjJhyo) -- two pieces pasted in: a blue folded paper wrapper and a torn brown paper scrap (pasted upside down).
+Blue wrapper, pencil (address side), plus "Rotterdam" in blue ink in another hand:
+ORIGINAL: "Greydanus / W. Varkenoord[sche]weg 359b / Gel. verz[enden?] [?] / Rotterdam"
+ENGLISH: "Greydanus, W[est-]Varkenoordseweg 359b, please forward [?], Rotterdam"
+Brown scrap, pencil:
+ORIGINAL: "Voorloopige bestemming in Cleef. Daarna verder, weet niet waarheen. Ik ben moedig."
+ENGLISH: "Provisional destination: Kleve. After that onward, don't know where to. I am in good spirits [lit. 'I am brave']."
+
+=================== 13and14 ===================
+13and14.jpg (Drive 1HbKkNEruo6r_GjgfeSrrtm_8PysGZW49) -- two pages.
+LEFT: reverse of the blue wrapper from p. 8, with pencil jottings (times "10.?0", "10.50", "12 [uur?]" and words, too faint to read [?]), "387", and in blue ink "Rotterdam / Greydanus / W[est] V[arkenoord...]". Below, a brown paper scrap, pencil:
+ORIGINAL: "Aan [J?] Greydanus West-Va[rkenoordscheweg]. Franssen uit Oranje[?]weg 3[?] R'dam en Van Braak uit Varsseveld maken het goed. Dit zijn nog [?] in Vught. Daag tot ziens [?]"
+ENGLISH: "To [J?] Greydanus, West-Va[rkenoordseweg]. Franssen of Oranje[?]weg 3[?], Rotterdam, and Van Braak of Varsseveld are doing well. [These are still / we are?] in Vught. Bye, see you [?]"
+RIGHT: handwritten ink letter (cramped hand), continued on 14b:
+ORIGINAL: "Vught 9 Aug. 1944. Geachte M[evrouw?]. Hierbij deel ik U mede, dat Uw man 9 Aug. is vertrokken van het kamp Vught naar Kleef in Duitsland. Over dit kamp hoeft U zich geen zorgen te maken. Hij is gegaan met nog 15 anderen. Zij allen zagen er goed uit en waren opgewekt. Hij was om 12 uur op het perron in Vught, en daar hebben wij hen rijkelijk voorzien van levensmiddelen, zodat zij niets [continued 14b]"
+ENGLISH: "Vught, 9 Aug 1944. Dear Mrs [?], I hereby inform you that your husband left Vught camp on 9 Aug for Kleve in Germany. You need not worry about this camp. He went with 15 others. They all looked well and were cheerful. He was on the platform in Vught at 12 o'clock, and there we supplied them richly with food, so that they [lacked?] nothing ..."
+Beneath it, a typed slip (also visible on 14b): see 14b.
+
+=================== 14b ===================
+14b.jpg (Drive 1HbkTkfweUfTck9PIong0McvcJogo62rv)
+TOP (upside down): second page of the handwritten 9 Aug 1944 letter begun on 13and14:
+ORIGINAL: "... nog 4 dozen vol met boterhammen mee. De behandeling was een geschikte [?]. Wij [?], laten wij hopen dat hij een gauw [?] terug[?] van U is. Met beleefde groeten, X"
+ENGLISH: "... [took] another 4 boxes full of sandwiches along. The treatment was decent [?]. ... let us hope that he [is soon back with you?]. With polite regards, X"
+BOTTOM: typed slip:
+ORIGINAL: "9 Aug. Geachte Mevrouw Greidanus, Ik sprak vandaag uw man, die op transport ging, ik meen naar Kleef. Hij maakt het best en laat U allerhartelijkst groeten. Hij vroeg U ook flink te blijven, speciaal in verband met de vermeerdering in uw gezin. Kan ik die boodschap goed hebben verstaan? N.N."
+ENGLISH: "9 Aug. Dear Mrs Greidanus, Today I spoke to your husband, who was going on transport, I think to Kleve. He is very well and sends you his warmest greetings. He also asked you to stay strong, especially in view of the increase in your family. Can I have understood that message correctly? N.N. [anonymous]"
+
+=================== 15 ===================
+15.jpg (Drive 1Hg_gM9H7oB9YkZo7-ATTa9oqmFn2W2FK)
+(a) Handwritten note (purple pencil, written sideways) on the back of a printed German parts form (columns "Körper, Kappen, Böden, Deckel, Deckscheiben, Teilscheiben, Äußere Hülsen, Kopfträger").
+ORIGINAL: "Ärztliche Untersuchung erst nach 20 Uhr möglich! 1.) Greydanus 2.) Schepen 3.) Palache. 3.5.45 [word, ?'bemerkt'/'Lenwerk'?] [signature, illegible]"
+ENGLISH: "Medical examination only possible after 8 p.m.! 1) Greydanus 2) Schepen 3) Palache. 3 May 1945. [signature]"
+No place name on the note.
+(b) Canteen voucher: "Langenwerke A.-G. Langensalza, Belei III Niederorschel, No 2198, Gutschein über RM 0.50 zum Einkauf von Waren in der Lager-Kantine. Lw 751 Belei III - 20000. 10. 44. - L/0492", stamped "16.12.44".
+
+=================== 15b ===================
+15b.jpg (Drive 1Hs50xCIwaV7nWD-8cBNi37TwUSJJezwU) -- loose items photographed:
+Langenwerke A.-G. Langensalza, Belei III Niederorschel canteen vouchers ("Gutschein ... zum Einkauf von Waren in der Lager-Kantine"): No 7401 (RM 0.50), No 0205 (RM 0.50), No 0819 (RM 0.50), No 1068 (RM 1.00); no date stamps visible.
+Allied military 1-Mark note: "Alliierte Militärbehörde, In Umlauf gesetzt in Deutschland, Serie 1944, Eine Mark", serial 095592151.
+
+=================== 16 ===================
+16.jpg (Drive 1HqSN9UetGXb0s9fXhFOj3QBzL20QNCdj)
+Langenwerke Niederorschel voucher No 1734, RM 0.50, stamped "16.12.44".
+"SS-Standort-Kantine - Buchenwald, RM -.50 RM, Wertmarke 45661".
+Langenwerke Niederorschel voucher No 0353, RM 1.00, stamped "17. XI. 1944".
+
+=================== 17 ===================
+17.jpg (Drive 1I5JSNRTUX48H0YYP9k0mZNdKBicfpmJm)
+"SS-Standort-Kantine - Buchenwald, RM 3 RM, Wertmarke 77384".
+A red-white-blue (Dutch flag) silk ribbon, with a word inked on the white band [illegible, ?].
+Right edge: Red Cross message form (= p. 18).
+
+=================== 18 ===================
+18.jpg (Drive 1IAuGrmZ1sq7HqJyZnH6t9dLb_PACmTbr) -- printed form "Informatie Bureau van het Nederlandsche Roode Kruis / Netherland Red Cross Information Bureau", purple stamp "Padvinders-Postdienst ... 1945" [Scouts' post service].
+ORIGINAL: Aanvrager: Greydanus, Geert, Veemgebouw, Eindhoven, N. Brabant, Holland. Mededeeling: "Ben goed gezond. Weet niets van de familie. Was in Buchenwald. Hoop spoedig thuis te zijn. Stuur bericht over jullie toestand." Datum: 9-5-45. Geadresseerde: Greydanus-Pebesma, Johanna, West Varkenoordscheweg 359B, Rotterdam (Zuid), Z. Holland, Nederland.
+ENGLISH: Enquirer: Geert Greydanus, Veemgebouw, Eindhoven. Message: "Am well and healthy. Know nothing of the family. Was in Buchenwald. Hope to be home soon. Send news of how you are." 9 May 1945. To Johanna Greydanus-Pebesma, West-Varkenoordseweg 359B, Rotterdam-Zuid.
+
+=================== 19 ===================
+19.jpg (Drive 1ICLFZ_yac0MGEGHJRs0vCiyQG8puykmA)
+(a) "LEVENSMIDDELEN KAART van het EVACUATIECENTRUM 'VEEMGEBOUW' Beukenlaan te Eindhoven" (meal card, 46 numbered squares, none visibly punched).
+(b) Pass: "Evacuatiecentrum 'VEEMGEBOUW' Beukenlaan - Eindhoven. Aan G. Greydanus No. P.B. 12110 wordt verlof gegeven, éénmaal zonder bagage het terrein te verlaten, en om uiterlijk 8 uur weer de poort binnen te komen. Handt. [signature]" (red diagonal stripe).
+ENGLISH (b): "To G. Greydanus, No. P.B. 12110, leave is granted to leave the grounds once, without luggage, and to come back through the gate by 8 o'clock at the latest."
+
+=================== 20a ===================
+20a.jpg (Drive 1IFkjlJNDg14ouy5f2PWC9aTYbxC0hAw3) -- typed, English, letterhead "Gewestelijk Politiepresident Eindhoven".
+"Eindhoven, May 8th 1945. STATEMENT. The Chief Constable of Civil Police Eindhoven declares that: Geert Greijdanus, born at Hennaarderadeel 1th of December 1899 is gully [=fully] reliable as to his political attitude. The Chief of Police, [signed] B.v.d. Werf."
+
+=================== 20b ===================
+20b.jpg (Drive 1IMMSlQfe1Enlll-Eazbg6TbIzUHUFT5w) -- typed, English, same letterhead; date line folded under (not visible).
+"STATEMENT. The Chief Constable of Civil Police Eindhoven declares that GEERT GREYDANUS, born at Hennaarderadeel on 1th December 1899, has to go to Utrecht and surroundings on Saterday May 12th till Tuesday May 15th, whilst on active service for Civil Police Eindhoven. The Chief Constable, [signed] B.v.d. Werf."
+
+=================== 20c ===================
+20c.jpg (Drive 1INJMgYTvtqlwhON_68lqZWRCrJZlLqro) -- typed, letterhead "Politiepresident Rotterdam, Centraal-Bureau, Afd. Personeel"; stamps "Hoofd-Commissaris van Politie Rotterdam"; passport photo of Geert stapled and stamped.
+ORIGINAL: "ROTTERDAM, 26 Mei 1945. Ondergeteekende verklaart, dat Geert Greydanus, geboren 1 December 1899 te Cubaard gem. Hennaarderadeel, van 9 April 1943 tot 14 Mei 1945 buiten dienst is geweest en gedurende de laatste 9 maanden in het Concentratiekamp te Buchenwalde verblijf heeft gehouden. Hy is thans weer in zijn functie van Majoor bij de Centrale Recherche werkzaam. Zijn legitimatiebewijs is gedurende zijn afwezigheid in het ongereede geraakt. De Inspecteur van Politie, [signed] (W. Lagendaal)."
+ENGLISH: "Rotterdam, 26 May 1945. The undersigned declares that Geert Greydanus, born 1 Dec 1899 at Cubaard, municipality of Hennaarderadeel, was out of service from 9 April 1943 to 14 May 1945 and during the last 9 months stayed in the concentration camp at Buchenwald. He is now again working in his function of Major at the Centrale Recherche. His identity card was lost during his absence. The Inspector of Police, (W. Lagendaal)."
+
+=================== 20c translated ===================
+20c translated.jpg (Drive 1KZR7VMVEmQXHyg8jfgZqpBo98RB3Bjye) -- Google Lens machine translation of 20c. Errors: "May 14, 1915" (original 1945); "Hennardndeel"; "His proof of identity has been neglected" (original: was lost); "s.Lagendral" (original W. Lagendaal).
+
+=================== 21 ===================
+21.jpg (Drive 1IaMxoJrM5EP2EpSzOP3c4O8ly2NchNGS) -- typed, letterhead "Gewestelijk Politiepresident Eindhoven" (struck/overtyped).
+ORIGINAL: "Eindhoven, 11 Mei 1945. VERKLARING. De Commissaris van Politie te Eindhoven verklaart hierbij, dat G. Greijdanus, geboren te Hennaarderadeel op 1 December 1899 zich op Zaterdag 12 Mei tot en met 14 Mei 1945 in opdracht voor dienstaangelegenheden naar Utrecht en omgeving dient te begeven. De Commissaris van Politie Wnd. [signed] B. v. d. Werf."
+ENGLISH: "Eindhoven, 11 May 1945. STATEMENT. The Commissioner of Police at Eindhoven hereby declares that G. Greijdanus, born at Hennaarderadeel on 1 Dec 1899, is to go on Saturday 12 May up to and including 14 May 1945, under orders on official business, to Utrecht and surroundings. Acting Commissioner of Police, B. v. d. Werf."
+
+=================== 22 ===================
+22.jpg (Drive 1IaklDMcej_YhlrGMJBaWwdKwLBXA8en0) -- printed bilingual form "Particulars of Exemption / Bijzonderheden omtrent vrijstelling".
+Handwritten: "travelling from Rotterdam to Friesland, Overijssel, Gelderland, Limburg and return." Reason: "essential police duties / dringende politie werkzaamheden". Stamps: "17 CDN FS SECTION" with initials and "May 25/45"; "ALLIED EXPEDITIONARY FORCE CIVIL AFFAIRS OFFICE", signature "[?] Rowland, Capt.", "DATE 25 MAY 1945", "DETACHMENT No. 821 US/BR". Form no. 2GHQPP/1362/2000 pads.
+
+=================== 30and31 ===================
+30and31.jpg (Drive 1IcVIrsvdekFn491WE84TbLik4W_laLGp) -- not in repo drive/; downloaded to scratch dl/. Wietske's hunger-trip diary (fair copy) begins. English version: Google Doc "30ff" (drive/1dw4uom45A_...txt).
+LEFT, clipped pencil note (continues on 30b):
+ORIGINAL: "Lieve Moeder & Bennie, We zitten hier even voor Utrecht met een lekke band. Het is de tweede. Het is nu 12 uur. We weten dus niet of we Harderwyk halen. Wat een prachtig weer he, en alles voor de wind. Er zitten wel vliegtuigen telkens in de lucht"
+ENGLISH: "Dear Mother & Bennie, We are sitting just before Utrecht with a flat tyre. It is the second one. It is 12 o'clock now. So we don't know if we will reach Harderwijk. What lovely weather, eh, and everything with the wind behind us. There are planes in the air all the time"
+RIGHT, diary:
+ORIGINAL: "Friesl. 21 Mrt - 22 Mei 1945. Met ons vieren gingen we op stap om wat eten op te halen. Toos en Annerie Numan gingen n. Ruinerwold, Truus Maaskant en ik zouden n. Friesl. Het weer was schitterend. Wel vroegen we ons steeds af, of het wel goed was wat we gingen doen, als de Tommies intyd eens komen. De eerste dag wilden we Harderwyk bereiken. Het lukte ook. v. Harderwyk zouden we met een schipper meevaren naar Dr. of naar Fsl. De schipper was helaas net vertrokken, dus die kans was verkeken. Op stap om nachtlogies. Wel 2 uur hebben we gelopen. Tenslotte bij Schuitemaker terecht gekomen waar Truus en ik geslapen hebben in een 1-pers. ledikant[?]. s'Morgens zonder ontbyt weer op stap, daarom zyn we maar by Fino in de ry gegaan om soep. Daarna op de fiets n. Jet, die niet thuis was. We wisten niet wat we doen moesten"
+ENGLISH: "Friesland, 21 Mar - 22 May 1945. The four of us set out to fetch some food. Toos and Annerie Numan went to Ruinerwold; Truus Maaskant and I were to go to Friesland. ..." (matches 30ff doc, p. 2).
+
+=================== 30b ===================
+30b.jpg (Drive 1IcgyYBuU-JI4QmDLRV80mNuhs0kMw6FT) -- not in repo drive/; downloaded to scratch dl/. Reverse/continuation of the clipped note on 30and31.
+ORIGINAL: "Maar we hebben geen last van beschieten. Er staat hier een agent uit R'dam ze band plakken, hij neemt het briefje mee. Verder geen nieuws. We hebben het best naar t'zin. Groeten van Toos, Annerie, Truus, Wietske"
+ENGLISH: "But we are not troubled by shooting. There is a policeman from Rotterdam here mending their tyre; he will take the note with him. No other news. We are enjoying ourselves. Greetings from Toos, Annerie, Truus, Wietske"
+
+=================== 32 ===================
+32.jpg (Drive 1IkRH9jOiIW0DmB7E-VAJ7lKAucl1_tPI) -- not in repo drive/; downloaded to scratch dl/. Diary, same page as left half of 32and33.
+ORIGINAL: "... nu de schipper net vertrokken was. Truus en ik zyn naar Sonnevanck gefietst waar we Ane Huyser bezocht hebben en s'middags ook konden eten. Toos en Annerie s'middags weer opgezocht en besloten n. Heerde te fietsen, waar Ina Lock was, om te vragen of zy een middel wist om over de Yssel te komen. Onderweg nogal wat last van beschieten. By mevr. de Jonge mochten we allemaal slapen. De volgende dag naar Wapenveld, we hadden gehoord dat daar wel eens overgezet werd. In W. mevr. Rutgers bezocht, zy kon ons niet helpen. Toen naar de Ysselkant. We zagen geen kans om er over te komen. We zouden proberen wat rogge te bemachtigen en dan maar naar huis. s'Middags lukte het toch om over te varen in een lekke boot zonder roeispanen. We kwamen met veel ..."
+ENGLISH: matches 30ff doc p. 2-3 (Sonnevanck, Heerde, Wapenveld, crossing the IJssel in a leaky boat without oars).
+
+=================== 32and33 ===================
+32and33.jpg (Drive 1IduKkXCYaMQ1WKiG6W-gi5-VQOUEBA0Q) -- not in repo drive/; downloaded to scratch dl/. Left = p. 32 (see 32.txt). Right = p. 33:
+ORIGINAL: "moeite aan de andere kant, na wel 2 rivierbreedtes afgeraakt te zyn (Windesheim). Op dat ogenblik geen controle. s'Avonds werd er nogal geschoten. By boer Kamphuis in het hooi geslapen. De volgende dag naar Oudeschoot. Veel lekke banden, hele stukken lopen, veel beschieten, waren we maar thuis gebleven. By Meppel gingen T. en A. een andere kant uit. Van Steenwyk n. Wolvega gelopen, daarna met paard en wagen, weer een heel eind lopen, s'avonds om 9 uur in O. waar we erg hartelyk werden ontvangen. Zondags daar overgebleven, maandags vertrokken naar Cubaard met 2 andere banden van oom Jan. Irnsum p.a.k. centrale keuken. Daar in de buurt de boer op geweest. Ieder ongeveer 1 pnd boter. In Cub. waren we om 5 uur, waar we ook heel goed ontvangen werden. Volgende dag n. Anjum. Dronryp zuivelfabriek, Birdaard Pé Woudsma."
+ENGLISH: matches 30ff doc p. 3-4.
+
+=================== 34 ===================
+34.jpg (Drive 1Im0Jldmx9WPnRAAjBNzkSZqIaIxNhZJa) -- not in repo drive/; downloaded to scratch dl/. Diary page; right edge shows a typed slip "Ruimte bestemd voor ... Distributiedienst" stamped "24 APR 1945".
+ORIGINAL: "s'Avonds 7 uur in Anjum. Het eerste wat Gerard en Cor zeiden: 'Hoe is het met Bensje'. Pasen over in Anjum. Het was erg riskant om te vertrekken n. R'dam, maar even afwachten. Telkens naar Bouma om berichten. De Tommies rukten snel op. Dinsdags naar Genum, waar Gerard my Zaterdags weer kwam halen omdat tante Klas ziek was geworden. 13 April werd Friesl. bevryd, de N.B.S. bezette de Schans. Zondags probeerden Duitschers van Schiermonnikoog by Oostmahorn te landen, wat hen niet lukte. Maandags beschoten ze Oostmahorn en trachtten weer te landen. 2 Canadezen sneuvelden hierby. Nog ongeveer een week in A. gebleven, daarna naar G. vertrokken in de hoop dat spoedig het hele land bevryd zou zyn en we weer naar huis konden. Truus was de gehele tyd op de Kooiplaats in A."
+ENGLISH: "At 7 in the evening in Anjum. The first thing Gerard and Cor said: 'How is Bensje?' Easter in Anjum. ... Friesland liberated 13 April ..." (matches 30ff doc p. 4).
+
+=================== 35 ===================
+35.jpg (Drive 1ImB062JrhX17GcsLYcwgmaiREo4jO5Yn) -- not in repo drive/; downloaded to scratch dl/. Left = p. 34 partly covered by folded slip (reverse of the 35b certificate: "Ruimte bestemd voor aanteekeningen Evacuatiebureau en andere comité's"). Right page:
+ORIGINAL: "Op de reis n. Genum bezweek de achterb[and]. Kon niet meer gemaakt, hoe ooit weer thuis te komen. We maakten het plan, dat als alles vry was, oom Klaas me thuisbrengen zou op de motor. Dat schreef ik Truus, en zy is toen vertrokken, door Drente. Met de vryheid kwam het verbod om te reizen. Overal heen om een vergunning, het lukte niet. Weer naar Anjum, misschien kon Fokke Rosier me helpen, als er een transport V.B.S. [?] naar R'dam ging. Woensdags in A. nog meegedaan met de optocht voor versierde wagens, als Mussert's tante (mei 1940, Mussert (Geert) in de hooiberg). Donderdags kwam Jan vertellen dat ik met 2 Amerikanen mee mocht ryden tot Haarlem, ze gaven me echter niet veel kans dat ik over de Afsluitdyk kwam. Toch maar probeeren. Zaterdags s'morgens om 5 uur vertrokken."
+ENGLISH: "... On Wednesday in Anjum I joined the parade of decorated wagons, as Mussert's aunt (May 1940, Mussert (Geert) in the haystack). On Thursday Jan came to say I could ride with 2 Americans to Haarlem ... Left Saturday at 5 a.m." (matches 30ff doc p. 4). The bracketed "mei 1940, Mussert (Geert) in de hooiberg" is unexplained on the page.
+
+=================== 35b ===================
+35b.jpg (Drive 1IqEhGsjIN-69hl9x4TpOBApiAn4CCE3P) -- not in repo drive/; downloaded to scratch dl/. Typed certificate (unfolded) over diary pp. 34-35.
+ORIGINAL: "Evacuatie-Bureau Metslawier. Hierbij verklaren wij dat Greijdanus, Wietske geb. 4.3.'24 te R'dam laatst gewoond te R'dam adres: W. Varken.weg 359b no. P.B. R 29/170395 in deze gemeente is opgenomen als hongervluchteling. Datum van afgifte: 23 April '45. Handteekening, Secr. Oostd'deel [signature]." Seal: "Gemeente Oostdongeradeel".
+ENGLISH: "Evacuation Bureau Metslawier. We hereby declare that Wietske Greijdanus, born 4 Mar 1924 in Rotterdam, last living in Rotterdam, address W[est] Varkenoordseweg 359b, no. P.B. R29/170395, has been admitted in this municipality as a hunger refugee. Issued 23 April 1945. Signed, Secretary of Oostdongeradeel."
+
+=================== 36 ===================
+36.jpg (Drive 1IrvuFNzgPhAKpCp8rn6tFx14YXkMUTbI) -- not in repo drive/; downloaded to scratch dl/. Diary page; left: clipped newspaper fragment ("...landsche Strijdkrachten ... hebben den openlijken ... opgenomen om Uw ontzet ... niet noodzakelijk werk").
+ORIGINAL: "Wonder boven wonder ging alles goed tot den Oever. In de W.meer was moffenrecessie [?], ik mocht niet verder, moest blyven by de N.B.S. St. Hippolytushoef, later werd ik naar Melle Montsma gebracht en mocht daar logeren. Pinkstermaandag was alles weer vry, vroeg vertrokken, een massieve band en een hele vracht achterop (± 40 k.g.), was de fiets haast niet vooruit te krygen. Het goot de hele dag. Purmerend - fam. Verloop, hier kreeg ik toevallig een oud nummer van Trouw in handen waar in stond dat Vader nog leefde. s'Avonds n. A'dam, strenge controle, mocht alles toch houden. Gelogeerd by fam. v/d Hilst. s'Avonds alles nog overgepakt, daar alles kletsnat was geregend en de tassen gescheurd. De volgende morgen op huis aan. Alles tegenwind. Nog geen 10 km. per uur."
+ENGLISH: "... Whit Monday everything was free again; left early ... In Purmerend, Verloop family: here I happened to get an old issue of Trouw which said that Father was still alive. In the evening to Amsterdam, strict control ... stayed with the v/d Hilst family ... Next morning homeward. Headwind all the way. Not even 10 km an hour."
+
+=================== 37 ===================
+37.jpg (Drive 1Iv5s7q9Mpn4l-spyS9Hblbr7zgJhBOPk) -- not in repo drive/; downloaded to scratch dl/. Left = p. 36 with a different newspaper clipping ("... STRIJDKRACHTEN ... Burgerij!"). Right page, last diary lines:
+ORIGINAL: "s'Avonds om 8 uur thuis. Vader was toen al meer als een week thuis."
+ENGLISH: "Home at 8 in the evening. Father had by then been home for more than a week."
+
+=================== 39 ===================
+39.jpg (Drive 1IxsWSe-X9mgB7pH_miIMNDr4Xf4BWDGP) -- printed poster, undated.
+ORIGINAL: "BEVEL. Op bevel der Duitsche Weermacht moeten alle mannen in den leeftijd van 17 t/m 40 jaar zich voor den arbeidsinzet aanmelden. Hiervoor moeten ALLE mannen van dezen leeftijd onmiddellijk na ontvangst van dit bevel met de voorgeschreven uitrusting op straat gaan staan. Alle andere bewoners, ook vrouwen en kinderen, moeten in de huizen blijven totdat de actie ten einde is. De mannen van de genoemde jaargangen, die bij een huiszoeking nog in huis worden aangetroffen, worden gestraft, waarbij hun particulier eigendom zal worden aangesproken. Bewijzen van vrijstelling ... moeten ter contrôle worden meegebracht ... Er moeten worden medegebracht: warme kleeding, stevige schoenen, dekens, bescherming tegen regen, eetgerei, mes, vork, lepel, drinkbeker en boterhammen voor één dag. ... De dagelijksche vergoeding bestaat uit goeden kost, rookartikelen en vijf gulden. Voor de achterblijvende familieleden zal worden gezorgd. Het is aan alle bewoners der gemeente verboden hun woonplaats te verlaten. Op hen, die pogen te ontvluchten of weerstand te bieden, zal worden geschoten."
+ENGLISH: "ORDER. By order of the German Wehrmacht all men aged 17 to 40 must report for labour deployment. ALL men of this age must immediately on receipt of this order stand in the street with the prescribed equipment. All other residents, including women and children, must stay indoors until the action is over. Men of these ages found at home in a house search will be punished, and their private property seized. ... Bring: warm clothing, sturdy shoes, blankets, rain protection, eating utensils, knife, fork, spoon, mug and sandwiches for one day. ... Daily allowance: good food, tobacco and five guilders. Families left behind will be cared for. All residents are forbidden to leave the municipality. Those who try to flee or resist will be shot."
+No date, place or signature on the poster.
+
+=================== 39 translated ===================
+39 translated.jpg (Drive 1KXmXLzA7xBNtfoD2fXAywvMXF6-N8EaP) -- Google Lens machine translation of 39. Errors: "German Defense Force" (Wehrmacht); "their private property will be addressed" (seized/held liable); "smoking articles and a file of guilders" (five guilders); "try to flee or again stand" (resist).
