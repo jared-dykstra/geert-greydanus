@@ -1,0 +1,32 @@
+# Fails a pull request unless it carries a fresh "Last updated" stamp and a rebuilt PDF, so readers
+# can always tell whether their copy of the page or PDF is current. Fix a failure by running
+# tools/build_pdf.sh and pushing the result.
+name: Check stamp
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  stamp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Compare stamp and PDF with main
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+        run: |
+          stamp() { grep -o '<time datetime="[^"]*"' | head -1 | cut -d'"' -f2; }
+          head_stamp=$(stamp < index.html)
+          base_stamp=$(git show "$BASE:index.html" | stamp || true)
+          echo "main: ${base_stamp:-none}  this PR: ${head_stamp:-none}"
+          if [ -z "$head_stamp" ]; then echo "::error::index.html has no Last updated stamp. Run tools/build_pdf.sh."; exit 1; fi
+          if [ -n "$base_stamp" ] && [ ! "$head_stamp" \> "$base_stamp" ]; then
+            echo "::error::The Last updated stamp is not newer than main's. Run tools/build_pdf.sh and push."; exit 1; fi
+          if git diff --quiet "$BASE" HEAD -- geert-greydanus-timeline.pdf; then
+            echo "::error::The PDF was not rebuilt in this PR. Run tools/build_pdf.sh and push."; exit 1; fi

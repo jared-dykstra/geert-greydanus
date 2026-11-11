@@ -12,15 +12,16 @@ The research timeline of Geert Greydanus (1899–1965), published with GitHub Pa
 `geert-greydanus-timeline.pdf` is printed from `index.html` and must always match it. After any change to the page, run the steps that apply, in this order:
 
 1. If you changed `tools/map/stops.json` or `tools/map/build_map.mjs`, run `cd tools/map && npm install && npm run build`.
-2. If you changed `tools/sections/` or `tools/page.py`, run `python3 tools/page.py index.html index.html`.
-3. Always run `tools/build_pdf.sh`.
+2. Always run `tools/build_pdf.sh`. It runs `tools/page.py` first, which re-inserts `tools/sections/` and stamps "Last updated" under the title with the current UTC time, then prints the PDF.
 
 Commit the PDF in the same commit as the change. Never edit the PDF by hand, and never replace it with a PDF exported from anywhere else.
+
+Every PR must carry a fresh "Last updated" stamp and a rebuilt PDF, so readers can tell whether their copy is current. Run `tools/build_pdf.sh` as the last step before the final push.
 
 ## Writing
 
 - **State the facts as they are now known.** When a check settles a question, rewrite the text as the fact.
-- **Leave out research history.** That includes dated follow-ups, "done" or "answered" notes, "last updated" lines and earlier readings set beside corrected ones.
+- **Leave out research history.** That includes dated follow-ups, "done" or "answered" notes, "last updated" lines in the text and earlier readings set beside corrected ones. (The single generated stamp under the title is the exception.)
 - **Show genuine disagreement.** Where sources still disagree, give each version with its source.
 - **Cite every claim.** Link to the local copy in `drive/`, `sources/` or `web/` when one exists.
 
