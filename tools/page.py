@@ -221,6 +221,7 @@ TEMPLATE = """<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Geert Greydanus (1899–1965): a timeline from the family papers</title>
 <meta name="description" content="Rotterdam police detective, resistance helper and camp survivor: Geert Greydanus's life from the family papers, with copies of every source.">
+<meta name="google-site-verification" content="_0uzc1kWQpNCWJH8MbeLqkACc4nvKDGC8PqsCSC1Q7o" />
 <style>{css}</style>
 </head>
 <body>
