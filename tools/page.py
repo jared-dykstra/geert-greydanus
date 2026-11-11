@@ -101,7 +101,7 @@ h1{font-size:clamp(34px,5vw,52px);line-height:1.1;margin:0 0 12px;font-weight:60
 .years{font-weight:400;color:var(--muted);white-space:nowrap}
 .lede{font-size:20px;max-width:46em;margin:0 0 12px;color:var(--ink)}
 .updated{font:500 14px/1.4 var(--sans);color:var(--muted);margin:0 0 24px}
-.photo{margin:24px 0;max-width:640px}.photo img{display:block;width:100%;height:auto;border-radius:4px}.photo figcaption{font:400 14px/1.5 var(--sans);color:var(--muted);margin-top:8px}
+.photo{margin:24px 0;max-width:640px}.photo img{display:block;width:100%;height:auto;border-radius:4px}.photo figcaption{font:400 14px/1.5 var(--sans);color:var(--muted);margin-top:8px}.photo-pair{display:grid;grid-template-columns:1.944fr .75fr;gap:12px;align-items:start;margin:24px 0}.photo-pair .photo{margin:0;max-width:none}@media (max-width:600px){.photo-pair{grid-template-columns:1fr}}@media print{.photo-pair{break-inside:avoid}}
 .actions{display:flex;flex-wrap:wrap;gap:12px;font-family:var(--sans)}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:6px;font:600 15px/1 var(--sans);text-decoration:none;border:1px solid var(--accent)}
 .btn-primary{background:var(--accent);color:var(--paper)}
@@ -231,7 +231,7 @@ TEMPLATE = """<!doctype html>
 <header class="hero"><div class="hero-inner">
 <p class="kicker">A timeline from the family papers</p>
 <h1>Geert Greydanus <span class="years">1899–1965</span></h1>
-<p class="lede">A Rotterdam police detective who went into hiding in April 1943 rather than arrest Jews, helped Allied airmen in the Achterhoek as &ldquo;Oom Geert&rdquo;, survived Vught, Buchenwald and Niederorschel, and later farmed near Clinton, Ontario.</p>
+<p class="lede">A Rotterdam police detective who went into hiding in April 1943 rather than arrest Jews, helped Allied airmen in the Achterhoek, where the Varsseveld group called him <a href="#pseudonyms-exact-wording">&ldquo;Oom Geert&rdquo;</a>, survived Vught, Buchenwald and Niederorschel, and later farmed near Clinton, Ontario.</p>
 {updated}
 <div class="actions">
 <a class="btn btn-primary" href="{pdf}" download>""" + DOWNLOAD_ICON + """Download as PDF</a>

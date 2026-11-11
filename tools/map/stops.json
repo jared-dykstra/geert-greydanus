@@ -5,7 +5,7 @@
   "places": {
     "rotterdam": {"name": "Rotterdam", "lon": 4.48, "lat": 51.92, "label": "left"},
     "winterswijk": {"name": "Winterswijk", "lon": 6.72, "lat": 51.97, "label": "right"},
-    "sinderen": {"name": "Satter farm, Sinderen", "short": "Sinderen", "lon": 6.465, "lat": 51.93, "label": "above"},
+    "sinderen": {"name": "Satter farm, Sinderen", "short": "Sinderen", "lon": 6.4674, "lat": 51.9229, "label": "above"},
     "ellecom": {"name": "Avegoor, Ellecom", "short": "Ellecom", "lon": 6.07, "lat": 52.03, "label": "above"},
     "arnhem": {"name": "Arnhem", "lon": 5.91, "lat": 51.98, "label": "left"},
     "vught": {"name": "Kamp Vught", "short": "Vught", "lon": 5.30, "lat": 51.66, "label": "left"},
