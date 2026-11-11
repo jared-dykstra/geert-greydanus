@@ -101,6 +101,7 @@ h1{font-size:clamp(34px,5vw,52px);line-height:1.1;margin:0 0 12px;font-weight:60
 .years{font-weight:400;color:var(--muted);white-space:nowrap}
 .lede{font-size:20px;max-width:46em;margin:0 0 12px;color:var(--ink)}
 .updated{font:500 14px/1.4 var(--sans);color:var(--muted);margin:0 0 24px}
+.photo{margin:24px 0;max-width:640px}.photo img{display:block;width:100%;height:auto;border-radius:4px}.photo figcaption{font:400 14px/1.5 var(--sans);color:var(--muted);margin-top:8px}
 .actions{display:flex;flex-wrap:wrap;gap:12px;font-family:var(--sans)}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:6px;font:600 15px/1 var(--sans);text-decoration:none;border:1px solid var(--accent)}
 .btn-primary{background:var(--accent);color:var(--paper)}
