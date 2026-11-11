@@ -167,6 +167,9 @@ em{font-style:italic}
 .sources-note{font:14px/1.5 var(--sans);color:var(--muted)}
 .archive details{margin-top:12px}
 .archive summary{cursor:pointer;font:600 15px var(--sans);color:var(--accent)}
+details.steps{margin:16px 0;border:1px solid var(--rule);border-radius:8px;background:var(--card);padding:12px 16px}
+details.steps summary{cursor:pointer;font:600 15px var(--sans);color:var(--accent)}
+details.steps[open] summary{margin-bottom:8px}
 .about{margin-top:64px;padding:20px 24px;background:var(--card);border:1px solid var(--rule);border-radius:8px;font:15px/1.6 var(--sans);color:var(--muted);max-width:none}
 .about h2{font:700 13px var(--sans);text-transform:uppercase;letter-spacing:.08em;margin:0 0 8px;padding:0;border:0;color:var(--muted)}
 .about p{margin:6px 0}
@@ -199,7 +202,7 @@ em{font-style:italic}
  table.timeline td:last-child,table.facts td:last-child{width:auto;margin-top:4px}
  tbody tr:hover{background:none}
 }
-@media print{.toc,.top,.actions,#archive-sources{display:none}.layout{display:block}body{background:#fff;font-size:12pt}h2{break-after:avoid}tr{break-inside:avoid}}
+@media print{details.steps::details-content{content-visibility:visible;display:block}.toc,.top,.actions,#archive-sources{display:none}.layout{display:block}body{background:#fff;font-size:12pt}h2{break-after:avoid}tr{break-inside:avoid}}
 """
 
 SCRIPT = """<script>
