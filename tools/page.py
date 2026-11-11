@@ -231,7 +231,7 @@ TEMPLATE = """<!doctype html>
 <header class="hero"><div class="hero-inner">
 <p class="kicker">A timeline from the family papers</p>
 <h1>Geert Greydanus <span class="years">1899–1965</span></h1>
-<p class="lede">A Rotterdam police detective who went into hiding in April 1943 rather than arrest Jews, helped Allied airmen in the Achterhoek as &ldquo;Oom Geert&rdquo;, survived Vught, Buchenwald and Niederorschel, and later farmed near Clinton, Ontario.</p>
+<p class="lede">A Rotterdam police detective who went into hiding in April 1943 rather than arrest Jews, helped Allied airmen in the Achterhoek, where the Varsseveld group called him <a href="#pseudonyms-exact-wording">&ldquo;Oom Geert&rdquo;</a>, survived Vught, Buchenwald and Niederorschel, and later farmed near Clinton, Ontario.</p>
 {updated}
 <div class="actions">
 <a class="btn btn-primary" href="{pdf}" download>""" + DOWNLOAD_ICON + """Download as PDF</a>
