@@ -9,7 +9,8 @@ rebuilds the rest of the page around them. Apart from the "Last updated" stamp u
 is set to the current UTC time on every run, running it twice gives the same file. tools/build_pdf.sh
 runs this script first, so every page or PDF build carries a fresh stamp.
 """
-import html, os, re, sys
+import html, json, os, re, subprocess, sys
+from urllib.parse import unquote
 from datetime import datetime, timezone
 
 PDF = 'geert-greydanus-timeline.pdf'
@@ -69,6 +70,41 @@ def toc(body):
             '<ol>%s</ol></details></nav>' % lis)
 
 
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SAVED_ON = re.compile(r'saved from \S+.*? on (\d{4}-\d{2}-\d{2})', re.I)
+
+
+def first_added():
+    """Map each file in git to the date of the commit that first added it."""
+    try:
+        out = subprocess.run(['git', '-c', 'core.quotePath=false', 'log', '--reverse', '--diff-filter=A',
+                              '--format=%x00%cs', '--name-only'], cwd=ROOT, capture_output=True, text=True,
+                             check=True).stdout
+    except (OSError, subprocess.CalledProcessError):
+        return {}
+    added = {}
+    for chunk in out.split('\x00')[1:]:
+        lines = chunk.strip().split('\n')
+        for f in lines[1:]:
+            added.setdefault(f.strip(), lines[0].strip())
+    return added
+
+
+def saved_dates(text):
+    """Map the local copy behind each link that has a data-original to the date it was saved: the date in
+    the copy's own "saved from" header, else the date it was first committed, else its file date."""
+    added, dates = first_added(), {}
+    for href in re.findall(r'<a [^>]*?href="([^"#]+)[^"]*"[^>]*\bdata-original=', text):
+        path = unquote(html.unescape(href))
+        if href in dates or not os.path.isfile(os.path.join(ROOT, path)):
+            continue
+        with open(os.path.join(ROOT, path), 'rb') as f:
+            m = SAVED_ON.search(f.read(2000).decode('utf-8', 'ignore'))
+        dates[href] = (m.group(1) if m else added.get(path) or
+                       datetime.fromtimestamp(os.path.getmtime(os.path.join(ROOT, path)), timezone.utc).strftime('%Y-%m-%d'))
+    return dates
+
+
 def render(doc):
     if START not in doc or SI_START not in doc:
         sys.exit('page.py: the input has no CONTENT or SOURCE INDEX markers')
@@ -79,7 +115,8 @@ def render(doc):
     now = datetime.now(timezone.utc)
     updated = ('<p class="updated">Last updated <time datetime="%s">%s</time></p>'
                % (now.strftime('%Y-%m-%dT%H:%MZ'), now.strftime('%-d %B %Y, %H:%M UTC')))
-    return TEMPLATE.format(toc=toc_html, body=body, source_index=source_index, pdf=PDF, updated=updated,
+    saved = json.dumps(saved_dates(body + source_index), sort_keys=True, separators=(',', ':'))
+    return TEMPLATE.format(toc=toc_html, body=body, source_index=source_index, pdf=PDF, updated=updated, saved=saved,
                            start=START, end=END, si_start=SI_START, si_end=SI_END, css=CSS)
 
 
@@ -202,10 +239,39 @@ details.steps[open] summary{margin-bottom:8px}
  table.timeline td:last-child,table.facts td:last-child{width:auto;margin-top:4px}
  tbody tr:hover{background:none}
 }
+.src-pop{position:absolute;z-index:50;width:max-content;max-width:min(340px,calc(100vw - 16px));background:var(--card);border:1px solid var(--rule);border-radius:8px;box-shadow:0 6px 24px rgba(0,0,0,.18);padding:6px;font:14px/1.4 var(--sans)}
+.src-opt{display:block;padding:8px 12px;border-radius:6px;text-decoration:none;color:var(--ink)}
+.src-opt:hover,.src-opt:focus{background:var(--accent-soft);outline:none}
+.src-opt strong{display:block;color:var(--accent);font-weight:600}
+.src-opt span{display:block;color:var(--muted);font-size:13px;overflow-wrap:anywhere}
+@media print{.src-pop{display:none}}
 @media print{details.steps::details-content{content-visibility:visible;display:block}.toc,.top,.actions,#archive-sources{display:none}.layout{display:block}body{background:#fff;font-size:12pt}h2{break-after:avoid}tr{break-inside:avoid}}
 """
 
 SCRIPT = """<script>
+(function(){var saved=window.SAVED||{},pop=null,cur=null;
+var months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+function host(u){try{return new URL(u).hostname.replace(/^www\\./,'')}catch(e){return u}}
+function day(d){var p=d.split('-');return +p[2]+' '+months[+p[1]-1]+' '+p[0]}
+function opt(href,title,note,local){var o=document.createElement('a');o.className='src-opt';o.href=href;o.target='_blank';if(!local)o.rel='noopener';
+var t=document.createElement('strong');t.textContent=title;var n=document.createElement('span');n.textContent=note;o.appendChild(t);o.appendChild(n);
+o.addEventListener('click',function(){close(false)});return o}
+function close(refocus){if(!pop)return;pop.remove();pop=null;cur.setAttribute('aria-expanded','false');if(refocus)cur.focus();cur=null}
+function open(a){var href=a.getAttribute('href'),d=saved[href.split('#')[0]];cur=a;a.setAttribute('aria-expanded','true');
+pop=document.createElement('div');pop.className='src-pop';pop.setAttribute('role','dialog');pop.setAttribute('aria-label','Open this source');
+pop.appendChild(opt(a.getAttribute('data-original'),'Original source',host(a.getAttribute('data-original')),false));
+pop.appendChild(opt(href,'Saved copy in this archive',d?'Saved '+day(d):'Saved copy',true));
+document.body.appendChild(pop);var r=a.getClientRects()[0]||a.getBoundingClientRect(),w=pop.offsetWidth,h=pop.offsetHeight,vw=document.documentElement.clientWidth;
+var left=Math.max(8,Math.min(r.left,vw-w-8)),top=r.bottom+6;if(top+h>window.innerHeight&&r.top-h-6>0)top=r.top-h-6;
+pop.style.left=(left+window.scrollX)+'px';pop.style.top=(top+window.scrollY)+'px';pop.querySelector('a').focus({preventScroll:true})}
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[data-original]');
+if(pop&&!pop.contains(e.target)){var same=a===cur;close(false);if(same){e.preventDefault();return}}
+if(!a||e.button||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;e.preventDefault();open(a)});
+document.addEventListener('keydown',function(e){if(!pop)return;if(e.key==='Escape'){close(true);return}
+if(e.key==='ArrowDown'||e.key==='ArrowUp'){var o=[].slice.call(pop.querySelectorAll('a')),i=o.indexOf(document.activeElement);e.preventDefault();o[(i+(e.key==='ArrowDown'?1:o.length-1))%o.length].focus()}
+if(e.key==='Tab'&&!pop.contains(document.activeElement))close(false)});
+window.addEventListener('resize',function(){close(false)});
+[].forEach.call(document.querySelectorAll('a[data-original]'),function(a){a.setAttribute('aria-haspopup','dialog');a.setAttribute('aria-expanded','false')});})();
 (function(){var links=[].slice.call(document.querySelectorAll('.toc a'));var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
 if(!('IntersectionObserver' in window))return;var cur;var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){if(cur)cur.classList.remove('active');cur=map[e.target.id];if(cur)cur.classList.add('active')}})},{rootMargin:'0px 0px -75% 0px'});
 Object.keys(map).forEach(function(id){var h=document.getElementById(id);if(h)io.observe(h)});
@@ -247,12 +313,13 @@ TEMPLATE = """<!doctype html>
 {end}
 {si_start}{source_index}{si_end}
 <section class="about"><h2>About this page</h2>
-<p>This page is the timeline <em>Geert Greydanus — Timeline from the Family Papers</em>, written from the family papers and the sources saved with it. Wherever a source was saved, its link opens the saved copy in this archive (family papers, published articles, archive records and web pages), so the page still works if the original site changes. Links to sources that could not be saved still go to the original site.</p>
+<p>This page is the timeline <em>Geert Greydanus — Timeline from the Family Papers</em>, written from the family papers and the sources saved with it. Wherever a source was saved (family papers, published articles, archive records and web pages), its link offers a choice: the original source, or the copy saved in this archive with the date it was saved. The saved copy keeps the page working if the original site changes or disappears. Links to sources that could not be saved still go to the original site.</p>
 <p>The <a href="{pdf}">PDF</a> is the same document, for printing or keeping.</p>
 </section>
 </main>
 </div>
 <a class="top" href="#">↑ Top</a>
+<script>window.SAVED={saved};</script>
 """ + SCRIPT.replace('{', '{{').replace('}', '}}') + """
 </body>
 </html>
