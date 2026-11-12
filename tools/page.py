@@ -235,6 +235,7 @@ TEMPLATE = """<!doctype html>
 {updated}
 <div class="actions">
 <a class="btn btn-primary" href="{pdf}" download>""" + DOWNLOAD_ICON + """Download as PDF</a>
+<a class="btn btn-secondary" href="sources/Hoekstra_2020_Geert-Greydanus-a-man-of-principles.pdf" download>""" + DOWNLOAD_ICON + """Download Jurjen Hoekstra&rsquo;s 2020 Booklet</a>
 <a class="btn btn-secondary" href="#archive-sources">Source index</a>
 </div>
 </div></header>
