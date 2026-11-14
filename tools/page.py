@@ -91,6 +91,79 @@ def add_anchors(*parts):
     return out
 
 
+SKIP_LINKS = ('https://github.com/jared-dykstra/geert-greydanus/issues', 'https://www.openstreetmap.org/')
+SAVED_FROM = re.compile(r'saved from (\S+?)(?: |\)| -->|$)', re.I | re.M)
+ONLINE_ONLY = [('https://collections.arolsen-archives.org/', 'Arolsen card images not bundled'),
+               ('https://www.oorlogsbronnen.nl/zoeken', 'search page'),
+               ('https://www.oorlogsbronnen.nl/tijdlijn/', 'page loads by script'),
+               ('https://oorlogvoorderechter.nl/', 'page loads by script'),
+               ('https://hdl.handle.net/', 'database page'),
+               ('https://vha.usc.edu/', 'restricted testimony; cited by tape and timecode')]
+
+
+def build_source_index(body, old):
+    """Rebuild the source-index table from every link in the page, so it never falls behind. A local copy
+    is listed with its original link (from data-original, else the index as it stood, else the copy's own
+    "saved from" header); a link
+    with no local copy keeps the reason already given for it, else a default by site."""
+    reasons, known, old_rows = {}, {}, []
+    for first, second in re.findall(r'<tr><td>(.*?)</td><td>(.*?)</td></tr>', old, flags=re.S):
+        old_rows.append((first, second))
+        text = html.unescape(re.sub(r'<[^>]+>', '', first))
+        if second.startswith('online only'):
+            reasons[text] = second
+        elif text != 'No online original':
+            for href in re.findall(r'href="([^"]+)"', second):
+                known.setdefault(html.unescape(href), text)
+    order, local, external = [], {}, set()
+    for attrs in re.findall(r'<a\s([^>]*)>', body):
+        m = re.search(r'href="([^"]*)"', attrs)
+        if not m:
+            continue
+        href = html.unescape(m.group(1))
+        if href.startswith(('#', 'mailto:')) or href.startswith(SKIP_LINKS):
+            continue
+        o = re.search(r'data-original="([^"]*)"', attrs)
+        if href.startswith(('http://', 'https://')):
+            key = href
+            external.add(key)
+        else:
+            key = href
+            if o and not local.get(key):
+                local[key] = html.unescape(o.group(1))
+            local.setdefault(key, None)
+        if key not in order:
+            order.append(key)
+    rows = []
+    for key in order:
+        if key in local:
+            orig = local[key] or known.get(key) or known.get(key.split('#')[0])
+            if not orig:
+                try:
+                    with open(os.path.join(ROOT, unquote(key.split('#')[0])), 'rb') as f:
+                        m = SAVED_FROM.search(f.read(2000).decode('utf-8', 'ignore'))
+                    orig = m.group(1) if m else None
+                except OSError:
+                    orig = None
+            a = '<a href="%s">%s</a>' % (html.escape(key, quote=True), html.escape(orig) if orig else 'No online original')
+            rows.append('<tr><td>%s</td><td><a href="%s">%s</a></td></tr>'
+                        % (a, html.escape(key, quote=True), html.escape(unquote(key))))
+        else:
+            reason = reasons.get(key) or 'online only: ' + next(
+                (why for site, why in ONLINE_ONLY if key.startswith(site)), 'not snapshotted')
+            rows.append('<tr><td><a href="%s">%s</a></td><td>%s</td></tr>'
+                        % (html.escape(key, quote=True), html.escape(key), reason))
+    # Keep rows for links no longer on the page, so no saved copy loses the record of where it came from.
+    listed = set(order)
+    for first, second in old_rows:
+        hrefs = [html.unescape(h) for h in re.findall(r'href="([^"]+)"', first + second)]
+        if not listed.intersection(hrefs) and html.unescape(re.sub(r'<[^>]+>', '', first)) not in listed:
+            rows.append('<tr><td>%s</td><td>%s</td></tr>' % (first, second))
+    head = '<tr><th>Original link</th><th>Local copy</th></tr>'
+    return re.sub(r'<table class="facts index">.*?</table>',
+                  lambda _: '<table class="facts index">%s%s</table>' % (head, ''.join(rows)), old, count=1, flags=re.S)
+
+
 def toc(body):
     items = re.findall(r'<h2 id="([^"]+)">(.*?)</h2>', body)
     lis = ''.join('<li><a href="#%s">%s</a></li>' % (i, re.sub(r'<[^>]+>', '', t)) for i, t in items)
@@ -139,6 +212,7 @@ def render(doc):
     body = doc.split(START, 1)[1].split(END, 1)[0].strip()
     source_index = doc.split(SI_START, 1)[1].split(SI_END, 1)[0]
     body = label_cells(classify_tables(add_sections(body)))
+    source_index = build_source_index(body, source_index)
     body, source_index = add_anchors(body, source_index)
     toc_html = toc(body + '<h2 id="archive-sources">Source index</h2>')
     now = datetime.now(timezone.utc)
