@@ -63,6 +63,34 @@ def label_cells(body):
     return re.sub(r'<table.*?</table>', table, body, flags=re.S)
 
 
+def slug(text):
+    text = html.unescape(re.sub(r'<[^>]+>', '', text)).lower()
+    return re.sub(r'[^0-9a-z]+', '-', text).strip('-') or 'section'
+
+
+def add_anchors(*parts):
+    """Give every heading and every timeline row an id, so each can be linked to. An id, once written,
+    stays: index.html is rewritten with it, so links keep working when rows are added later."""
+    taken = set(re.findall(r'\sid="([^"]+)"', ''.join(parts)))
+    def new_id(text):
+        base = slug(text)
+        i, n = base, 2
+        while i in taken:
+            i, n = '%s-%d' % (base, n), n + 1
+        taken.add(i)
+        return i
+    def heading(m):
+        return '<h%s id="%s"%s>%s</h%s>' % (m.group(1), new_id(m.group(3)), m.group(2), m.group(3), m.group(1))
+    def table(m):
+        return re.sub(r'<tr>(?=<td data-label="Date">(.*?)</td>)',
+                      lambda r: '<tr id="%s">' % new_id(r.group(1)), m.group(0), flags=re.S)
+    out = []
+    for part in parts:
+        part = re.sub(r'<h([2-6])((?:(?!\sid=)[^>])*)>(.*?)</h\1>', heading, part, flags=re.S)
+        out.append(re.sub(r'<table class="timeline">.*?</table>', table, part, flags=re.S))
+    return out
+
+
 def toc(body):
     items = re.findall(r'<h2 id="([^"]+)">(.*?)</h2>', body)
     lis = ''.join('<li><a href="#%s">%s</a></li>' % (i, re.sub(r'<[^>]+>', '', t)) for i, t in items)
@@ -111,6 +139,7 @@ def render(doc):
     body = doc.split(START, 1)[1].split(END, 1)[0].strip()
     source_index = doc.split(SI_START, 1)[1].split(SI_END, 1)[0]
     body = label_cells(classify_tables(add_sections(body)))
+    body, source_index = add_anchors(body, source_index)
     toc_html = toc(body + '<h2 id="archive-sources">Source index</h2>')
     now = datetime.now(timezone.utc)
     updated = ('<p class="updated">Last updated <time datetime="%s">%s</time></p>'
@@ -245,6 +274,13 @@ details.steps[open] summary{margin-bottom:8px}
 .src-opt strong{display:block;color:var(--accent);font-weight:600}
 .src-opt span{display:block;color:var(--muted);font-size:13px;overflow-wrap:anywhere}
 @media print{.src-pop{display:none}}
+.anchor{margin-left:.35em;font:400 .8em var(--sans);color:var(--muted);text-decoration:none;opacity:0;transition:opacity .15s}
+h2:hover .anchor,h3:hover .anchor,h4:hover .anchor,tr:hover .anchor,.anchor:focus{opacity:1}
+.anchor:hover{color:var(--accent)}
+@media (hover:none){.anchor{opacity:.6}}
+tr:target{background:var(--accent-soft)}
+h2:target,h3:target,h4:target{color:var(--accent)}
+@media print{.anchor{display:none}}
 @media print{details.steps::details-content{content-visibility:visible;display:block}.toc,.top,.actions,#archive-sources{display:none}.layout{display:block}body{background:#fff;font-size:12pt}h2{break-after:avoid}tr{break-inside:avoid}}
 """
 
@@ -272,6 +308,10 @@ if(e.key==='ArrowDown'||e.key==='ArrowUp'){var o=[].slice.call(pop.querySelector
 if(e.key==='Tab'&&!pop.contains(document.activeElement))close(false)});
 window.addEventListener('resize',function(){close(false)});
 [].forEach.call(document.querySelectorAll('a[data-original]'),function(a){a.setAttribute('aria-haspopup','dialog');a.setAttribute('aria-expanded','false')});})();
+(function(){function mark(el,id,label){var a=document.createElement('a');a.className='anchor';a.href='#'+id;a.textContent='#';
+a.setAttribute('aria-label',label);a.title=label;el.appendChild(a)}
+[].forEach.call(document.querySelectorAll('main h2[id],main h3[id],main h4[id]'),function(h){mark(h,h.id,'Link to this section')});
+[].forEach.call(document.querySelectorAll('table.timeline tr[id] > td:first-child'),function(td){mark(td,td.parentNode.id,'Link to this date')});})();
 (function(){var links=[].slice.call(document.querySelectorAll('.toc a'));var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
 if(!('IntersectionObserver' in window))return;var cur;var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){if(cur)cur.classList.remove('active');cur=map[e.target.id];if(cur)cur.classList.add('active')}})},{rootMargin:'0px 0px -75% 0px'});
 Object.keys(map).forEach(function(id){var h=document.getElementById(id);if(h)io.observe(h)});
@@ -312,7 +352,7 @@ TEMPLATE = """<!doctype html>
 {body}
 {end}
 {si_start}{source_index}{si_end}
-<section class="about"><h2>About this page</h2>
+<section class="about"><h2 id="about-this-page">About this page</h2>
 <p>This page is the timeline <em>Geert Greydanus — Timeline from the Family Papers</em>, written from the family papers and the sources saved with it. Wherever a source was saved (family papers, published articles, archive records and web pages), its link offers a choice: the original source, or the copy saved in this archive with the date it was saved. The saved copy keeps the page working if the original site changes or disappears. Links to sources that could not be saved still go to the original site.</p>
 <p>The <a href="{pdf}">PDF</a> is the same document, for printing or keeping.</p>
 </section>
