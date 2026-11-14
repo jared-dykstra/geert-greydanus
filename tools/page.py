@@ -63,6 +63,107 @@ def label_cells(body):
     return re.sub(r'<table.*?</table>', table, body, flags=re.S)
 
 
+def slug(text):
+    text = html.unescape(re.sub(r'<[^>]+>', '', text)).lower()
+    return re.sub(r'[^0-9a-z]+', '-', text).strip('-') or 'section'
+
+
+def add_anchors(*parts):
+    """Give every heading and every timeline row an id, so each can be linked to. An id, once written,
+    stays: index.html is rewritten with it, so links keep working when rows are added later."""
+    taken = set(re.findall(r'\sid="([^"]+)"', ''.join(parts)))
+    def new_id(text):
+        base = slug(text)
+        i, n = base, 2
+        while i in taken:
+            i, n = '%s-%d' % (base, n), n + 1
+        taken.add(i)
+        return i
+    def heading(m):
+        return '<h%s id="%s"%s>%s</h%s>' % (m.group(1), new_id(m.group(3)), m.group(2), m.group(3), m.group(1))
+    def table(m):
+        return re.sub(r'<tr>(?=<td data-label="Date">(.*?)</td>)',
+                      lambda r: '<tr id="%s">' % new_id(r.group(1)), m.group(0), flags=re.S)
+    out = []
+    for part in parts:
+        part = re.sub(r'<h([2-6])((?:(?!\sid=)[^>])*)>(.*?)</h\1>', heading, part, flags=re.S)
+        out.append(re.sub(r'<table class="timeline">.*?</table>', table, part, flags=re.S))
+    return out
+
+
+SKIP_LINKS = ('https://github.com/jared-dykstra/geert-greydanus/issues', 'https://www.openstreetmap.org/')
+SAVED_FROM = re.compile(r'saved from (\S+?)(?: |\)| -->|$)', re.I | re.M)
+ONLINE_ONLY = [('https://collections.arolsen-archives.org/', 'Arolsen card images not bundled'),
+               ('https://www.oorlogsbronnen.nl/zoeken', 'search page'),
+               ('https://www.oorlogsbronnen.nl/tijdlijn/', 'page loads by script'),
+               ('https://oorlogvoorderechter.nl/', 'page loads by script'),
+               ('https://hdl.handle.net/', 'database page'),
+               ('https://vha.usc.edu/', 'restricted testimony; cited by tape and timecode')]
+
+
+def build_source_index(body, old):
+    """Rebuild the source-index table from every link in the page, so it never falls behind. A local copy
+    is listed with its original link (from data-original, else the index as it stood, else the copy's own
+    "saved from" header); a link
+    with no local copy keeps the reason already given for it, else a default by site."""
+    reasons, known, old_rows = {}, {}, []
+    for first, second in re.findall(r'<tr><td>(.*?)</td><td>(.*?)</td></tr>', old, flags=re.S):
+        old_rows.append((first, second))
+        text = html.unescape(re.sub(r'<[^>]+>', '', first))
+        if second.startswith('online only'):
+            reasons[text] = second
+        elif text != 'No online original':
+            for href in re.findall(r'href="([^"]+)"', second):
+                known.setdefault(html.unescape(href), text)
+    order, local, external = [], {}, set()
+    for attrs in re.findall(r'<a\s([^>]*)>', body):
+        m = re.search(r'href="([^"]*)"', attrs)
+        if not m:
+            continue
+        href = html.unescape(m.group(1))
+        if href.startswith(('#', 'mailto:')) or href.startswith(SKIP_LINKS):
+            continue
+        o = re.search(r'data-original="([^"]*)"', attrs)
+        if href.startswith(('http://', 'https://')):
+            key = href
+            external.add(key)
+        else:
+            key = href
+            if o and not local.get(key):
+                local[key] = html.unescape(o.group(1))
+            local.setdefault(key, None)
+        if key not in order:
+            order.append(key)
+    rows = []
+    for key in order:
+        if key in local:
+            orig = local[key] or known.get(key) or known.get(key.split('#')[0])
+            if not orig:
+                try:
+                    with open(os.path.join(ROOT, unquote(key.split('#')[0])), 'rb') as f:
+                        m = SAVED_FROM.search(f.read(2000).decode('utf-8', 'ignore'))
+                    orig = m.group(1) if m else None
+                except OSError:
+                    orig = None
+            a = '<a href="%s">%s</a>' % (html.escape(key, quote=True), html.escape(orig) if orig else 'No online original')
+            rows.append('<tr><td>%s</td><td><a href="%s">%s</a></td></tr>'
+                        % (a, html.escape(key, quote=True), html.escape(unquote(key))))
+        else:
+            reason = reasons.get(key) or 'online only: ' + next(
+                (why for site, why in ONLINE_ONLY if key.startswith(site)), 'not snapshotted')
+            rows.append('<tr><td><a href="%s">%s</a></td><td>%s</td></tr>'
+                        % (html.escape(key, quote=True), html.escape(key), reason))
+    # Keep rows for links no longer on the page, so no saved copy loses the record of where it came from.
+    listed = set(order)
+    for first, second in old_rows:
+        hrefs = [html.unescape(h) for h in re.findall(r'href="([^"]+)"', first + second)]
+        if not listed.intersection(hrefs) and html.unescape(re.sub(r'<[^>]+>', '', first)) not in listed:
+            rows.append('<tr><td>%s</td><td>%s</td></tr>' % (first, second))
+    head = '<tr><th>Original link</th><th>Local copy</th></tr>'
+    return re.sub(r'<table class="facts index">.*?</table>',
+                  lambda _: '<table class="facts index">%s%s</table>' % (head, ''.join(rows)), old, count=1, flags=re.S)
+
+
 def toc(body):
     items = re.findall(r'<h2 id="([^"]+)">(.*?)</h2>', body)
     lis = ''.join('<li><a href="#%s">%s</a></li>' % (i, re.sub(r'<[^>]+>', '', t)) for i, t in items)
@@ -111,6 +212,8 @@ def render(doc):
     body = doc.split(START, 1)[1].split(END, 1)[0].strip()
     source_index = doc.split(SI_START, 1)[1].split(SI_END, 1)[0]
     body = label_cells(classify_tables(add_sections(body)))
+    source_index = build_source_index(body, source_index)
+    body, source_index = add_anchors(body, source_index)
     toc_html = toc(body + '<h2 id="archive-sources">Source index</h2>')
     now = datetime.now(timezone.utc)
     updated = ('<p class="updated">Last updated <time datetime="%s">%s</time></p>'
@@ -245,6 +348,13 @@ details.steps[open] summary{margin-bottom:8px}
 .src-opt strong{display:block;color:var(--accent);font-weight:600}
 .src-opt span{display:block;color:var(--muted);font-size:13px;overflow-wrap:anywhere}
 @media print{.src-pop{display:none}}
+.anchor{margin-left:.35em;font:400 .8em var(--sans);color:var(--muted);text-decoration:none;opacity:0;transition:opacity .15s}
+h2:hover .anchor,h3:hover .anchor,h4:hover .anchor,tr:hover .anchor,.anchor:focus{opacity:1}
+.anchor:hover{color:var(--accent)}
+@media (hover:none){.anchor{opacity:.6}}
+tr:target{background:var(--accent-soft)}
+h2:target,h3:target,h4:target{color:var(--accent)}
+@media print{.anchor{display:none}}
 @media print{details.steps::details-content{content-visibility:visible;display:block}.toc,.top,.actions,#archive-sources{display:none}.layout{display:block}body{background:#fff;font-size:12pt}h2{break-after:avoid}tr{break-inside:avoid}}
 """
 
@@ -272,6 +382,10 @@ if(e.key==='ArrowDown'||e.key==='ArrowUp'){var o=[].slice.call(pop.querySelector
 if(e.key==='Tab'&&!pop.contains(document.activeElement))close(false)});
 window.addEventListener('resize',function(){close(false)});
 [].forEach.call(document.querySelectorAll('a[data-original]'),function(a){a.setAttribute('aria-haspopup','dialog');a.setAttribute('aria-expanded','false')});})();
+(function(){function mark(el,id,label){var a=document.createElement('a');a.className='anchor';a.href='#'+id;a.textContent='#';
+a.setAttribute('aria-label',label);a.title=label;el.appendChild(a)}
+[].forEach.call(document.querySelectorAll('main h2[id],main h3[id],main h4[id]'),function(h){mark(h,h.id,'Link to this section')});
+[].forEach.call(document.querySelectorAll('table.timeline tr[id] > td:first-child'),function(td){mark(td,td.parentNode.id,'Link to this date')});})();
 (function(){var links=[].slice.call(document.querySelectorAll('.toc a'));var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
 if(!('IntersectionObserver' in window))return;var cur;var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){if(cur)cur.classList.remove('active');cur=map[e.target.id];if(cur)cur.classList.add('active')}})},{rootMargin:'0px 0px -75% 0px'});
 Object.keys(map).forEach(function(id){var h=document.getElementById(id);if(h)io.observe(h)});
@@ -312,7 +426,7 @@ TEMPLATE = """<!doctype html>
 {body}
 {end}
 {si_start}{source_index}{si_end}
-<section class="about"><h2>About this page</h2>
+<section class="about"><h2 id="about-this-page">About this page</h2>
 <p>This page is the timeline <em>Geert Greydanus — Timeline from the Family Papers</em>, written from the family papers and the sources saved with it. Wherever a source was saved (family papers, published articles, archive records and web pages), its link offers a choice: the original source, or the copy saved in this archive with the date it was saved. The saved copy keeps the page working if the original site changes or disappears. Links to sources that could not be saved still go to the original site.</p>
 <p>The <a href="{pdf}">PDF</a> is the same document, for printing or keeping.</p>
 </section>
