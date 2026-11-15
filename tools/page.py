@@ -405,6 +405,28 @@ TEMPLATE = """<!doctype html>
 <title>Geert Greydanus (1899–1965): a timeline from the family papers</title>
 <meta name="description" content="Rotterdam police detective, resistance helper and camp survivor: Geert Greydanus's life from the family papers, with copies of every source.">
 <meta name="google-site-verification" content="_0uzc1kWQpNCWJH8MbeLqkACc4nvKDGC8PqsCSC1Q7o" />
+<link rel="canonical" href="https://jared-dykstra.github.io/geert-greydanus/">
+<link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Geert Greydanus archive">
+<meta property="og:title" content="Geert Greydanus (1899–1965): a timeline from the family papers">
+<meta property="og:description" content="Rotterdam police detective, resistance helper and camp survivor: Geert Greydanus's life from the family papers, with copies of every source.">
+<meta property="og:url" content="https://jared-dykstra.github.io/geert-greydanus/">
+<meta property="og:image" content="https://jared-dykstra.github.io/geert-greydanus/drive/1JSk1a3QlW_fam%20photo.jpg">
+<meta property="og:image:alt" content="Geert Greydanus with his wife Johanna and their children, about 1945–46">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{{"@context":"https://schema.org","@type":"Article",
+"headline":"Geert Greydanus (1899–1965): a timeline from the family papers",
+"url":"https://jared-dykstra.github.io/geert-greydanus/","inLanguage":"en",
+"author":{{"@type":"Person","name":"Jared Dykstra"}},
+"license":"https://creativecommons.org/licenses/by/4.0/",
+"about":{{"@type":"Person","name":"Geert Greydanus",
+"alternateName":["Geert Greijdanus","Geert Greidanus","Oom Geert"],
+"birthDate":"1899-12-01","deathDate":"1965-09-14",
+"deathPlace":{{"@type":"Place","name":"Clinton, Ontario, Canada"}},
+"description":"Rotterdam police detective who went into hiding in 1943 rather than arrest Jews, helped Allied airmen in the Achterhoek, and survived Vught, Buchenwald and Niederorschel."}}}}
+</script>
 <style>{css}</style>
 </head>
 <body>
@@ -429,6 +451,7 @@ TEMPLATE = """<!doctype html>
 <section class="about"><h2 id="about-this-page">About this page</h2>
 <p>This page is the timeline <em>Geert Greydanus — Timeline from the Family Papers</em>, written from the family papers and the sources saved with it. Wherever a source was saved (family papers, published articles, archive records and web pages), its link offers a choice: the original source, or the copy saved in this archive with the date it was saved. The saved copy keeps the page working if the original site changes or disappears. Links to sources that could not be saved still go to the original site.</p>
 <p>The <a href="{pdf}">PDF</a> is the same document, for printing or keeping.</p>
+<p>The timeline text, the map and the PDF are licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: you may copy, re-host and adapt them, with credit to Jared Dykstra. The family papers and the saved copies of other people&rsquo;s work are not covered by this license; their rights stay with their owners (<a href="https://github.com/jared-dykstra/geert-greydanus#license">details</a>).</p>
 </section>
 </main>
 </div>

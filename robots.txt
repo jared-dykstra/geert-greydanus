@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jared-dykstra.github.io/geert-greydanus/sitemap.xml
