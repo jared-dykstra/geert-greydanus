@@ -26,3 +26,13 @@ Open **`index.html`** in a browser. Links that point to an archived file open th
 - Not archived: Arolsen Archives card images, Drive folders, and pages that could not be saved when the archive was built (some nl.wikipedia articles, such as Willy Markus and KP-Aalten; eindhoven4044.nl; holocaust.cz; officielebekendmakingen.nl; stiftung-gedenkstaetten.de). These links still point online. Other nl.wikipedia articles and jolink.org are saved in `web/`.
 - Web snapshots are single HTML files saved from the browser; some pages load images or scripts from the original site and may look incomplete offline.
 - `index.html` is the living version of the timeline and the source of truth; the PDF is printed from it.
+
+## License
+
+- **The timeline** (the text of `index.html` and `tools/sections/`, the map and `geert-greydanus-timeline.pdf`) is licensed under [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/); see [`LICENSE`](LICENSE). You may copy, re-host, translate and adapt it, including commercially, as long as you credit Jared Dykstra and link to this repository or the [published page](https://jared-dykstra.github.io/geert-greydanus/).
+- **The code** in `tools/` is under the [MIT License](tools/LICENSE).
+- **Not covered by either license:**
+  - `drive/`: the Greydanus family papers, including Geert's journal, letters, photographs, translations and interviews. They are shared here for research and remembrance. Copyright stays with the authors and their heirs.
+  - `sources/` and `web/`: copies of published articles, books, archive records and web pages, kept so the citations still work if the originals change or disappear. Rights stay with their publishers, archives and authors. Each copy links to its original.
+
+If you hold rights in any copied item and want it changed or removed, please open an issue.
