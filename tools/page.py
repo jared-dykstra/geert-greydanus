@@ -9,7 +9,8 @@ rebuilds the rest of the page around them. Apart from the "Last updated" stamp u
 is set to the current UTC time on every run, running it twice gives the same file. tools/build_pdf.sh
 runs this script first, so every page or PDF build carries a fresh stamp.
 """
-import html, json, os, re, subprocess, sys
+import functools, html, json, os, re, subprocess, sys
+import people
 from urllib.parse import unquote
 from datetime import datetime, timezone
 
@@ -175,6 +176,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SAVED_ON = re.compile(r'saved from \S+.*? on (\d{4}-\d{2}-\d{2})', re.I)
 
 
+@functools.lru_cache(maxsize=None)
 def first_added():
     """Map each file in git to the date of the commit that first added it."""
     try:
@@ -214,13 +216,17 @@ def render(doc):
     body = label_cells(classify_tables(add_sections(body)))
     source_index = build_source_index(body, source_index)
     body, source_index = add_anchors(body, source_index)
-    toc_html = toc(body + '<h2 id="archive-sources">Source index</h2>')
+    body = people.link_pages(body)
+    toc_html = toc(body + '<h2 id="site-map">Site map</h2><h2 id="archive-sources">Source index</h2>')
     now = datetime.now(timezone.utc)
     updated = ('<p class="updated">Last updated <time datetime="%s">%s</time></p>'
                % (now.strftime('%Y-%m-%dT%H:%MZ'), now.strftime('%-d %B %Y, %H:%M UTC')))
     saved = json.dumps(saved_dates(body + source_index), sort_keys=True, separators=(',', ':'))
-    return TEMPLATE.format(toc=toc_html, body=body, source_index=source_index, pdf=PDF, updated=updated, saved=saved,
-                           start=START, end=END, si_start=SI_START, si_end=SI_END, css=CSS)
+    page = TEMPLATE.format(toc=toc_html, body=body, source_index=source_index, pdf=PDF, updated=updated, saved=saved,
+                           start=START, end=END, si_start=SI_START, si_end=SI_END, css=CSS,
+                           mentions=json.dumps(people.mentions(), ensure_ascii=False, separators=(',', ':')),
+                           site_map=people.site_map(PDF))
+    return page, body, updated, now
 
 
 CSS = r"""
@@ -310,13 +316,19 @@ em{font-style:italic}
 details.steps{margin:16px 0;border:1px solid var(--rule);border-radius:8px;background:var(--card);padding:12px 16px}
 details.steps summary{cursor:pointer;font:600 15px var(--sans);color:var(--accent)}
 details.steps[open] summary{margin-bottom:8px}
+.site-map ul{max-width:none;padding-left:1.2em}.site-map li{margin:8px 0}.site-map .desc{color:var(--muted);font-size:.9em}
+.person-page-link{font:14px/1.4 var(--sans);margin:-4px 0 12px}.person-page-link a::before{content:"→ "}
+.single{max-width:1180px;margin:0 auto;padding:0 24px}.single main>p,.single main>ul,.single main>ol,.single .chain{max-width:52em}.hero-inner.single{padding:48px 24px 36px}
+.kicker a{color:inherit;text-decoration:none}.kicker a:hover{color:var(--accent)}
+main>h2:first-child{border-top:0;margin-top:16px}
 .about{margin-top:64px;padding:20px 24px;background:var(--card);border:1px solid var(--rule);border-radius:8px;font:15px/1.6 var(--sans);color:var(--muted);max-width:none}
 .about h2{font:700 13px var(--sans);text-transform:uppercase;letter-spacing:.08em;margin:0 0 8px;padding:0;border:0;color:var(--muted)}
 .about p{margin:6px 0}
 .top{position:fixed;right:16px;bottom:16px;padding:10px 14px;border-radius:20px;background:var(--card);border:1px solid var(--rule);font:600 13px var(--sans);text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.08)}
 @media (max-width:900px){
  .layout{display:block;padding:0 16px}
- .hero-inner{padding:32px 16px 24px}
+ .hero-inner,.hero-inner.single{padding:32px 16px 24px}
+ .single{padding:0 16px}
  .toc{position:static;max-height:none;padding:16px 0 0}
  .toc details{border:1px solid var(--rule);border-radius:8px;background:var(--card);padding:12px 16px}
  .toc summary{cursor:pointer;margin:0}
@@ -358,8 +370,7 @@ h2:target,h3:target,h4:target{color:var(--accent)}
 @media print{details.steps::details-content{content-visibility:visible;display:block}.toc,.top,.actions,#archive-sources{display:none}.layout{display:block}body{background:#fff;font-size:12pt}h2{break-after:avoid}tr{break-inside:avoid}}
 """
 
-SCRIPT = """<script>
-(function(){var saved=window.SAVED||{},pop=null,cur=null;
+SCRIPT_POPOVER = """(function(){var saved=window.SAVED||{},pop=null,cur=null;
 var months=['January','February','March','April','May','June','July','August','September','October','November','December'];
 function host(u){try{return new URL(u).hostname.replace(/^www\\./,'')}catch(e){return u}}
 function day(d){var p=d.split('-');return +p[2]+' '+months[+p[1]-1]+' '+p[0]}
@@ -382,17 +393,24 @@ if(e.key==='ArrowDown'||e.key==='ArrowUp'){var o=[].slice.call(pop.querySelector
 if(e.key==='Tab'&&!pop.contains(document.activeElement))close(false)});
 window.addEventListener('resize',function(){close(false)});
 [].forEach.call(document.querySelectorAll('a[data-original]'),function(a){a.setAttribute('aria-haspopup','dialog');a.setAttribute('aria-expanded','false')});})();
-(function(){function mark(el,id,label){var a=document.createElement('a');a.className='anchor';a.href='#'+id;a.textContent='#';
+"""
+
+SCRIPT_ANCHORS = """(function(){function mark(el,id,label){var a=document.createElement('a');a.className='anchor';a.href='#'+id;a.textContent='#';
 a.setAttribute('aria-label',label);a.title=label;el.appendChild(a)}
 [].forEach.call(document.querySelectorAll('main h2[id],main h3[id],main h4[id]'),function(h){mark(h,h.id,'Link to this section')});
 [].forEach.call(document.querySelectorAll('table.timeline tr[id] > td:first-child'),function(td){mark(td,td.parentNode.id,'Link to this date')});})();
-(function(){var links=[].slice.call(document.querySelectorAll('.toc a'));var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+"""
+
+SCRIPT_TOC = """(function(){var links=[].slice.call(document.querySelectorAll('.toc a'));var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
 if(!('IntersectionObserver' in window))return;var cur;var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){if(cur)cur.classList.remove('active');cur=map[e.target.id];if(cur)cur.classList.add('active')}})},{rootMargin:'0px 0px -75% 0px'});
 Object.keys(map).forEach(function(id){var h=document.getElementById(id);if(h)io.observe(h)});
 if(window.matchMedia('(max-width:900px)').matches){var t=document.querySelector('.toc details');if(t)t.open=false}
 if(location.hash==='#archive-sources'){var d=document.querySelector('#archive-sources details');if(d)d.open=true}
 document.querySelector('.toc a[href="#archive-sources"]').addEventListener('click',function(){var d=document.querySelector('#archive-sources details');if(d)d.open=true});})();
-</script>"""
+"""
+
+SCRIPT = '<script>\n' + SCRIPT_POPOVER + SCRIPT_ANCHORS + SCRIPT_TOC + '</script>'
+PERSON_SCRIPT = '<script>\n' + SCRIPT_POPOVER + SCRIPT_ANCHORS + '</script>'
 
 DOWNLOAD_ICON = ('<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">'
                  '<path d="M8 2v8m0 0L4.5 6.5M8 10l3.5-3.5M2.5 13.5h11"/></svg>')
@@ -425,7 +443,8 @@ TEMPLATE = """<!doctype html>
 "alternateName":["Geert Greijdanus","Geert Greidanus","Oom Geert"],
 "birthDate":"1899-12-01","deathDate":"1965-09-14",
 "deathPlace":{{"@type":"Place","name":"Clinton, Ontario, Canada"}},
-"description":"Rotterdam police detective who went into hiding in 1943 rather than arrest Jews, helped Allied airmen in the Achterhoek, and survived Vught, Buchenwald and Niederorschel."}}}}
+"description":"Rotterdam police detective who went into hiding in 1943 rather than arrest Jews, helped Allied airmen in the Achterhoek, and survived Vught, Buchenwald and Niederorschel."}},
+"mentions":{mentions}}}
 </script>
 <style>{css}</style>
 </head>
@@ -447,10 +466,12 @@ TEMPLATE = """<!doctype html>
 {start}
 {body}
 {end}
+{site_map}
 {si_start}{source_index}{si_end}
 <section class="about"><h2 id="about-this-page">About this page</h2>
 <p>This page is the timeline <em>Geert Greydanus — Timeline from the Family Papers</em>, written from the family papers and the sources saved with it. Wherever a source was saved (family papers, published articles, archive records and web pages), its link offers a choice: the original source, or the copy saved in this archive with the date it was saved. The saved copy keeps the page working if the original site changes or disappears. Links to sources that could not be saved still go to the original site.</p>
 <p>The <a href="{pdf}">PDF</a> is the same document, for printing or keeping.</p>
+<p>Some people in the timeline also have a page of their own, for anyone researching them; the <a href="#site-map">site map</a> lists them.</p>
 <p>The timeline text, the map and the PDF are licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: you may copy, re-host and adapt them, with credit to Jared Dykstra. The family papers and the saved copies of other people&rsquo;s work are not covered by this license; their rights stay with their owners (<a href="https://github.com/jared-dykstra/geert-greydanus#license">details</a>).</p>
 </section>
 </main>
@@ -465,4 +486,8 @@ TEMPLATE = """<!doctype html>
 if __name__ == '__main__':
     src, out = sys.argv[1], sys.argv[2]
     doc = open(src, encoding='utf-8').read()
-    open(out, 'w', encoding='utf-8').write(render(doc))
+    page, body, updated, now = render(doc)
+    open(out, 'w', encoding='utf-8').write(page)
+    # people/ and sitemap.xml belong to the published page, not to a preview written elsewhere.
+    if os.path.abspath(out) == os.path.join(ROOT, 'index.html'):
+        people.build(ROOT, body, updated, now, CSS, PERSON_SCRIPT, saved_dates)

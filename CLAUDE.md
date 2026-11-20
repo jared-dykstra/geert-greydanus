@@ -5,6 +5,7 @@ The research timeline of Geert Greydanus (1899–1965), published with GitHub Pa
 ## Source of truth
 
 - **The HTML is the source of truth.** That means `index.html`, plus what `tools/page.py` inserts into it: the sections in `tools/sections/` and the map built from `tools/map/stops.json`. Edit these.
+- **`people/` and `sitemap.xml` are generated.** `tools/people.py` (run by `tools/page.py`) cuts each person's page from the laid-out `index.html`. To add or change a person page, edit the `PEOPLE` list there; to change its text, edit the timeline.
 - **The old Claude Doc is retired.** Do not copy content from it or from an export of it; this repository supersedes it.
 
 ## Keep the PDF in step
