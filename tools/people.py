@@ -44,14 +44,14 @@ def entry(slug, desc, people, section=None, title=None, name=None, rows=None, se
                 name=name or ' and '.join(p['name'] for p in people))
 
 
-# Dates and places are only those the page's own text states; where its sources disagree, the field is
-# left out. Descriptions say no more than the text does.
+# Dates and places are only those the page's own text states; where it leaves a disagreement between sources
+# unresolved, the field is left out. Descriptions say no more than the text does.
 PEOPLE = [
     entry('wietske-walinga-greydanus',
-          "Geert Greydanus's daughter Wietske (1924–2008): hostage in Kamp Vught in 1943, and her diary of a bicycle "
+          "Geert Greydanus's daughter Wietske: hostage in Kamp Vught in 1943, and her diary of a bicycle "
           'journey from Rotterdam to Friesland for food in the hunger winter of 1945.',
           [person('Wietske Walinga-Greydanus', ['Wietske Greydanus', 'Wietske Greijdanus', 'Grietje Wietske Greydanus',
-                                                'Wietske Walinga', 'Wilma Walinga', 'Wilma Greydanus'], '1924-03-04', 'Rotterdam', '2008-07-28')],
+                                                'Wietske Walinga', 'Wilma Walinga'], '1924-03-04', 'Rotterdam', '2008-07-28')],
           title='Wietske Walinga-Greydanus (1924–2008) and her hunger-winter journey',
           name='Wietske Walinga-Greydanus', rows=r'Wietske', timeline=r'Wietske(?! Baron)'),
     entry('satter-family',
@@ -98,8 +98,8 @@ PEOPLE = [
           [person('Hendrik Pieter Heinen', ['Henk Heinen'], '1914-11-28', 'Eibergen', '1944-06-06', 'Overveen')],
           section='hendrik-pieter-heinen'),
     entry('martinus-antonius-lelivelt',
-          'Martinus Antonius (Martin) Lelivelt, Lichtenvoorde builder who hid Jews and airmen, named by Geert Greydanus '
-          'from Vught; shot at Fort Rhijnauwen on 25 July 1944.',
+          'Martinus Antonius (Martin) Lelivelt, Lichtenvoorde builder who hid Jews and airmen, probably the "Lebbeveld" '
+          'Geert Greydanus named from Vught; shot at Fort Rhijnauwen on 25 July 1944.',
           [person('Martinus Antonius Lelivelt', ['Martin Lelivelt'], '1896-01-17', 'Lichtenvoorde', '1944-07-25',
                   'Fort Rhijnauwen')],
           section='martinus-antonius-lelivelt', title='Martinus Antonius (Martin) Lelivelt (Lichtenvoorde, 1896 – 1944)'),
@@ -132,7 +132,7 @@ PEOPLE = [
     entry('johannes-berlijn',
           "Johannes (Jo) Berlijn, Rotterdam forger for the LO, whose house was Geert Greydanus's first hiding place; "
           'killed in Kamp Vught on 30 August 1944.',
-          [person('Johannes Berlijn', ['Jo Berlijn'], '1906-02-16', 'Rotterdam', '1944-08-30', 'Kamp Vught')],
+          [person('Johannes Berlijn', ['Jo Berlijn'], None, 'Rotterdam', '1944-08-30', 'Kamp Vught')],
           section='johannes-berlijn'),
     entry('johan-gerard-westerweel',
           'Johan Gerard (Joop) Westerweel, head of the Montessori school in Rotterdam, who helped Jews escape to Spain; '
@@ -240,8 +240,7 @@ def site_map(pdf):
     items = ''.join('<li><a href="%s/%s.html">%s</a> <span class="desc">%s</span></li>'
                     % (DIR, e['slug'], html.escape(e['name']), html.escape(e['desc'])) for e in PEOPLE)
     return ('<section class="site-map"><h2 id="site-map">Site map</h2>\n'
-            '<ul><li><a href="#overview">The timeline</a> <span class="desc">This page.</span></li>'
-            '<li><a href="%s">The timeline as a PDF</a> <span class="desc">The same document, for printing or keeping.</span></li></ul>\n'
+            '<ul><li><a href="%s">The timeline as a PDF</a> <span class="desc">The same document, for printing or keeping.</span></li></ul>\n'
             '<h3 id="site-map-people">Pages for people in the timeline</h3>\n<ul>%s</ul>\n</section>' % (pdf, items))
 
 
