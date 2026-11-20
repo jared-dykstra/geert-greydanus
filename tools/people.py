@@ -51,7 +51,7 @@ PEOPLE = [
           "Geert Greydanus's daughter Wietske (1924–2008): hostage in Kamp Vught in 1943, and her diary of a bicycle "
           'journey from Rotterdam to Friesland for food in the hunger winter of 1945.',
           [person('Wietske Walinga-Greydanus', ['Wietske Greydanus', 'Wietske Greijdanus', 'Grietje Wietske Greydanus',
-                                                'Wietske Walinga'], '1924-03-04', 'Rotterdam', '2008-07-28')],
+                                                'Wietske Walinga', 'Wilma Walinga', 'Wilma Greydanus'], '1924-03-04', 'Rotterdam', '2008-07-28')],
           title='Wietske Walinga-Greydanus (1924–2008) and her hunger-winter journey',
           name='Wietske Walinga-Greydanus', rows=r'Wietske', timeline=r'Wietske(?! Baron)'),
     entry('satter-family',
