@@ -9,7 +9,7 @@ rebuilds the rest of the page around them. Apart from the "Last updated" stamp u
 is set to the current UTC time on every run, running it twice gives the same file. tools/build_pdf.sh
 runs this script first, so every page or PDF build carries a fresh stamp.
 """
-import html, json, os, re, subprocess, sys
+import functools, html, json, os, re, subprocess, sys
 import people
 from urllib.parse import unquote
 from datetime import datetime, timezone
@@ -176,6 +176,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SAVED_ON = re.compile(r'saved from \S+.*? on (\d{4}-\d{2}-\d{2})', re.I)
 
 
+@functools.lru_cache(maxsize=None)
 def first_added():
     """Map each file in git to the date of the commit that first added it."""
     try:
@@ -483,4 +484,6 @@ if __name__ == '__main__':
     doc = open(src, encoding='utf-8').read()
     page, body, updated, now = render(doc)
     open(out, 'w', encoding='utf-8').write(page)
-    people.build(ROOT, body, updated, now, CSS, PERSON_SCRIPT, saved_dates)
+    # people/ and sitemap.xml belong to the published page, not to a preview written elsewhere.
+    if os.path.abspath(out) == os.path.join(ROOT, 'index.html'):
+        people.build(ROOT, body, updated, now, CSS, PERSON_SCRIPT, saved_dates)
