@@ -53,7 +53,7 @@ PEOPLE = [
           [person('Wietske Walinga-Greydanus', ['Wietske Greydanus', 'Wietske Greijdanus', 'Grietje Wietske Greydanus',
                                                 'Wietske Walinga'], '1924-03-04', 'Rotterdam', '2008-07-28')],
           title='Wietske Walinga-Greydanus (1924–2008) and her hunger-winter journey',
-          name='Wietske Walinga-Greydanus', rows=r'Wietske', timeline=r'Wietske'),
+          name='Wietske Walinga-Greydanus', rows=r'Wietske', timeline=r'Wietske(?! Baron)'),
     entry('satter-family',
           'Hendrik Satter and his children Jo and Wil, who hid Geert Greydanus on their farm near Varsseveld; Hendrik '
           'was arrested with him on 20 April 1944.',
