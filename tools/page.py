@@ -216,6 +216,7 @@ def render(doc):
     body = label_cells(classify_tables(add_sections(body)))
     source_index = build_source_index(body, source_index)
     body, source_index = add_anchors(body, source_index)
+    body = people.link_pages(body)
     toc_html = toc(body + '<h2 id="archive-sources">Source index</h2>')
     now = datetime.now(timezone.utc)
     updated = ('<p class="updated">Last updated <time datetime="%s">%s</time></p>'
@@ -315,6 +316,7 @@ em{font-style:italic}
 details.steps{margin:16px 0;border:1px solid var(--rule);border-radius:8px;background:var(--card);padding:12px 16px}
 details.steps summary{cursor:pointer;font:600 15px var(--sans);color:var(--accent)}
 details.steps[open] summary{margin-bottom:8px}
+.person-page-link{font:14px/1.4 var(--sans);margin:-4px 0 12px}.person-page-link a::before{content:"→ "}
 .single{max-width:1180px;margin:0 auto;padding:0 24px}.single main>p,.single main>ul,.single main>ol,.single .chain{max-width:52em}.hero-inner.single{padding:48px 24px 36px}
 .kicker a{color:inherit;text-decoration:none}.kicker a:hover{color:var(--accent)}
 main>h2:first-child{border-top:0;margin-top:16px}

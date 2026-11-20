@@ -226,6 +226,39 @@ def gather(body, e):
     return '\n'.join(parts)
 
 
+LINK = re.compile(r'<a class="person-page" href="[^"]*">(.*?)</a>', re.S)
+LINK_P = re.compile(r'<p class="person-page-link">.*?</p>\n?', re.S)
+
+
+def unlink(s):
+    """Remove the links to person pages that link_pages() added."""
+    return LINK.sub(r'\1', LINK_P.sub('', s))
+
+
+def link_pages(body):
+    """Link the main page to the person pages: each name in "People in Geert's story" that has a page, and a
+    line under each heading a section page is cut from. Earlier links are removed first, so a re-run
+    gives the same page."""
+    body = unlink(body)
+    def table(m):
+        def row(r):
+            cell = r.group(2)
+            name = text(cell)
+            for e in PEOPLE:
+                pat = e['rows'] or '|'.join(re.escape(p['name'].split()[-1]) for p in e['people'])
+                if re.search(pat, name):
+                    return '%s<a class="person-page" href="%s/%s.html">%s</a>%s' % (r.group(1), DIR, e['slug'], cell, r.group(3))
+            return r.group(0)
+        return re.sub(r'(<tr><td data-label="Person">)(.*?)(</td>)', row, m.group(0), flags=re.S)
+    body = re.sub(r'<h2 id="people-in-geerts-story">.*?</table>', table, body, count=1, flags=re.S)
+    for e in PEOPLE:
+        if e['section']:
+            m = re.search(r'<h([2-6]) id="%s"[^>]*>.*?</h\1>\n?' % re.escape(e['section']), body, re.S)
+            body = body[:m.end()] + ('<p class="person-page-link"><a class="person-page" href="%s/%s.html">Page for %s</a></p>\n'
+                                     % (DIR, e['slug'], html.escape(e['name']))) + body[m.end():]
+    return body
+
+
 def rebase(frag):
     """Point the cut text's links at the right place from people/: local files one folder up, and links
     into the rest of the timeline at index.html."""
@@ -317,6 +350,7 @@ def build(root, body, updated, now, css, script, saved_dates):
             h1 = html.escape(e['title']) if e['title'] else heading
         else:
             frag, h1 = gather(body, e), html.escape(e['title'])
+        frag = unlink(frag)
         saved = json.dumps({'../' + k: v for k, v in saved_dates(frag).items()}, sort_keys=True, separators=(',', ':'))
         frag = rebase(frag)
         path = os.path.join(root, DIR, e['slug'] + '.html')
