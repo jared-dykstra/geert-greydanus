@@ -389,9 +389,13 @@ def build(root, body, updated, now, css, script, saved_dates):
     for f in os.listdir(os.path.join(root, DIR)):
         if f.endswith('.html') and f not in wanted:
             os.remove(os.path.join(root, DIR, f))
-    rows = ['<url><loc>%s</loc><lastmod>%s</lastmod></url>' % (BASE, stamp_iso),
-            '<url><loc>%sgeert-greydanus-timeline.pdf</loc><lastmod>%s</lastmod></url>' % (BASE, stamp_iso)]
-    rows += ['<url><loc>%s</loc><lastmod>%s</lastmod></url>' % (url(e['slug']), lastmods[e['slug']]) for e in PEOPLE]
+    # The sitemap schema types <lastmod> as xsd:date or xsd:dateTime, which needs seconds;
+    # the page stamps are minute precision (hh:mmZ), so add ':00' here.
+    def full(t):
+        return re.sub(r'T(\d\d:\d\d)Z$', r'T\1:00Z', t)
+    rows = ['<url><loc>%s</loc><lastmod>%s</lastmod></url>' % (BASE, full(stamp_iso)),
+            '<url><loc>%sgeert-greydanus-timeline.pdf</loc><lastmod>%s</lastmod></url>' % (BASE, full(stamp_iso))]
+    rows += ['<url><loc>%s</loc><lastmod>%s</lastmod></url>' % (url(e['slug']), full(lastmods[e['slug']])) for e in PEOPLE]
     open(os.path.join(root, 'sitemap.xml'), 'w', encoding='utf-8').write(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n%s\n</urlset>\n'
         % '\n'.join(rows))
