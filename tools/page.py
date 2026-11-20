@@ -315,7 +315,7 @@ em{font-style:italic}
 details.steps{margin:16px 0;border:1px solid var(--rule);border-radius:8px;background:var(--card);padding:12px 16px}
 details.steps summary{cursor:pointer;font:600 15px var(--sans);color:var(--accent)}
 details.steps[open] summary{margin-bottom:8px}
-.single{max-width:820px;margin:0 auto;padding:0 24px}.hero-inner.single{padding:48px 24px 36px}
+.single{max-width:1180px;margin:0 auto;padding:0 24px}.single main>p,.single main>ul,.single main>ol,.single .chain{max-width:52em}.hero-inner.single{padding:48px 24px 36px}
 .kicker a{color:inherit;text-decoration:none}.kicker a:hover{color:var(--accent)}
 main>h2:first-child{border-top:0;margin-top:16px}
 .about{margin-top:64px;padding:20px 24px;background:var(--card);border:1px solid var(--rule);border-radius:8px;font:15px/1.6 var(--sans);color:var(--muted);max-width:none}
