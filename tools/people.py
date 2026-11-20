@@ -235,6 +235,16 @@ def unlink(s):
     return LINK.sub(r'\1', LINK_P.sub('', s))
 
 
+def site_map(pdf):
+    """The main page's site map: the page itself, the PDF, and every person page."""
+    items = ''.join('<li><a href="%s/%s.html">%s</a> <span class="desc">%s</span></li>'
+                    % (DIR, e['slug'], html.escape(e['name']), html.escape(e['desc'])) for e in PEOPLE)
+    return ('<section class="site-map"><h2 id="site-map">Site map</h2>\n'
+            '<ul><li><a href="#overview">The timeline</a> <span class="desc">This page.</span></li>'
+            '<li><a href="%s">The timeline as a PDF</a> <span class="desc">The same document, for printing or keeping.</span></li></ul>\n'
+            '<h3 id="site-map-people">Pages for people in the timeline</h3>\n<ul>%s</ul>\n</section>' % (pdf, items))
+
+
 def link_pages(body):
     """Link the main page to the person pages: each name in "People in Geert's story" that has a page, and a
     line under each heading a section page is cut from. Earlier links are removed first, so a re-run

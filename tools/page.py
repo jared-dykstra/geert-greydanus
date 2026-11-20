@@ -217,7 +217,7 @@ def render(doc):
     source_index = build_source_index(body, source_index)
     body, source_index = add_anchors(body, source_index)
     body = people.link_pages(body)
-    toc_html = toc(body + '<h2 id="archive-sources">Source index</h2>')
+    toc_html = toc(body + '<h2 id="site-map">Site map</h2><h2 id="archive-sources">Source index</h2>')
     now = datetime.now(timezone.utc)
     updated = ('<p class="updated">Last updated <time datetime="%s">%s</time></p>'
                % (now.strftime('%Y-%m-%dT%H:%MZ'), now.strftime('%-d %B %Y, %H:%M UTC')))
@@ -225,7 +225,7 @@ def render(doc):
     page = TEMPLATE.format(toc=toc_html, body=body, source_index=source_index, pdf=PDF, updated=updated, saved=saved,
                            start=START, end=END, si_start=SI_START, si_end=SI_END, css=CSS,
                            mentions=json.dumps(people.mentions(), ensure_ascii=False, separators=(',', ':')),
-                           people_links=people.links_list(prefix=people.DIR + '/'))
+                           site_map=people.site_map(PDF))
     return page, body, updated, now
 
 
@@ -316,6 +316,7 @@ em{font-style:italic}
 details.steps{margin:16px 0;border:1px solid var(--rule);border-radius:8px;background:var(--card);padding:12px 16px}
 details.steps summary{cursor:pointer;font:600 15px var(--sans);color:var(--accent)}
 details.steps[open] summary{margin-bottom:8px}
+.site-map ul{max-width:none;padding-left:1.2em}.site-map li{margin:8px 0}.site-map .desc{color:var(--muted);font-size:.9em}
 .person-page-link{font:14px/1.4 var(--sans);margin:-4px 0 12px}.person-page-link a::before{content:"→ "}
 .single{max-width:1180px;margin:0 auto;padding:0 24px}.single main>p,.single main>ul,.single main>ol,.single .chain{max-width:52em}.hero-inner.single{padding:48px 24px 36px}
 .kicker a{color:inherit;text-decoration:none}.kicker a:hover{color:var(--accent)}
@@ -465,11 +466,12 @@ TEMPLATE = """<!doctype html>
 {start}
 {body}
 {end}
+{site_map}
 {si_start}{source_index}{si_end}
 <section class="about"><h2 id="about-this-page">About this page</h2>
 <p>This page is the timeline <em>Geert Greydanus — Timeline from the Family Papers</em>, written from the family papers and the sources saved with it. Wherever a source was saved (family papers, published articles, archive records and web pages), its link offers a choice: the original source, or the copy saved in this archive with the date it was saved. The saved copy keeps the page working if the original site changes or disappears. Links to sources that could not be saved still go to the original site.</p>
 <p>The <a href="{pdf}">PDF</a> is the same document, for printing or keeping.</p>
-<p>Some sections also have a page of their own, for anyone researching the people named in them: {people_links}.</p>
+<p>Some people in the timeline also have a page of their own, for anyone researching them; the <a href="#site-map">site map</a> lists them.</p>
 <p>The timeline text, the map and the PDF are licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: you may copy, re-host and adapt them, with credit to Jared Dykstra. The family papers and the saved copies of other people&rsquo;s work are not covered by this license; their rights stay with their owners (<a href="https://github.com/jared-dykstra/geert-greydanus#license">details</a>).</p>
 </section>
 </main>
