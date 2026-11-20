@@ -34,13 +34,14 @@ def person(name, alt=(), born=None, born_in=None, died=None, died_in=None):
     return p
 
 
-def entry(slug, desc, people, section=None, title=None, name=None, rows=None, sections=(), timeline=None):
+def entry(slug, desc, people, section=None, title=None, name=None, rows=None, sections=(), timeline=None, feature=None):
     """section: the id of the heading a section page is cut from. For a gathered page: rows, a pattern
     for the first cell of their rows in "People in Geert's story"; sections, heading ids to include;
     timeline, a pattern for the timeline rows to include. title overrides the heading as the page title;
-    name is the link text used for the page in lists (default: the people's names)."""
+    name is the link text used for the page in lists (default: the people's names). feature: the id of a
+    call-out (<aside class="feature">) on the main page to show at the top of the page."""
     return dict(slug=slug, desc=desc, people=people, section=section, title=title, rows=rows,
-                sections=sections, timeline=timeline,
+                sections=sections, timeline=timeline, feature=feature,
                 name=name or ' and '.join(p['name'] for p in people))
 
 
@@ -133,7 +134,7 @@ PEOPLE = [
           'Jacob (Jaap) Stigter of Honselersdijk and KP-Neede, shot in Kamp Vught on 9 August 1944; Geert Greydanus '
           'told his family that Jaap had prayed for the prisoners in Vught.',
           [person('Jacob Stigter', ['Jaap Stigter'], '1924-07-23', 'Honselersdijk', '1944-08-09', 'Kamp Vught')],
-          section='jacob-stigter', name='Jaap Stigter', rows=r'Stigter', timeline=r'Stigter'),
+          section='jacob-stigter', name='Jaap Stigter', rows=r'Stigter', timeline=r'Stigter', feature='stigter-feature'),
     entry('johannes-berlijn',
           "Johannes (Jo) Berlijn, Rotterdam forger for the LO, whose house was Geert Greydanus's first hiding place; "
           'killed in Kamp Vught on 30 August 1944.',
@@ -367,6 +368,11 @@ def build(root, body, updated, now, css, script, saved_dates):
         else:
             frag, h1 = gather(body, e), html.escape(e['title'])
         frag = unlink(frag)
+        if e['feature']:
+            m = re.search(r'<aside class="feature" id="%s">.*?</aside>' % re.escape(e['feature']), body, re.S)
+            if not m:
+                raise SystemExit('people.py: no call-out with id "%s"' % e['feature'])
+            frag = m.group(0) + '\n' + frag
         saved = json.dumps({'../' + k: v for k, v in saved_dates(frag).items()}, sort_keys=True, separators=(',', ':'))
         frag = rebase(frag)
         path = os.path.join(root, DIR, e['slug'] + '.html')
