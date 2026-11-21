@@ -423,6 +423,7 @@ TEMPLATE = """<!doctype html>
 <title>Geert Greydanus (1899–1965): a timeline from the family papers</title>
 <meta name="description" content="Rotterdam police detective, resistance helper and camp survivor: Geert Greydanus's life from the family papers, with copies of every source.">
 <meta name="google-site-verification" content="_0uzc1kWQpNCWJH8MbeLqkACc4nvKDGC8PqsCSC1Q7o" />
+<meta name="msvalidate.01" content="B35A490AEFFE674C8371F348958C4B1D" />
 <link rel="canonical" href="https://jared-dykstra.github.io/geert-greydanus/">
 <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 <meta property="og:type" content="article">
