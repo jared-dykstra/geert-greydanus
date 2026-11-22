@@ -26,7 +26,9 @@ const countries = feature(world, world.objects.countries).features;
 const shown = { Netherlands: 'nl', Germany: 'de', Belgium: 'be', Luxembourg: 'lu', France: 'fr', Denmark: 'dk' };
 const land = countries
   .filter(c => shown[c.properties.name])
-  .map(c => `<path class="jm-land jm-${shown[c.properties.name]}" d="${path(c)}"/>`)
+  .map(c => [c, path(c)])
+  .filter(([, d]) => d) // countries wholly outside the frame have no path
+  .map(([c, d]) => `<path class="jm-land jm-${shown[c.properties.name]}" d="${d}"/>`)
   .join('');
 const countryLabels = [['NETHERLANDS', 5.55, 52.62], ['GERMANY', 9.0, 52.1], ['BELGIUM', 4.3, 50.75]]
   .map(([t, lon, lat]) => { const [x, y] = P(lon, lat); return `<text class="jm-country" x="${x}" y="${y}">${t}</text>`; })
@@ -39,7 +41,7 @@ const steps = data.steps.map(s => ({ ...s, xy: places[s.place].xy }));
 const legs = steps.map((s, i) => {
   if (i === 0) return '';
   const [ax, ay] = steps[i - 1].xy, [bx, by] = s.xy;
-  if (ax === bx && ay === by) return `<path class="jm-leg" data-i="${i}" d=""/>`;
+  if (ax === bx && ay === by) return `<path class="jm-leg" data-i="${i}"/>`;
   // A gentle curve, so legs that retrace a road (Buchenwald and back) do not sit on top of each other.
   const mx = (ax + bx) / 2, my = (ay + by) / 2, dx = bx - ax, dy = by - ay, k = 0.12;
   const cx = Math.round(mx - dy * k), cy = Math.round(my + dx * k);
@@ -85,12 +87,12 @@ const html = `<h2 id="geerts-journey-on-a-map">Geert’s journey on a map</h2>
 <input class="jm-slider" type="range" min="0" max="${steps.length - 1}" value="0" aria-label="Step">
 </div>
 </div>
-<ol class="jm-steps">${list}</ol>
+<div class="jm-list"><ol class="jm-steps">${list}</ol></div>
 <figcaption class="jm-note">${esc(data.note)} Borders are today’s, from Natural Earth.</figcaption>
 </figure>
 <style>
 .journey{margin:24px 0 32px;display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:20px;font-family:var(--sans)}
-.jm-map{position:sticky;top:12px;align-self:start;background:var(--card);border:1px solid var(--rule);border-radius:8px;overflow:hidden}
+.jm-map{align-self:start;background:var(--card);border:1px solid var(--rule);border-radius:8px;overflow:hidden}
 .jm-map svg{display:block;width:100%;height:auto}
 .jm-sea{fill:var(--jm-sea)}
 .jm-land{fill:var(--jm-land);stroke:var(--jm-border);stroke-width:.8}
@@ -116,7 +118,8 @@ const html = `<h2 id="geerts-journey-on-a-map">Geert’s journey on a map</h2>
 .jm-btn{font:600 14px var(--sans);border:1px solid var(--accent);background:transparent;color:var(--accent);border-radius:6px;padding:6px 12px;cursor:pointer}
 .jm-play{background:var(--accent);color:var(--paper);min-width:6.5em}
 .jm-slider{flex:1;accent-color:var(--accent);min-width:0}
-.jm-steps{list-style:none;margin:0;padding:0;max-height:640px;overflow:auto}
+.jm-list{position:relative}
+.jm-steps{list-style:none;margin:0;padding:0 4px 0 0;position:absolute;inset:0;overflow:auto;scrollbar-width:thin;scrollbar-color:var(--rule) transparent}
 .jm-steps li{margin:0;border-left:3px solid var(--rule);padding:2px 0 10px 12px}
 .jm-steps button{all:unset;cursor:pointer;display:block}
 .jm-steps button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -129,9 +132,9 @@ const html = `<h2 id="geerts-journey-on-a-map">Geert’s journey on a map</h2>
 .jm-note{grid-column:1/-1;font-size:13px;color:var(--muted)}
 :root{--jm-sea:#dfe8ec;--jm-land:#f4efe4;--jm-nl:#ece3d0;--jm-border:#c9bfae}
 @media (prefers-color-scheme:dark){:root{--jm-sea:#1c2428;--jm-land:#2b2723;--jm-nl:#35302a;--jm-border:#4a433b}}
-@media (max-width:900px){.journey{display:block}.jm-map{position:static}.jm-steps{max-height:none;margin-top:16px}}
+@media (max-width:900px){.journey{display:block}.jm-steps{position:static;margin-top:16px}}
 @media (prefers-reduced-motion:reduce){.jm-marker,.jm-canada{transition:none}}
-@media print{.jm-controls,.jm-caption,.jm-howto,.jm-marker{display:none}.jm-map{position:static}.jm-steps{max-height:none}.jm-steps p{display:block}.jm-leg{opacity:1;stroke-dashoffset:0!important}.jm-canada{opacity:1}.journey{display:block}}
+@media print{.jm-controls,.jm-caption,.jm-howto,.jm-marker{display:none}.jm-steps{position:static}.jm-steps p{display:block}.jm-leg{opacity:1;stroke-dashoffset:0!important}.jm-canada{opacity:1}.journey{display:block}}
 </style>
 <script>
 (function(){
@@ -142,7 +145,7 @@ var marker=root.querySelector('.jm-marker'),slider=root.querySelector('.jm-slide
 var capDate=root.querySelector('.jm-cap-date'),capText=root.querySelector('.jm-cap-text'),canada=root.querySelector('.jm-canada');
 var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
 legs.forEach(function(l){var n=l.getTotalLength?l.getTotalLength():0;l._n=n;if(!l.classList.contains('jm-march')&&n){l.style.strokeDasharray=n;l.style.strokeDashoffset=n;}});
-var cur=-1,timer=null;
+var list=root.querySelector('.jm-steps'),cur=-1,timer=null;
 function show(i,animate){
   i=Math.max(0,Math.min(steps.length-1,i));
   legs.forEach(function(l){var k=+l.getAttribute('data-i');var on=k<=i;l.classList.toggle('on',on);
@@ -153,7 +156,9 @@ function show(i,animate){
   marker.style.transition=(animate&&!reduce)?'':'none';
   marker.setAttribute('transform','translate('+steps[i].xy[0]+','+steps[i].xy[1]+')');marker.style.transform='translate('+steps[i].xy[0]+'px,'+steps[i].xy[1]+'px)';
   items.forEach(function(li,k){li.classList.toggle('now',k===i)});
-  var li=items[i];capDate.textContent=li.querySelector('.jm-date').textContent;capText.textContent=li.querySelector('p').firstChild.textContent;
+  var li=items[i];
+  if(list.scrollHeight>list.clientHeight){var top=li.offsetTop-list.offsetTop,bot=top+li.offsetHeight;
+    if(top<list.scrollTop)list.scrollTop=top;else if(bot>list.scrollTop+list.clientHeight)list.scrollTop=bot-list.clientHeight;}capDate.textContent=li.querySelector('.jm-date').textContent;capText.textContent=li.querySelector('p').firstChild.textContent;
   slider.value=i;cur=i;
 }
 function stop(){if(timer){clearInterval(timer);timer=null;}play.textContent='▶ Play';play.setAttribute('aria-label','Play');}
