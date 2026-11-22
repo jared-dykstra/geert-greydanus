@@ -12,10 +12,12 @@
     "kleve": {"name": "Kleve", "lon": 6.14, "lat": 51.79, "label": "below"},
     "buchenwald": {"name": "Buchenwald", "lon": 11.25, "lat": 51.02, "label": "below"},
     "niederorschel": {"name": "Niederorschel", "lon": 10.43, "lat": 51.37, "label": "above"},
-    "eindhoven": {"name": "Eindhoven", "lon": 5.48, "lat": 51.44, "label": "below"}
+    "eindhoven": {"name": "Eindhoven", "lon": 5.48, "lat": 51.44, "label": "below"},
+    "beetgum": {"name": "Beetgum", "lon": 5.64, "lat": 53.23, "label": "above"}
   },
   "context": [
     {"name": "Kubaard", "lon": 5.58, "lat": 53.13, "note": "born 1899"},
+    {"name": "Suawoude", "lon": 5.89, "lat": 53.20, "note": "Baron relatives"},
     {"name": "Amsterdam", "lon": 4.90, "lat": 52.37},
     {"name": "Utrecht", "lon": 5.12, "lat": 52.09}
   ],
@@ -24,8 +26,12 @@
      "text": "Refuses to arrest Jews and goes into hiding, first at an address in Rotterdam."},
     {"place": "winterswijk", "date": "12 Apr 1943", "kind": "hiding", "anchor": "april-1943-april-1944-in-hiding-oom-geert-in-the-achterhoek",
      "text": "Hides with H. Wiggers at the farm Plak-an near Winterswijk."},
-    {"place": "sinderen", "date": "Late Apr 1943 – 20 Apr 1944", "kind": "hiding", "anchor": "april-1943-april-1944-in-hiding-oom-geert-in-the-achterhoek",
-     "text": "A year on Hendrik Satter's farm as “Oom Geert”, helping people in hiding and Allied airmen. He spends some weeks of it with relatives in Friesland."},
+    {"place": "sinderen", "date": "Late Apr – Dec 1943", "kind": "hiding", "anchor": "april-1943-april-1944-in-hiding-oom-geert-in-the-achterhoek",
+     "text": "Hides on Hendrik Satter's farm as “Oom Geert”, helping people in hiding and Allied airmen. In these months he also visits Johanna's Baron relatives in Suawoude, sometimes disguised as an old farmer."},
+    {"place": "beetgum", "date": "Dec 1943", "kind": "hiding", "anchor": "april-1943-april-1944-in-hiding-oom-geert-in-the-achterhoek",
+     "text": "He panics and wants to give himself up. Wil Satter and Anne Schaap take him by train and bus to a farm in Beetgum for a few weeks."},
+    {"place": "sinderen", "date": "Early 1944 – Apr 1944", "kind": "hiding", "anchor": "april-1943-april-1944-in-hiding-oom-geert-in-the-achterhoek",
+     "text": "Back on the Satter farm. In March he helps Theo van Braak with downed pilots. In April he leaves for Friesland to work for the Trouw group, and about a week later comes back for a weekend to fetch his belongings."},
     {"place": "ellecom", "date": "20–21 Apr 1944", "kind": "prison", "anchor": "april-august-1944-arrest-the-vught-bunker-transport",
      "text": "Arrested at the farm. The truck takes the prisoners to Avegoor, where they are stripped: “Greydanus was in bad shape”."},
     {"place": "arnhem", "date": "21 Apr 1944", "kind": "prison", "anchor": "april-august-1944-arrest-the-vught-bunker-transport",
