@@ -271,6 +271,15 @@
   .content-note-label { font-size: clamp(11px, 1vw, 13px); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
   .content-note p { font-size: clamp(0.98rem, 1.55vw, 1.2rem); line-height: 1.5; }
   body[data-kind="intro"] .brandmark { visibility: hidden; }
+  .appendix-slide { padding-bottom: clamp(52px, 7vh, 66px); }
+  .appendix-body { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: clamp(8px, 1.3vh, 12px); margin-top: 4px; }
+  .prompt-card { background: var(--bg-surface-2); border: 1px solid var(--hairline); border-left: 3px solid var(--accent); border-radius: 10px; padding: clamp(8px, 1.1vw, 12px) clamp(12px, 1.4vw, 16px); }
+  .prompt-card.long { flex: 1; min-height: 0; }
+  .prompt-n { font-size: 10.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 4px; }
+  .prompt-text { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: clamp(0.56rem, 0.98vw, 0.84rem); line-height: 1.45; color: var(--ink-primary); white-space: normal; overflow-wrap: anywhere; }
+  .prompt-text p + p { margin-top: 0.55em; }
+  .prompt-text.long { column-count: 2; column-gap: clamp(18px, 2.4vw, 32px); font-size: clamp(0.5rem, 0.86vw, 0.76rem); line-height: 1.4; }
+  .prompt-text.long p { break-inside: avoid-column; }
   /* ---------- years (Venice) ---------- */
   .years { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(12px, 1.6vw, 20px); }
   .year { border-top: 3px solid var(--hairline-strong); padding-top: 12px; }
@@ -402,7 +411,7 @@
         <p class="lede" style="margin-top: clamp(14px, 2.4vh, 22px); max-width: 48ch">I'm going to share a family-history project I've worked on, on and off, for years, and how AI finally made it possible.</p>
         <div class="content-note">
           <div class="content-note-label">Content note</div>
-          <p>This talk covers Second World War history, including aspects of the Holocaust: persecution, hostage-taking, imprisonment, torture and executions.</p>
+          <p>This talk covers Second World War history, including aspects of the Holocaust: persecution, imprisonment, torture and executions.</p>
         </div>
       </div>
       <div class="notes" hidden>[before 0:00 · ~30s] Read this slide out loud, plainly. Don't give the title; it comes later.
@@ -1060,6 +1069,70 @@ Likely questions and short answers:
 — Where are the originals? Family papers; plus Arolsen, NIOD, the US National Archives, Delpher newspapers.</div>
     </section>
 
+
+
+
+
+    <!-- APPENDIX START -->
+    <section class="slide black-slide" data-kind="black" aria-label="Slide 36">
+      <div class="notes" hidden>End of the talk. Stop here, or advance to show every prompt used to build this deck.</div>
+    </section>
+
+    <section class="slide appendix-slide" aria-label="Slide 37">
+      <div class="eyebrow">Appendix · Every prompt used to build this deck</div>
+      <div class="appendix-body"><div class="prompt-card long"><div class="prompt-n">Prompt 1 of 31 · part 1 of 3</div><div class="prompt-text long"><p>I need to make a new 15-20min presentation, so create jared/packages/personal-api-resentation using the same tech as the other two presentations - HTML with the speaker view worked really well.</p><p>This presentation is going to be about use of AI in a personal project: https://github.com/jared-dykstra/geert-greydanus.</p><p>Slide 1 - Just black; no text and no introduction.  I intend to start by handing paper copies of this memo to everyone in the room, evoking the feeling of being in the police office and being handed an assignmnet: https://jared-dykstra.github.io/geert-greydanus/drive/1J_ofXSh0r_arrestInstructions.jpg</p><p>Slide 2 - Just one heading: &quot;What is your assignment?&quot;  I want the room to tell me what this paper says.  (Expect Google lens, etc.)</p><p>Slide 3 - An english translation of the footnote: &quot;There will be coffee in the canteen afterward&quot;. Question - How does that make you feel?</p><p>After this, I want to share my personal journey for 3-4 minutes.  I found this letter in a box of family posessions, along with quite a lot of other papers.  I vaguely knew my mother&#x27;s family had a WW2 encounter with a concentration camp called &quot;Vught&quot; in the Netherlands.  I don&#x27;t speak dutch.  I was born in Canada, as were my parents.  All 4 of my grandparents emmigrated from the Netherlands after WW2.</p><p>next, I want to visually show some of the documents I found.  In approximately 2010, I was amazed to google the relatively unique spelling of &quot;Geert Greydanus&quot; and find relevant documents.  But almost all were dutch.  Many were handwritten and some ripped and stained.  Show 4-5 examples of these scanned documents, one per slide.</p><p>My goal: Make this information accessable and preserve it online as best possible, for future generations, but also for any other family that might stumble across the connections.</p><p>Leading up to 2020, I picked this up off and on as a side project.  It was like an investigation scene from TV, with a bulletin board, lines, arrows, documents, etc.  Stories and artifacts have intersecting information, but it&#x27;s very difficult to know which details matter, which don&#x27;t.  Which are accurate and what might not be.</p><p>2 weeks ago, my son asked if he could look at those old artifacts for a school project.  I thought: &quot;I pay for Claude, let&#x27;s throw this all at Claude and see what it can do&quot;.</p><p>The result is https://jared-dykstra.github.io/geert-greydanus<br>  * Born 1899<br>  * Detective in Rotterdam in ___<br>  * Failed to report for duty in ____ Why? and went into hiding, putting his wife and children at great risk</p><p>Geert was able bodied and had the cover of a police uniform and experience.  He wasn&#x27;t sitting around.  Obviously Geert did not want his activities in hiding to be known, since the threat of interrogations were real.</p></div></div></div>
+      <div class="notes" hidden>Every prompt used to build this deck, verbatim, typos included. No PowerPoint, no slide editor: the deck is one HTML file, written and revised by Claude from these prompts. Slide numbers in later prompts refer to the deck as it was at that moment.</div>
+    </section>
+
+    <section class="slide appendix-slide" aria-label="Slide 38">
+      <div class="eyebrow">Appendix · Every prompt used to build this deck</div>
+      <div class="appendix-body"><div class="prompt-card long"><div class="prompt-n">Prompt 1 of 31 · part 2 of 3</div><div class="prompt-text long"><p>  * Geert&#x27;s family was taken hostage and sent to concentration camp Vught in ___. (Show a picture of the kamp - one with the fence, guard tower and moat. There were ___ families taken hostage.<br>  * He was paniced, but associates (fam Satter)  convinced him to not turn himself in<br>  * The family was released later, ahead of Christmas - much to their surprise.  The german commander Rauter claimed it worked.<br>  * Not much is known during this period (intentional)<br>  * Geert returned to Satter on April 20, 1943 to &quot;Fetch his belongings&quot;, but there were a large operation that day, based on a traitor in the resistance networks (Willy Markus) and ___ people were captured.<br>  * Gert spent ___ months in the Vught &quot;Bunker&quot; (Camp prison) subject to interrogations<br>  * Geert named ___ people who were ultimately sentenced to death and executed, but he was classified a Polital Prisoner (because of the refusal to arrest Jews and Jehovah&#x27;s Witnesses in Rotterdam) and sent to Camp Buchenwald, and then a satellite camp for forced labor.<br>  * Toward the end of the war, there was a death march from the satellite camp back to Buchenwarld.  How many KM?  Over 10 days?  How many prisoners left the subcamp?  And how many arrived back at Buchenwald.<br>  * The prisoners were told to &quot;stall&quot; on the journey back.  They managed to do this one day, and arrived back too late to be transported to other camps.  They were there just before the camp was liberated by the american army.<br>  * Geert was in a field hospital for ___ weeks and then trasported back to the Netherlands.</p><p>&lt;Pause here for some questions&gt;</p><p>Main takeaway: There&#x27;s a lot of information.  There were also intersecting stories and reports, such as Allied airmen &quot;helpers&quot; reports, and also a the `Gurstein Report` - include one slide on each.</p><p>Main takeawy: I took a lot of messy information and &quot;lobbed&quot; it at Claude.  It would never have been possible to perform this type of graph-data analysis without AI.</p><p>Main takeaway: I didn&#x27;t need the whiteboard anymore: No strings and arrows and lines and post-its.</p><p>Main takeaway: We are used to working in rigid structures.  We have certain frameworks and tools that guide us from one state to the next.  But it&#x27;s time to completely strip away and rethink those tools.</p><p>Show a slide with a photo of the clock on St. Marks&#x27; square in Venice.  (The clock that shows the positiion of all the planets.). What year was the clock completed?  What year was Christopher columbus&#x27; voyage?   The Venetions were the gateway to Europe from the eastern trade-routes, and were at the peak of their power.  They were used to their heliocentric, paradigm.  They never imagined what would change.   But trade didn&#x27;t stop, it just re-oriented from east to west.</p></div></div></div>
+      <div class="notes" hidden>Prompt 1, continued.</div>
+    </section>
+
+    <section class="slide appendix-slide" aria-label="Slide 39">
+      <div class="eyebrow">Appendix · Every prompt used to build this deck</div>
+      <div class="appendix-body"><div class="prompt-card long"><div class="prompt-n">Prompt 1 of 31 · part 3 of 3</div><div class="prompt-text long"><p>AI makes the impossible possible.  It also means stripping away the framework that was comfortable.  Rather than fitting the messy world into our framework and structures, PRs and Code reviews, and Relational databases.  We need to meet the world were it&#x27;s at.  The old frameworks existed because we had a paradigm and worldview that was the bottleneck.  We need to shed that paradigm and look from east to west.</p></div></div></div>
+      <div class="notes" hidden>Prompt 1, continued.</div>
+    </section>
+
+    <section class="slide appendix-slide" aria-label="Slide 40">
+      <div class="eyebrow">Appendix · Every prompt used to build this deck</div>
+      <div class="appendix-body"><div class="prompt-card"><div class="prompt-n">Prompt 2 of 31</div><div class="prompt-text"><p>try again</p></div></div><div class="prompt-card"><div class="prompt-n">Prompt 3 of 31</div><div class="prompt-text"><p>Remove the date range &quot;10-15 Nov&quot; from Slide 13. - Lets also change to a new title: &quot;How do you respond?&quot;</p></div></div><div class="prompt-card"><div class="prompt-n">Prompt 4 of 31</div><div class="prompt-text"><p>On slide 27, show an inset of &quot;the wall&quot; from Slide 12</p></div></div><div class="prompt-card"><div class="prompt-n">Prompt 5 of 31</div><div class="prompt-text"><p>On slide 20, change &quot;The fate of the rest is unknown&quot; to &quot;those who fell behind were shot&quot;</p></div></div><div class="prompt-card"><div class="prompt-n">Prompt 6 of 31</div><div class="prompt-text"><p>Actually, change that tile to just `425 arrived`. No extra text is needed, since it&#x27;s explained lower on the same slide.</p></div></div><div class="prompt-card"><div class="prompt-n">Prompt 7 of 31</div><div class="prompt-text"><p>Duplicate Slide 29.  From the first one copy, Remove all of the text except a heading &quot;Where is this clock?&quot;  - I expect my audience to use google lens or AI to figure it out.</p></div></div></div>
+      <div class="notes" hidden>Prompts 2–7.</div>
+    </section>
+
+    <section class="slide appendix-slide" aria-label="Slide 41">
+      <div class="eyebrow">Appendix · Every prompt used to build this deck</div>
+      <div class="appendix-body"><div class="prompt-card"><div class="prompt-n">Prompt 8 of 31</div><div class="prompt-text"><p>On slide 30, change &quot;And what year did Columbus sail?&quot; to a a bullet; add a 2nd bullet &quot;And what year did Copernicus publish the heliocentric model?&quot;</p><p>In the notes, include a point that the planets were removed from the clock in 1735 because they were highly complex and harming the timekeeping accuracy.</p></div></div><div class="prompt-card"><div class="prompt-n">Prompt 9 of 31</div><div class="prompt-text"><p>Change the caption on slide 31 from &quot;Trade didn&#x27;t stop. It turned from east to west.&quot; to &quot;The world didn&#x27;t stop.  But everything was re-oriented&quot;</p></div></div><div class="prompt-card"><div class="prompt-n">Prompt 10 of 31</div><div class="prompt-text"><p>Add a slide after Slide 27 to let people know that the website that resulted is just a Github repo full of documents and one central HTML file.  There is no code and the repo moves version-by-version, prompt-by-prompt.  with prompts like &quot;What contradictions are there?&quot;  &quot;What should we research next?&quot;</p></div></div><div class="prompt-card"><div class="prompt-n">Prompt 11 of 31</div><div class="prompt-text"><p>Add the URL and a QR Code to Slide 23: https://jared-dykstra.github.io/geert-greydanus</p></div></div></div>
+      <div class="notes" hidden>Prompts 8–11.</div>
+    </section>
+
+    <section class="slide appendix-slide" aria-label="Slide 42">
+      <div class="eyebrow">Appendix · Every prompt used to build this deck</div>
+      <div class="appendix-body"><div class="prompt-card"><div class="prompt-n">Prompt 12 of 31</div><div class="prompt-text"><p>Remove the last bullet and URL from slide 32.  Add a new final &quot;Thank you&quot; slide at the end.  Include the QR code and link on that final slide again.</p></div></div><div class="prompt-card"><div class="prompt-n">Prompt 13 of 31</div><div class="prompt-text"><p>The clock image shifts when I go from Slide 29 to slide 30.  I need it positioned the same, so keep the caption on both slides.</p></div></div><div class="prompt-card"><div class="prompt-n">Prompt 14 of 31</div><div class="prompt-text"><p>On slide 22, remove &quot;14 May Back at work with the police&quot;. Also remove the 1947 bullet point</p></div></div><div class="prompt-card"><div class="prompt-n">Prompt 15 of 31</div><div class="prompt-text"><p>Remove &quot;I pay for Claude&quot; from slide 13.</p></div></div><div class="prompt-card"><div class="prompt-n">Prompt 16 of 31</div><div class="prompt-text"><p>Change the top caption on slide 13 from &quot;Two weeks ago&quot; to &quot;Seven years later (three weeks ago)&quot;</p></div></div><div class="prompt-card"><div class="prompt-n">Prompt 17 of 31</div><div class="prompt-text"><p>Change Slide 14 from &quot;Ordered to round up Rotterdam&#x27;s last Jews. He doesn&#x27;t report, and goes into hiding.&quot; to &quot;Ordered to round up Rotterdam&#x27;s last Jews. Orders are now compulsary. He doesn&#x27;t report, and goes into hiding.&quot;</p></div></div></div>
+      <div class="notes" hidden>Prompts 12–17.</div>
+    </section>
+
+    <section class="slide appendix-slide" aria-label="Slide 43">
+      <div class="eyebrow">Appendix · Every prompt used to build this deck</div>
+      <div class="appendix-body"><div class="prompt-card"><div class="prompt-n">Prompt 18 of 31</div><div class="prompt-text"><p>The quote on slide 14 might be biased, so just remove `1,000` since there is no source to verify that number.</p></div></div><div class="prompt-card"><div class="prompt-n">Prompt 19 of 31</div><div class="prompt-text"><p>Remove the &quot;Family account&quot; line from slide 20</p></div></div><div class="prompt-card"><div class="prompt-n">Prompt 20 of 31</div><div class="prompt-text"><p>There&#x27;s an errant `\` in the caption under the photo on slide 30</p></div></div><div class="prompt-card"><div class="prompt-n">Prompt 21 of 31</div><div class="prompt-text"><p>ok, this looks good - thanks.  Commit this via a PR to the `jared` repo.  Also push a PR to the https://github.com/jared-dykstra/geert-greydanus repository, but put a &quot;Do Not Merge&quot; label on the PR.</p></div></div><div class="prompt-card"><div class="prompt-n">Prompt 22 of 31</div><div class="prompt-text"><p>Oh, remove the last bullet point &quot;Two weeks later, in Rotterdam, Geert refused to round up Jews.&quot; from slide 25.  Add a 2nd URL and QR code the final &quot;thank you&quot; slide pointing to https://en.wikipedia.org/wiki/Gerstein_Report for anyone who wants to read it. and push that change to both places.</p></div></div></div>
+      <div class="notes" hidden>Prompts 18–22.</div>
+    </section>
+
+    <section class="slide appendix-slide" aria-label="Slide 44">
+      <div class="eyebrow">Appendix · Every prompt used to build this deck</div>
+      <div class="appendix-body"><div class="prompt-card"><div class="prompt-n">Prompt 23 of 31</div><div class="prompt-text"><p>Give me an honest review of these slides - Target audience are my coworkers, including some of my reports, but also reports from other teams, and Engineering Managers, Designers, and Product Managers.</p></div></div><div class="prompt-card"><div class="prompt-n">Prompt 24 of 31</div><div class="prompt-text"><p>Yes, add an introduction slide before the completely blank slide.  It needs to withhold the deck title, and state that my goal is to share a personal family-history side project, and how AI made it possible.  Also include a disclaimer that that content will cover World war 2 history, including aspects of the holocost.</p><p>How do you propose separating Geert&#x27;s moral choice from the tooling argument?  I agree that there needs to be a clear demarkation - This is not intended to be a commentary on the morality of AI.</p><p>Regarding Slide 26, I intend the graph to be representative, not accurate.  It&#x27;s not something I want to go into in-depth.  No RAG or graph abstraction was made - So let&#x27;s change the title to &quot;Claude identified the dots; and made the connections&quot;</p></div></div><div class="prompt-card"><div class="prompt-n">Prompt 25 of 31</div><div class="prompt-text"><p>Add the hinge slide</p></div></div></div>
+      <div class="notes" hidden>Prompts 23–25.</div>
+    </section>
+
+    <section class="slide appendix-slide" aria-label="Slide 45">
+      <div class="eyebrow">Appendix · Every prompt used to build this deck</div>
+      <div class="appendix-body"><div class="prompt-card"><div class="prompt-n">Prompt 26 of 31</div><div class="prompt-text"><p>Lets remove the &quot;Questions&quot; slide 23 - We&#x27;ll cover at the end.</p></div></div><div class="prompt-card"><div class="prompt-n">Prompt 27 of 31</div><div class="prompt-text"><p>The final slide has 2 QR codes - Put as much space as possible between them so if people scan the code, they scan the correct one.</p></div></div><div class="prompt-card"><div class="prompt-n">Prompt 28 of 31</div><div class="prompt-text"><p>Actually, remove the gerstein report QR code and link.  If people are really interested, they can ask me or find it via the other site.</p></div></div><div class="prompt-card"><div class="prompt-n">Prompt 29 of 31</div><div class="prompt-text"><p>yes, push both.</p></div></div><div class="prompt-card"><div class="prompt-n">Prompt 30 of 31</div><div class="prompt-text"><p>Remove &quot;Hostage taking&quot; from the first disclaimer slide.  It&#x27;s covered by &quot;Imprisonment&quot;</p></div></div><div class="prompt-card"><div class="prompt-n">Prompt 31 of 31</div><div class="prompt-text"><p>Add a black slide to the very end, After that - Add new slides that shows every prompt used to create the deck.  I can optionally use this to re-enforce the point of these slides - no powerpoint used.</p></div></div></div>
+      <div class="notes" hidden>Prompts 26–31.</div>
+    </section>
+    <!-- APPENDIX END -->
+
     <!-- ---------- edge click zones ---------- -->
     <button class="edge edge-left" id="edgeLeft" aria-label="Previous slide">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6" /></svg>
@@ -1086,7 +1159,7 @@ Likely questions and short answers:
         <button class="nav-btn" id="prevBtn" aria-label="Previous slide">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6" /></svg>
         </button>
-        <span class="counter" id="counter">1 / 35</span>
+        <span class="counter" id="counter">1 / 45</span>
         <button class="nav-btn" id="nextBtn" aria-label="Next slide">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6" /></svg>
         </button>
@@ -1101,7 +1174,7 @@ Likely questions and short answers:
   <div class="speaker-header">
     <span class="speaker-brand mono">HOW DO YOU RESPOND? &middot; SPEAKER VIEW</span>
     <button class="speaker-timer" id="speakerTimer" title="Click to reset the timer" aria-label="Elapsed time. Click to reset.">00:00</button>
-    <span class="speaker-counter" id="speakerCounter">1 / 35</span>
+    <span class="speaker-counter" id="speakerCounter">1 / 45</span>
   </div>
   <div class="speaker-main">
     <div class="speaker-current">
